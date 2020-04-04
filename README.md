@@ -1,9 +1,2 @@
 # SHS project
-
-# How to compile
-
-# How to play 
-
-# Who worked on it
-
-...
+This is our project for SHS: video games, hope you like it!
