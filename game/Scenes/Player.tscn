@@ -37,10 +37,11 @@ __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
-scale = Vector2( 0.5, 0.5 )
+[node name="Sprite" type="AnimatedSprite" parent="."]
+scale = Vector2( 0.125, 0.125 )
 frames = SubResource( 1 )
 animation = "player1"
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="Collision" type="CollisionShape2D" parent="."]
+scale = Vector2( 0.25, 0.25 )
 shape = SubResource( 2 )
