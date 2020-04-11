@@ -4,6 +4,7 @@ var angle
 var is_right = false
 var is_left = false
 export var angle_step = 1
+export var is_input_sensitive = true
 var player
 
 # Declare member variables here. Examples:
@@ -24,22 +25,23 @@ func set_player_sprit():
 		$Sprite.animation = "player2"
 
 func _input(event):
-	if event.is_action_pressed("ui_right") && player == 1:
-		is_right = true
-	if event.is_action_pressed("ui_right2") && player == 2:
-		is_right = true
-	if event.is_action_pressed("ui_left") && player == 1:
-		is_left = true
-	if event.is_action_pressed("ui_left2") && player == 2:
-		is_left = true
-	if event.is_action_released("ui_right") && player == 1:
-		is_right = false
-	if event.is_action_released("ui_right2") && player == 2:
-		is_right = false
-	if event.is_action_released("ui_left") && player == 1:
-		is_left = false
-	if event.is_action_released("ui_left2") && player == 2:
-		is_left = false
+	if is_input_sensitive:
+		if event.is_action_pressed("ui_right") && player == 1:
+			is_right = true
+		if event.is_action_pressed("ui_right2") && player == 2:
+			is_right = true
+		if event.is_action_pressed("ui_left") && player == 1:
+			is_left = true
+		if event.is_action_pressed("ui_left2") && player == 2:
+			is_left = true
+		if event.is_action_released("ui_right") && player == 1:
+			is_right = false
+		if event.is_action_released("ui_right2") && player == 2:
+			is_right = false
+		if event.is_action_released("ui_left") && player == 1:
+			is_left = false
+		if event.is_action_released("ui_left2") && player == 2:
+			is_left = false
 
 func _physics_process(delta):
 	if is_right:
