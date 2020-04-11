@@ -15,8 +15,6 @@ func _ready():
 	$Player1.add_collision_exception_with($Player2)
 	$Player2.add_collision_exception_with($Player1)
 
-
-
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):
 #	pass
