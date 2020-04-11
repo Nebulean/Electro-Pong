@@ -44,10 +44,13 @@ func _input(event):
 			is_left = false
 
 func _physics_process(delta):
+	var lastPos = Vector2(1000, 0).rotated(angle)
+	var lastAngle = angle
 	if is_right:
 		angle = angle + angle_step * delta
 	if is_left:
 		angle = angle - angle_step * delta
-	position = Vector2(250, 0).rotated(angle)
-	rotation_degrees
+	move_and_slide(Vector2(1000, 0).rotated(angle) - lastPos)
+	rotate(angle  - lastAngle)
+
 
