@@ -17,7 +17,7 @@ func set_player(new_player):
 	set_player_sprit()
 
 func set_player_sprit():
-	if player == 0:
+	if player == 1:
 		angle = 0
 		$Sprite.animation = "player1"
 	else:
@@ -44,10 +44,13 @@ func _input(event):
 			is_left = false
 
 func _physics_process(delta):
+	var lastPos = Vector2(0, 250).rotated(angle)
+	var lastAngle = angle
 	if is_right:
 		angle = angle + angle_step * delta
 	if is_left:
 		angle = angle - angle_step * delta
-	position = Vector2(250, 0).rotated(angle)
-	rotation_degrees
+	move_and_collide(Vector2(0, 250).rotated(angle) - lastPos)
+	rotate(angle  - lastAngle)
+
 
