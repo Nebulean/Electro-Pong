@@ -1,5 +1,4 @@
-hello
-everyone
-how
-are
-you
+Welcome to "Electro-Pong", a simple reproduction of the game "Pong" with electrodynamics.
+We will now briefly explain how it works.
+!(BALL_APPEAR) This is the ball. It is a negatively charged particle.
+As any other charged particles, it will be affected by electromagnetic fields.
