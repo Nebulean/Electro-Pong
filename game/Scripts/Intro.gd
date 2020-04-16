@@ -122,5 +122,9 @@ func command_interpreter(command):
 		var pos = Vector2(get_viewport().size.x/6, get_viewport().size.y/2)
 		var vec = Vector2(200,0)
 		ball_modifier(pos, vec)
+	elif command == "PLAYER_DISAPPEAR":
+		pass
+	elif command == "MAGNETIC":
+		pass
 	else:
 		print("Unknown command")
