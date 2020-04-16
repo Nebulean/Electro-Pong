@@ -10,7 +10,6 @@ script = ExtResource( 1 )
 margin_right = 710.0
 margin_bottom = 215.0
 custom_colors/font_color = Color( 1, 1, 1, 1 )
-text = "test"
 __meta__ = {
 "_edit_use_anchors_": false
 }
