@@ -15,17 +15,6 @@ func _ready():
 	# We instanciate a scenes
 	ball = ball_scn.instance()
 	
-	# We add the ball to child
-	# add_child(ball)
-	
-	# We select a position for the ball
-	# var pos = Vector2(get_viewport().size.x/10, get_viewport().size.y/2)
-	# ball.position = pos
-	
-	# We select a velocity for the ball
-	# var vel = Vector2(50, 0)
-	# ball.linear_velocity = vel
-	
 	# We load the text file that will guide the tutorial
 	text = load_text("res://Assets/Text/intro.txt")
 
@@ -57,21 +46,6 @@ func next_content(index):
 	for i in range(0, 100):
 		$Label.modulate = i
 
-
-func command_interpreter(command):
-	if command == "EMPTY":
-		print("No commands here")
-	elif command == "BALL_APPEAR":
-		print("Creating ball")
-		# We add the ball to child
-		add_child(ball)
-		# We select a position for the ball
-		var pos = Vector2(get_viewport().size.x/10, get_viewport().size.y/2)
-		ball.position = pos
-		
-		# We select a velocity for the ball
-		var vel = Vector2(50, 0)
-		ball.linear_velocity = vel
 
 # This function will load a text file, and add each line to an element of an array.
 func load_text(filename):
@@ -113,3 +87,19 @@ func line_interpreter(line):
 			
 			return [new_line, command]
 	return [line, "EMPTY"]
+
+
+func command_interpreter(command):
+	if command == "EMPTY":
+		print("No commands here")
+	elif command == "BALL_APPEAR":
+		print("Creating ball")
+		# We add the ball to child
+		add_child(ball)
+		# We select a position for the ball
+		var pos = Vector2(get_viewport().size.x/10, get_viewport().size.y/2)
+		ball.position = pos
+		
+		# We select a velocity for the ball
+		var vel = Vector2(50, 0)
+		ball.linear_velocity = vel
