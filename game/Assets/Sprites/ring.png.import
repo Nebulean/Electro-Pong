@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/arena.png-0c63d34ec54ee6d2099b5e18e632d01b.stex"
+path="res://.import/ring.png-1b6751c76a6c0ca87d66ecb54ed93d03.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Sprites/arena.png"
-dest_files=[ "res://.import/arena.png-0c63d34ec54ee6d2099b5e18e632d01b.stex" ]
+source_file="res://Assets/Sprites/ring.png"
+dest_files=[ "res://.import/ring.png-1b6751c76a6c0ca87d66ecb54ed93d03.stex" ]
 
 [params]
 

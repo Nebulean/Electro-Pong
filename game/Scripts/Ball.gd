@@ -1,5 +1,7 @@
 extends RigidBody2D
 
+class_name Ball
+
 var screen_size
 export var min_speed = 150
 export var max_speed = 200

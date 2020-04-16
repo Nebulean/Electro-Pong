@@ -8,9 +8,26 @@
 
 config_version=4
 
-_global_script_classes=[  ]
+_global_script_classes=[ {
+"base": "RigidBody2D",
+"class": "Ball",
+"language": "GDScript",
+"path": "res://Scripts/Ball.gd"
+}, {
+"base": "KinematicBody2D",
+"class": "Player",
+"language": "GDScript",
+"path": "res://Scripts/Player.gd"
+}, {
+"base": "Area2D",
+"class": "Ring",
+"language": "GDScript",
+"path": "res://Scripts/Ring.gd"
+} ]
 _global_script_class_icons={
-
+"Ball": "",
+"Player": "",
+"Ring": ""
 }
 
 [application]
