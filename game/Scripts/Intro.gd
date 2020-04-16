@@ -1,22 +1,34 @@
-extends Node2D
+extends Node
 
 var text
-var ball_scn
 var ball
-
+var ball_scn
 var textIndex = 0
-
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	# We load the scenes
-	ball_scn = preload("res://Scenes/Ball.tscn")
-
-	# We instanciate a scenes
-	ball = ball_scn.instance()
-
 	# We load the text file that will guide the tutorial
 	text = load_text("res://Assets/Text/intro.txt")
+	
+	# We instanciate a ball
+	ball_scn = preload("res://Scenes/Ball.tscn")
+	ball = ball_scn.instance()
+	var pos = Vector2(get_viewport().size.x/2, get_viewport().size.y/2)
+	var vel = Vector2(0,0)
+	ball_modifier(pos, vel)
+	ball.set_visible(false)
+
+# warning-ignore:unused_argument
+func _physics_process(delta):
+	# we check if the ball is off limite
+	if ball.position.x < 0:
+		ball.linear_velocity.x *= -1
+	if ball.position.x > get_viewport().size.x:
+		ball.linear_velocity.x *= -1
+	if ball.position.y < 0:
+		ball.linear_velocity.y *= -1
+	if ball.position.y > get_viewport().size.y:
+		ball.linear_velocity.y *= -1
 
 func _input(ev):
 	# We check if any key is pressed
@@ -36,18 +48,8 @@ func next_content(index):
 	for c in cmds:
 		command_interpreter(c)
 
-	# We update the text
-	# TODO : THE FADE DO NOT WORK
-	# for i in range(100, 0):
-	# 	$Label.modulate = i
-
-	# $Label.add_color_override("font_color", Color("#ffffff")) # does not work
-	$Label.text = line
-
-
-	# for i in range(0, 100):
-	# 	$Label.modulate = i
-
+	$Label.set_text(line)
+	$Label.set_visible(true)
 
 # This function will load a text file, and add each line to an element of an array.
 func load_text(filename):
@@ -90,28 +92,35 @@ func line_interpreter(line):
 			return [new_line, command]
 	return [line, "EMPTY"]
 
+func ball_modifier(position, velocity):
+	# We remove the previous ball
+	ball.queue_free()
+	ball = ball_scn.instance()
+	
+	# We modify our properties
+	ball.manual_state = true
+	ball.set_position(position)
+	ball.set_linear_velocity(velocity)
+	ball.set_visible(true)
+	
+	# We add ball as scene child
+	add_child(ball)
+	
 
-func command_interpreter(command):
+func command_interpreter(command):	
 	if command == "EMPTY":
 		print("No commands here")
-		
-	elif command == "BALL_CREATE":
-		print("Creating ball")
-		# We add the ball to child
-		add_child(ball)
-		
-		# We select a position for the ball
-		var pos = Vector2(get_viewport().size.x/10, get_viewport().size.y/2)
-		ball.position = pos
-		
-	elif command == "BALL_MOVE":
-		# We select a velocity for the ball
-		var vel = Vector2(100, 0)
-		ball.linear_velocity = vel
-		
+	elif command == "BALL_APPEAR_CENTER_STOP":
+		var pos = Vector2(get_viewport().size.x/2, get_viewport().size.y/2)
+		var vec = Vector2(0,0)
+		ball_modifier(pos, vec)
 	elif command == "BALL_DISAPPEAR":
-		# We hide the ball
-		ball.hide()
-		
+		ball.set_visible(false)
+	elif command == "PLAYER_APPEAR_BOTTOM":
+		pass
+	elif command == "BALL_APPEAR_LEFT_MOVE":
+		var pos = Vector2(get_viewport().size.x/6, get_viewport().size.y/2)
+		var vec = Vector2(200,0)
+		ball_modifier(pos, vec)
 	else:
 		print("Unknown command")

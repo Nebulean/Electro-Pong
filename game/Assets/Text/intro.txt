@@ -1,6 +1,7 @@
 Welcome to "Electro-Pong", a simple reproduction of the game "Pong" with electrodynamics.
 We will now briefly explain how it works.
-!(BALL_APPEAR) This is the ball. It is a negatively charged particle.
+!(BALL_APPEAR_CENTER_STOP) This is the ball. It is a negatively charged particle.
 As any other charged particles, it will be affected by electromagnetic fields.
-!(BALL_DISAPPEAR, PLAYER_APPEAR) This is the player.
-The ball will bounce on it, and electromagnetic fields can be generated from it.
+!(BALL_DISAPPEAR,PLAYER_APPEAR) This is the player.
+The ball will bounce on it, and electric fields can be generated from it.
+!(BALL_APPEAR_LEFT_MOVE) This is how the electric field affects the ball.
