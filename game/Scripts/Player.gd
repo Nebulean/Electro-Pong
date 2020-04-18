@@ -34,21 +34,21 @@ func set_position_via_angle() -> void:
 
 func _input(event):
 	if is_input_sensitive:
-		if event.is_action_pressed("ui_right") && player == 1:
+		if event.is_action_pressed("p1_clockwise") && player == 1:
 			is_right = true
-		if event.is_action_pressed("ui_right2") && player == 2:
+		if event.is_action_pressed("p2_clockwise") && player == 2:
 			is_right = true
-		if event.is_action_pressed("ui_left") && player == 1:
+		if event.is_action_pressed("p1_trigo") && player == 1:
 			is_left = true
-		if event.is_action_pressed("ui_left2") && player == 2:
+		if event.is_action_pressed("p2_trigo") && player == 2:
 			is_left = true
-		if event.is_action_released("ui_right") && player == 1:
+		if event.is_action_released("p1_clockwise") && player == 1:
 			is_right = false
-		if event.is_action_released("ui_right2") && player == 2:
+		if event.is_action_released("p2_clockwise") && player == 2:
 			is_right = false
-		if event.is_action_released("ui_left") && player == 1:
+		if event.is_action_released("p1_trigo") && player == 1:
 			is_left = false
-		if event.is_action_released("ui_left2") && player == 2:
+		if event.is_action_released("p2_trigo") && player == 2:
 			is_left = false
 
 func _physics_process(delta):
