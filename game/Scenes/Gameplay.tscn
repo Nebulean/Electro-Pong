@@ -12,9 +12,13 @@ __meta__ = {
 }
 
 [node name="Ring" parent="." instance=ExtResource( 2 )]
+gravity_vec = Vector2( 0, 0 )
+gravity = 0.0
 
 [node name="Player1" parent="." instance=ExtResource( 1 )]
+position = Vector2( 0, -250 )
 
 [node name="Player2" parent="." instance=ExtResource( 1 )]
+position = Vector2( 0, 250 )
 
 [node name="Ball" parent="." instance=ExtResource( 3 )]
