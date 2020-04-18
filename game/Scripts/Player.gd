@@ -2,9 +2,9 @@ extends KinematicBody2D
 
 class_name Player
 
-var angle
-var is_right = false
-var is_left = false
+export var angle: float
+var is_clockwise = false
+var is_trigo = false
 export var angle_step = 1
 export var is_input_sensitive = true
 var player
@@ -27,35 +27,36 @@ func set_player(num: int, center: Vector2, radius: float):
 
 	ring_center = center
 	ring_radius = radius
-	set_position_via_angle()
+	position = position_from_angle(angle)
 
-func set_position_via_angle() -> void:
-	position = ring_center + ring_radius*Vector2(cos(angle), sin(angle))
+func position_from_angle(alpha) -> Vector2:
+	return ring_center + ring_radius * Vector2(cos(alpha), sin(alpha))
 
 func _input(event):
 	if is_input_sensitive:
 		if event.is_action_pressed("p1_clockwise") && player == 1:
-			is_right = true
+			is_clockwise = true
 		if event.is_action_pressed("p2_clockwise") && player == 2:
-			is_right = true
+			is_clockwise = true
 		if event.is_action_pressed("p1_trigo") && player == 1:
-			is_left = true
+			is_trigo = true
 		if event.is_action_pressed("p2_trigo") && player == 2:
-			is_left = true
+			is_trigo = true
 		if event.is_action_released("p1_clockwise") && player == 1:
-			is_right = false
+			is_clockwise = false
 		if event.is_action_released("p2_clockwise") && player == 2:
-			is_right = false
+			is_clockwise = false
 		if event.is_action_released("p1_trigo") && player == 1:
-			is_left = false
+			is_trigo = false
 		if event.is_action_released("p2_trigo") && player == 2:
-			is_left = false
+			is_trigo = false
 
 func _physics_process(delta):
-	var lastPos = Vector2(0, 250).rotated(angle)
 	var lastAngle = angle
-	if is_right:
+	if is_clockwise:
 		angle = angle + angle_step * delta
-	if is_left:
+	if is_trigo:
 		angle = angle - angle_step * delta
-	set_position_via_angle()
+	move_and_collide(
+		position_from_angle(angle) - position_from_angle(lastAngle))
+	rotate(angle - lastAngle)
