@@ -34,7 +34,12 @@ func _input(ev):
 	# We check if any key is pressed
 	if ev is InputEventKey and ev.pressed:
 		textIndex += 1
-		next_content(textIndex)
+		
+		# If we are at the end of the file, we go to next scene
+		if textIndex >= text.size():
+			get_tree().change_scene("res://Scenes/Gameplay.tscn")
+		else:
+			next_content(textIndex)
 
 # Will handle what append when next line
 func next_content(index):

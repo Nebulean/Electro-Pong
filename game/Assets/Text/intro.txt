@@ -8,3 +8,7 @@ The ball will bounce on it, and electric fields can be generated from it.
 !(PLAYER_DISAPPEAR,BALL_DISAPPEAR) Simple, right ?
 !(BALL_APPEAR_LEFT_MOVE,MAGNETIC) This is how the magnetic field affects the ball.
 !(BALL_DISAPPEAR) Physics is great.
+!(BALL_APPEAR_CENTER_STOP,INVERSE_POLARITY) Last but not least, the polarity of the particle can be inverted.
+This will reverse all the effects presented before.
+!(BALL_DISAPPEAR) You now understand most of the important stuff. A game will then start, and you'll figure more by yourself.
+Good luck!
