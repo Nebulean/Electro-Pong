@@ -29,7 +29,7 @@ func set_player(num: int, center: Vector2, radius: float):
 	ring_radius = radius
 	position = position_from_angle(angle)
 
-func position_from_angle(alpha) -> Vector2:
+func position_from_angle(alpha: float) -> Vector2:
 	return ring_center + ring_radius * Vector2(cos(alpha), sin(alpha))
 
 func _input(event):
@@ -54,9 +54,9 @@ func _input(event):
 func _physics_process(delta):
 	var lastAngle = angle
 	if is_clockwise:
-		angle = angle + angle_step * delta
+		angle = wrapf(angle + angle_step * delta, 0, 2*PI)
 	if is_trigo:
-		angle = angle - angle_step * delta
+		angle = wrapf(angle - angle_step * delta, 0, 2*PI)
 	move_and_collide(
 		position_from_angle(angle) - position_from_angle(lastAngle))
 	rotate(angle - lastAngle)
