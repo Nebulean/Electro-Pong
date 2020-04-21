@@ -114,7 +114,7 @@ func ball_modifier(position, velocity):
 
 func command_interpreter(command):	
 	if command == "EMPTY":
-		print("No commands here")
+		print_debug("No commands here")
 	elif command == "BALL_APPEAR_CENTER_STOP":
 		var pos = Vector2(get_viewport().size.x/2, get_viewport().size.y/2)
 		var vec = Vector2(0,0)
