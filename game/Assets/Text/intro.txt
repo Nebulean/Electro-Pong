@@ -4,7 +4,7 @@ We will now briefly explain how it works.
 As any other charged particles, it will be affected by electromagnetic fields.
 !(BALL_DISAPPEAR,PLAYER_APPEAR) This is the player.
 The ball will bounce on it, and electric fields can be generated from it.
-!(BALL_APPEAR_LEFT_MOVE) This is how the electric field affects the ball.
+!(BALL_APPEAR_LEFT_MOVE,ELECTRIC) This is how the electric field affects the ball.
 !(PLAYER_DISAPPEAR,BALL_DISAPPEAR) Simple, right ?
 !(BALL_APPEAR_LEFT_MOVE,MAGNETIC) This is how the magnetic field affects the ball.
 !(BALL_DISAPPEAR) Physics is great.

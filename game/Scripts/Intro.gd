@@ -130,5 +130,7 @@ func command_interpreter(command):
 		pass
 	elif command == "MAGNETIC":
 		pass
+	elif command == "ELECTRIC":
+		pass
 	else:
 		print_debug("Unknown command")
