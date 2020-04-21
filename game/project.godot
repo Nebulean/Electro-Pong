@@ -23,11 +23,17 @@ _global_script_classes=[ {
 "class": "Ring",
 "language": "GDScript",
 "path": "res://Scripts/Ring.gd"
+}, {
+"base": "Label",
+"class": "score_display",
+"language": "GDScript",
+"path": "res://Scripts/ScoreDisplay.gd"
 } ]
 _global_script_class_icons={
 "Ball": "",
 "Player": "",
-"Ring": ""
+"Ring": "",
+"score_display": ""
 }
 
 [application]
