@@ -132,4 +132,4 @@ func command_interpreter(command):
 	elif command == "MAGNETIC":
 		pass
 	else:
-		print("Unknown command")
+		print_debug("Unknown command")
