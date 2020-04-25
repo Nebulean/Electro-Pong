@@ -15,8 +15,8 @@ func _ready() -> void:
 	# Set players
 	p1.set_player(1, ring.position, radius)
 	p2.set_player(2, ring.position, radius)
-	p1.add_collision_exception_with(p2)
-	p2.add_collision_exception_with(p1)
+	#p1.add_collision_exception_with(p2)
+	#p2.add_collision_exception_with(p1)
 
 # The angles must be between 0 and 2*PI
 func angular_distance(alpha: float, beta: float) -> float:

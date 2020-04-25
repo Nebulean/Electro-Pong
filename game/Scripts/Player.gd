@@ -57,6 +57,5 @@ func _physics_process(delta):
 		angle = wrapf(angle + angle_step * delta, 0, 2*PI)
 	if is_trigo:
 		angle = wrapf(angle - angle_step * delta, 0, 2*PI)
-	move_and_collide(
-		position_from_angle(angle) - position_from_angle(lastAngle))
-	rotate(angle - lastAngle)
+	position = position_from_angle(angle)
+	rotation = angle + PI/2
