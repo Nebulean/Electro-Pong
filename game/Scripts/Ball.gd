@@ -3,9 +3,11 @@ extends RigidBody2D
 class_name Ball
 
 var screen_size
+var magnetic_active = 0
 export var min_speed = 150
 export var max_speed = 200
 export var charge = -1
+export var B = 0.01
 
 func _ready():
 	screen_size = get_viewport_rect().size
@@ -33,3 +35,18 @@ func _on_Polarity_inverter_timeout():
 	print_debug("Polarity reset")
 	charge *= -1
 	set_sprite()
+
+func execute_magnetic():
+	magnetic_active = 1
+	$Magnetic_Timer.start()
+
+func _integrate_forces(state):
+	if magnetic_active == 1:
+		set_applied_force(charge*B*Vector2(linear_velocity.y, -linear_velocity.x))
+	else:
+		set_applied_force(Vector2(0, 0))
+
+func _on_Magnetic_Timer_timeout():
+	$Magnetic_Timer.stop()
+	print_debug("Magnetic field stops")
+	magnetic_active = 0
