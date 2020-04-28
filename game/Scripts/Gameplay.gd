@@ -15,8 +15,28 @@ func _ready() -> void:
 	# Set players
 	p1.set_player(1, ring.position, radius)
 	p2.set_player(2, ring.position, radius)
+	#p1.add_collision_exception_with(p2)
+	#p2.add_collision_exception_with(p1)
 
+# The angles must be between 0 and 2*PI
+func angular_distance(alpha: float, beta: float) -> float:
+	assert(0 <= alpha && alpha <= 2*PI)
+	assert(0 <= beta && beta <= 2*PI)
+	if alpha > beta:
+		var temp := alpha
+		alpha = beta
+		beta = temp
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta: float) -> void:
-#	pass
+	var diff := beta - alpha
+	return min(diff, 2*PI - diff)
+
+func _physics_process(_delta: float) -> void:
+	# Ring rotation
+	var first_solution: float = (p1.angle + p2.angle)/2
+	var dist_to_first_solution := angular_distance(first_solution, ring.angle)
+	var second_solution := wrapf(first_solution + PI, 0, 2*PI)
+	var dist_to_second_solution := angular_distance(second_solution, ring.angle)
+	if dist_to_first_solution < dist_to_second_solution:
+		ring.angle = first_solution
+	else:
+		ring.angle = second_solution
