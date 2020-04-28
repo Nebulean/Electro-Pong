@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Scenes/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scenes/Ring.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Scenes/Ball.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Scripts/Gameplay.gd" type="Script" id=4]
+[ext_resource path="res://Scenes/HUD.tscn" type="PackedScene" id=5]
 
 [node name="Gameplay" type="Node"]
 script = ExtResource( 4 )
@@ -23,3 +24,5 @@ position = Vector2( 0, 250 )
 
 [node name="Ball" parent="." instance=ExtResource( 3 )]
 linear_damp = 0.0
+
+[node name="HUD" parent="." instance=ExtResource( 5 )]
