@@ -38,6 +38,7 @@ func _input(ev):
 			get_tree().change_scene("res://Scenes/Gameplay.tscn")
 		else:
 			next_content(textIndex)
+			
 		textIndex += 1
 
 # Will handle what append when next line
