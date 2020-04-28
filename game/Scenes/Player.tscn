@@ -19,12 +19,12 @@ animations = [ {
 }, {
 "frames": [ ExtResource( 1 ) ],
 "loop": true,
-"name": "player1",
+"name": "player1_power",
 "speed": 5.0
 }, {
 "frames": [ ExtResource( 1 ) ],
 "loop": true,
-"name": "player1_power",
+"name": "player1",
 "speed": 5.0
 } ]
 
@@ -43,3 +43,4 @@ animation = "player1"
 shape = SubResource( 2 )
 
 [node name="PowerupStorage" parent="." instance=ExtResource( 4 )]
+position = Vector2( 0, 30 )
