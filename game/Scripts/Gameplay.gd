@@ -14,6 +14,9 @@ func _ready() -> void:
 	ring.position = screen_size/2
 	var radius := ($Ring/CollisionShape2D.shape as CircleShape2D).radius
 	
+	area1.position = screen_size/2
+	area2.position = screen_size/2
+	
 	# Set players
 	p1.set_player(1, ring.position, radius)
 	p2.set_player(2, ring.position, radius)

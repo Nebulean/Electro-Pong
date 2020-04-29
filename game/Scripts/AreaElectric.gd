@@ -9,4 +9,4 @@ func _ready():
 
 
 func _physics_process(_delta: float) -> void:
-	$CollisionShape2D.set_rotation(angle)
+	set_rotation(angle)
