@@ -48,3 +48,38 @@ func _physics_process(_delta: float) -> void:
 	#Area for electric field rotation with player
 	area1.angle = p1.angle
 	area2.angle = p2.angle
+	ball.angle_p1 = p1.angle
+	ball.angle_p2 = p2.angle
+
+func execute_elec_att(num):
+	assert(num in [1, 2])
+	if num == 1:
+		ball.elec_att_active_p1 = 1
+		$ElecAttTimer1.start()
+	else:
+		ball.elec_att_active_p2 = 1
+		$ElecAttTimer2.start()
+
+
+func _on_AreaElectric1_body_entered(body):
+	ball.ball_area1 = 1
+
+func _on_AreaElectric1_body_exited(body):
+	ball.ball_area1 = 0
+
+func _on_AreaElectric2_body_entered(body):
+	ball.ball_area2 = 1
+
+func _on_AreaElectric2_body_exited(body):
+	ball.ball_area2 = 0
+
+
+func _on_ElecAttTimer1_timeout():
+	$ElecAttTimer1.stop()
+	print_debug("Attractive Electric field stopped for Player 1")
+	ball.elec_att_active_p1 = 0
+
+func _on_ElecAttTimer2_timeout():
+	$ElecAttTimer2.stop()
+	print_debug("Attractive Electric field stopped for Player 2")
+	ball.elec_att_active_p2 = 0

@@ -32,8 +32,20 @@ linear_damp = 0.0
 
 [node name="AreaElectric1" parent="." instance=ExtResource( 7 )]
 
+[node name="ElecAttTimer1" type="Timer" parent="."]
+wait_time = 3.0
+
 [node name="AreaElectric2" parent="." instance=ExtResource( 7 )]
+
+[node name="ElecAttTimer2" type="Timer" parent="."]
+wait_time = 3.0
 
 [node name="PowerUpMagnetic" parent="." instance=ExtResource( 8 )]
 
 [node name="PowerUpElecAtt" parent="." instance=ExtResource( 6 )]
+[connection signal="body_entered" from="AreaElectric1" to="." method="_on_AreaElectric1_body_entered"]
+[connection signal="body_exited" from="AreaElectric1" to="." method="_on_AreaElectric1_body_exited"]
+[connection signal="timeout" from="ElecAttTimer1" to="." method="_on_ElecAttTimer1_timeout"]
+[connection signal="body_entered" from="AreaElectric2" to="." method="_on_AreaElectric2_body_entered"]
+[connection signal="body_exited" from="AreaElectric2" to="." method="_on_AreaElectric2_body_exited"]
+[connection signal="timeout" from="ElecAttTimer2" to="." method="_on_ElecAttTimer2_timeout"]
