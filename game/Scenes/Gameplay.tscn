@@ -1,10 +1,13 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://Scenes/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scenes/Ring.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Scenes/Ball.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Scripts/Gameplay.gd" type="Script" id=4]
 [ext_resource path="res://Scenes/HUD.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Scenes/PowerUpElecAtt.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Scenes/AreaElectric.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Scenes/PowerUpMagnetic.tscn" type="PackedScene" id=8]
 
 [node name="Gameplay" type="Node"]
 script = ExtResource( 4 )
@@ -26,3 +29,11 @@ position = Vector2( 0, 250 )
 linear_damp = 0.0
 
 [node name="HUD" parent="." instance=ExtResource( 5 )]
+
+[node name="AreaElectric1" parent="." instance=ExtResource( 7 )]
+
+[node name="AreaElectric2" parent="." instance=ExtResource( 7 )]
+
+[node name="PowerUpMagnetic" parent="." instance=ExtResource( 8 )]
+
+[node name="PowerUpElecAtt" parent="." instance=ExtResource( 6 )]

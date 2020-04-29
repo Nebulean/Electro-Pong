@@ -4,6 +4,8 @@ onready var ring := $Ring
 onready var p1 := $Player1
 onready var p2 := $Player2
 onready var ball := $Ball
+onready var area1 := $AreaElectric1
+onready var area2 := $AreaElectric2
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -40,3 +42,6 @@ func _physics_process(_delta: float) -> void:
 		ring.angle = first_solution
 	else:
 		ring.angle = second_solution
+	#Area for electric field rotation with player
+	area1.angle = p1.angle
+	area2.angle = p2.angle
