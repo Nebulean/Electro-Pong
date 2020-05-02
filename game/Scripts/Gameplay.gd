@@ -41,9 +41,16 @@ func _on_Ring_body_exited(_body: Node) -> void:
 	var exit_angle: float = (ball.position - ring.position).angle() - ring.angle
 	exit_angle = wrapf(exit_angle, 0, 2*PI)
 	if 0 <= exit_angle && exit_angle < PI:
-		p2.score += 1
+		p2.increment_score()
 		hud.set_score_p2(p2.score)
 	else:
-		p1.score += 1
+		p1.increment_score()
 		hud.set_score_p1(p1.score)
 	ball.reset()
+
+
+func _on_player_won(player) -> void:
+	assert(player in [1, 2])
+	print_debug("Player _ won.")
+	var status := get_tree().change_scene("res://Scenes/MainMenu.tscn")
+	assert(status == OK)

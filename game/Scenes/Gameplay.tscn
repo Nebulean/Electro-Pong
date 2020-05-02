@@ -27,3 +27,5 @@ linear_damp = 0.0
 
 [node name="HUD" parent="." instance=ExtResource( 5 )]
 [connection signal="body_exited" from="Ring" to="." method="_on_Ring_body_exited"]
+[connection signal="player_won" from="Player1" to="." method="_on_player_won"]
+[connection signal="player_won" from="Player2" to="." method="_on_player_won"]
