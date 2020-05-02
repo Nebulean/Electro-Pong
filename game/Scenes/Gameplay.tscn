@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://Scenes/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scenes/Ring.tscn" type="PackedScene" id=2]
@@ -9,12 +9,19 @@
 [ext_resource path="res://Scenes/AreaElectric.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Scenes/PowerUpMagnetic.tscn" type="PackedScene" id=8]
 [ext_resource path="res://Scenes/PowerupGenerator.tscn" type="PackedScene" id=9]
+[ext_resource path="res://Assets/Sprites/light.png" type="Texture" id=10]
+[ext_resource path="res://Assets/Sprites/background.png" type="Texture" id=11]
 
 [node name="Gameplay" type="Node"]
 script = ExtResource( 4 )
 __meta__ = {
 "_edit_horizontal_guides_": [  ]
 }
+
+[node name="Background" type="Sprite" parent="."]
+position = Vector2( 520.568, 292.819 )
+scale = Vector2( 20.566, 12.6845 )
+texture = ExtResource( 11 )
 
 [node name="Ring" parent="." instance=ExtResource( 2 )]
 gravity_vec = Vector2( 0, 0 )
@@ -33,7 +40,9 @@ linear_damp = 0.0
 
 [node name="HUD" parent="." instance=ExtResource( 5 )]
 margin_left = 4.10107
+margin_top = -2.65009
 margin_right = 4.10107
+margin_bottom = -2.65009
 
 [node name="AreaElectric1" parent="." instance=ExtResource( 7 )]
 
@@ -50,7 +59,19 @@ wait_time = 3.0
 [node name="PowerUpElecAtt" parent="." instance=ExtResource( 6 )]
 
 [node name="PowerupGenerator" parent="." instance=ExtResource( 9 )]
-scale = Vector2( 1, 0.995885 )
+scale = Vector2( 1.00316, 0.995885 )
+
+[node name="CenterLight" type="Light2D" parent="."]
+texture = ExtResource( 10 )
+color = Color( 0.792157, 0.988235, 1, 1 )
+shadow_enabled = true
+shadow_gradient_length = 2.0
+shadow_filter = 1
+shadow_filter_smooth = 0.5
+
+[node name="CanvasModulate" type="CanvasModulate" parent="."]
+position = Vector2( 0, -1.36038 )
+color = Color( 0.27451, 0.27451, 0.27451, 1 )
 [connection signal="body_entered" from="AreaElectric1" to="." method="_on_AreaElectric1_body_entered"]
 [connection signal="body_exited" from="AreaElectric1" to="." method="_on_AreaElectric1_body_exited"]
 [connection signal="timeout" from="ElecAttTimer1" to="." method="_on_ElecAttTimer1_timeout"]
