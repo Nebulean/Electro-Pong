@@ -31,15 +31,7 @@ func set_sprite():
 		$Sprite.animation = "negative"
 
 func _change_polarity():
-	if (charge < 0):
-		$Polarity_inverter.start()
-		print_debug("Polarity changed")
-		charge *= -1
-		set_sprite()
-
-func _on_Polarity_inverter_timeout():
-	$Polarity_inverter.stop()
-	print_debug("Polarity reset")
+	print_debug("Polarity changed")
 	charge *= -1
 	set_sprite()
 
