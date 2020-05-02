@@ -8,8 +8,7 @@ var el_out_scn
 var el_in_scn
 
 func _ready():
-	pass
-	# mag_scn		= preload("res://Scenes/")
+	mag_scn			= preload("res://Scenes/PowerUpMagnetic.tscn")
 	# pol_scn		= preload("res://Scenes")
 	# el_out_scn		= preload("res://Scenes/")
 	# el_in_scn		= preload("res://Scenes")
@@ -31,10 +30,10 @@ func spawn(type):
 		print_debug("This is not a valid powerup type.")
 	
 	# We disable the powerup (it's just there, nothing more).
-		
+	#current.CollisionShape.set_deferred
 	# We add the new powerup to the storage
 	add_child(current)
 
 func execute_powerup():
-	#current.
+	# current.execute()
 	pass

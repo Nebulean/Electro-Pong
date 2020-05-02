@@ -39,7 +39,7 @@ _global_script_class_icons={
 [application]
 
 config/name="Electro-Pong"
-run/main_scene="res://Scenes/MainMenu.tscn"
+run/main_scene="res://Scenes/Gameplay.tscn"
 config/icon="res://icon.png"
 
 [input]

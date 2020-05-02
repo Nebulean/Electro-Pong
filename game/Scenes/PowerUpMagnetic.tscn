@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://Assets/Sprites/powerup_magnetic.png" type="Texture" id=1]
-[ext_resource path="res://PowerUpMagnetic.gd" type="Script" id=2]
+[ext_resource path="res://Scripts/PowerUpMagnetic.gd" type="Script" id=2]
 
 [sub_resource type="CircleShape2D" id=1]
 radius = 17.7744
