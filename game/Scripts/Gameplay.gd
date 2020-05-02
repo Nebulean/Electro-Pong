@@ -4,6 +4,7 @@ onready var ring := $Ring
 onready var p1 := $Player1
 onready var p2 := $Player2
 onready var ball := $Ball
+onready var hud := $HUD
 onready var area1 := $AreaElectric1
 onready var area2 := $AreaElectric2
 
@@ -28,12 +29,7 @@ func _ready() -> void:
 func angular_distance(alpha: float, beta: float) -> float:
 	assert(0 <= alpha && alpha <= 2*PI)
 	assert(0 <= beta && beta <= 2*PI)
-	if alpha > beta:
-		var temp := alpha
-		alpha = beta
-		beta = temp
-
-	var diff := beta - alpha
+	var diff := abs(beta - alpha)
 	return min(diff, 2*PI - diff)
 
 func _physics_process(_delta: float) -> void:
@@ -51,6 +47,24 @@ func _physics_process(_delta: float) -> void:
 	area2.angle = p2.angle
 	ball.angle_p1 = p1.angle
 	ball.angle_p2 = p2.angle
+
+func _on_Ring_body_exited(_body: Node) -> void:
+	var exit_angle: float = (ball.position - ring.position).angle() - ring.angle
+	exit_angle = wrapf(exit_angle, 0, 2*PI)
+	if 0 <= exit_angle && exit_angle < PI:
+		p2.increment_score()
+		hud.set_score_p2(p2.score)
+	else:
+		p1.increment_score()
+		hud.set_score_p1(p1.score)
+	ball.reset()
+
+
+func _on_player_won(player) -> void:
+	assert(player in [1, 2])
+	print_debug("Player _ won.")
+	var status := get_tree().change_scene("res://Scenes/MainMenu.tscn")
+	assert(status == OK)
 
 func execute_elec_att(num):
 	assert(num in [1, 2])

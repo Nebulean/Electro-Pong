@@ -51,6 +51,9 @@ wait_time = 3.0
 
 [node name="PowerupGenerator" parent="." instance=ExtResource( 9 )]
 scale = Vector2( 1, 0.995885 )
+[connection signal="body_exited" from="Ring" to="." method="_on_Ring_body_exited"]
+[connection signal="player_won" from="Player1" to="." method="_on_player_won"]
+[connection signal="player_won" from="Player2" to="." method="_on_player_won"]
 [connection signal="body_entered" from="AreaElectric1" to="." method="_on_AreaElectric1_body_entered"]
 [connection signal="body_exited" from="AreaElectric1" to="." method="_on_AreaElectric1_body_exited"]
 [connection signal="timeout" from="ElecAttTimer1" to="." method="_on_ElecAttTimer1_timeout"]
