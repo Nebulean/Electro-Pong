@@ -12,6 +12,12 @@ var player2
 var player_scn
 var apple
 var apple_scn
+var pu_el
+var pu_el_scn
+var pu_mag
+var pu_mag_scn
+var pu_pol
+var pu_pol_scn
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -34,12 +40,20 @@ func _ready() -> void:
 	ring_scn = preload("res://Scenes/Ring.tscn")
 	player_scn = preload("res://Scenes/Player.tscn")
 	apple_scn = preload("res://Scenes/Apple.tscn")
+	pu_el_scn = preload("res://Scenes/PowerUpElecAtt.tscn")
+	pu_mag_scn = preload("res://Scenes/PowerUpMagnetic.tscn")
+	# pu_pol_scn = preload(???)
 	
 	# We hide some things
 	$Ground.visible = false
+	
+	# We connect the resize event
+	get_tree().get_root().connect("size_changed", self, "resize")
 
+func resize() -> void:
+	var pos = Vector2(get_viewport().size.x/2, get_viewport().size.y - 41)
+	$Ground.set_position(pos)
 
-# warning-ignore:unused_argument
 func _physics_process(delta):
 	# we check if the ball is off limite
 	if ball.position.x < 0:
@@ -156,18 +170,26 @@ func command_interpreter(command: String) -> void:
 		ball_modifier(pos, vec)
 	elif command == "BALL_DISAPPEAR":
 		ball.set_visible(false)
-	# elif command == "PLAYER_APPEAR_BOTTOM":
-	# 	pass
+
 	elif command == "BALL_APPEAR_LEFT_MOVE":
 		var pos = Vector2(get_viewport().size.x/6, get_viewport().size.y/2)
 		var vec = Vector2(200,0)
 		ball_modifier(pos, vec)
-	# elif command == "PLAYER_DISAPPEAR":
-	# 	pass
-	elif command == "MAGNETIC":
-		pass
-	elif command == "ELECTRIC":
-		pass
+
+	elif command == "MAGNETIC_APPEAR":
+		pu_mag = pu_mag_scn.instance()
+		var pos = Vector2(get_viewport().size.x/2, get_viewport().size.y/2)
+		pu_mag.set_position(pos)
+		add_child(pu_mag)
+	elif command == "MAGNETIC_DISAPPEAR":
+		pu_mag.queue_free()
+	elif command == "ELECTRIC_APPEAR":
+		pu_el = pu_el_scn.instance()
+		var pos = Vector2(get_viewport().size.x/2, get_viewport().size.y/2)
+		pu_el.set_position(pos)
+		add_child(pu_el)
+	elif command == "ELECTRIC_DISAPPEAR":
+		pu_el.queue_free()
 	elif command == "PLAYER_1_KEYBOARD_APPEAR":
 		var pos = Vector2(get_viewport().size.x/2, get_viewport().size.y/2)
 		var scale = Vector2(0.4, 0.4)
@@ -182,7 +204,9 @@ func command_interpreter(command: String) -> void:
 		# We spawn the ring
 		ring = ring_scn.instance()
 		var pos = Vector2(get_viewport().size.x/2, get_viewport().size.y/2)
+		var scale = Vector2(0.7, 0.7)
 		ring.set_position(pos)
+		ring.set_scale(scale)
 		add_child(ring)
 	elif command == "RING_DISSAPPEAR":
 		ring.queue_free()
@@ -199,8 +223,26 @@ func command_interpreter(command: String) -> void:
 		apple.queue_free()
 		$Ground.queue_free()
 	elif command == "POWERUPS_APPEAR":
-		pass
+		# We spawn all powerups
+		pu_el = pu_el_scn.instance()
+		pu_mag = pu_mag_scn.instance()
+		#pu_pol = pu_pol_scn.instance()
+		var pos_el = Vector2(3*get_viewport().size.x/8, get_viewport().size.y/2)
+		var pos_mag = Vector2(get_viewport().size.x/2, get_viewport().size.y/2)
+		#var pos_pol = Vector2(5*get_viewport().size.x/8, get_viewport().size.y/2)
+		pu_el.set_position(pos_el)
+		pu_mag.set_position(pos_mag)
+		#pu_pol.set_position(pos_pol)
+		add_child(pu_el)
+		add_child(pu_mag)
+		#add_child(pu_pol)
 	elif command == "POWERUPS_DISAPPEAR":
-		pass
+		pu_el.queue_free()
+		pu_mag.queue_free()
+		#pu_pol.queue_free()
+	elif command == "VECTORFIELD_APPEAR":
+		var pos = Vector2(get_viewport().size.x/2, get_viewport().size.y/2)
+		var scale = Vector2(0.4, 0.4)
+		load_image("res://Assets/Sprites/vector_field.png", pos, scale)
 	else:
 		print_debug("Unknown command")

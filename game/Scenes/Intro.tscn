@@ -5,10 +5,15 @@
 [ext_resource path="res://Fonts/Roboto-Bold.ttf" type="DynamicFontData" id=3]
 
 [sub_resource type="DynamicFont" id=1]
+size = 22
 font_data = ExtResource( 3 )
 
 [node name="Intro" type="Node"]
 script = ExtResource( 1 )
+__meta__ = {
+"_edit_horizontal_guides_": [  ],
+"_edit_vertical_guides_": [  ]
+}
 
 [node name="Label" type="Label" parent="."]
 anchor_left = 0.5
@@ -28,4 +33,4 @@ __meta__ = {
 
 [node name="Ground" parent="." instance=ExtResource( 2 )]
 position = Vector2( 542.658, 571.528 )
-scale = Vector2( 0.7, 0.5 )
+scale = Vector2( 1, 0.5 )
