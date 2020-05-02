@@ -1,14 +1,33 @@
-Welcome to "Electro-Pong", a simple reproduction of the game "Pong" with electrodynamics.
-We will now briefly explain how it works.
-!(BALL_APPEAR_CENTER_STOP) This is the ball. It is a negatively charged particle.
-As any other charged particles, it will be affected by electromagnetic fields.
-!(BALL_DISAPPEAR,PLAYER_APPEAR) This is the player.
-The ball will bounce on it, and electric fields can be generated from it.
-!(BALL_APPEAR_LEFT_MOVE,ELECTRIC) This is how the electric field affects the ball.
-!(PLAYER_DISAPPEAR,BALL_DISAPPEAR) Simple, right ?
-!(BALL_APPEAR_LEFT_MOVE,MAGNETIC) This is how the magnetic field affects the ball.
-!(BALL_DISAPPEAR) Physics is great.
-!(BALL_APPEAR_CENTER_STOP,INVERSE_POLARITY) Last but not least, the polarity of the particle can be inverted.
-This will reverse all the effects presented before.
-!(BALL_DISAPPEAR) You now understand most of the important stuff. A game will then start, and you'll figure more by yourself.
-Good luck!
+Welcome to Electro-pong, a simple reproduction of the game Pong, with a touch of electrodynamics.
+You know nothing about electrodynamics ? Don't worry, we'll now explain how it work.
+!(BALL_APPEAR_CENTER_STOP) This is the ball. It is a negatively charged particles. Yes, like electrons.
+As of any charged particles, it is affected by what we call "electromagnetic fields".
+!(BALL_DISAPPEAR) Fields are mathematical objects that apply forces at some elements in a particular direction for a position.
+For instance, the gravitational field applies forces on us (not only), and makes us stay on earth.
+In our case, we are interessed in electromagnetic fields.
+These are two separate fields: electric field and magnetic field.
+To keep it simple, this game will only consider fields that are uniform, which means that their effect does not change with position.
+In this case, electric fields are the most simple ones.
+Indeed, the accelerate charged particles in the direction of the field.
+!(BALL_APPEAR_LEFT_MOVE,ELECTRIC) This is how it works.
+!(BALL_DISAPPEAR) Easy, right ? Let's continue with the magnetic field then.
+This field might be a little bit trickier to understand, as the acceleration in not in the direction of the field.
+In this game, the magnetic field will points toward you. Yes, you, the players.
+!(BALL_APPEAR_LEFT_MOVE,MAGNETIC) In this particular configuration, the ball will be affected the following way.
+!(BALL_DISAPPEAR) Weird, right ? Yes, it is, but don't worry, physicist do know exactly how it behaves.
+And.... that's it ! You now know everything about electrodynamics (except for the minor content of some 1000-ish pages books).
+One more thing, we have also added a powerup able to inverse the polarity of the particles (which means that if the particles is negatively charged, it becomes positively charge.)
+The effect of this inversion of polarity is that all the effects are inversed!
+A repulsive electric field becomes attractive, and the particle affected by the magnetic field will rotate in the other direction.
+You now understand the scientific part of the game, we now probably need to explain a few things about the game itself.
+The game is simple: two players are located on the border of a ring, and they will play the ball with the particle.
+The goal is simple, shoot the ball into the opponent area to get a point.
+The first player with 11 points will win.
+The players move with two directional keys.
+Some times, a powerup will appear inside the ring: they are four of them.
+The repulsive and attractive electric fields, the magnetic field and the inversion of polarity.
+Don't worry! All of them work exactly like it was explained before.
+To obtain a powerup, you need to touch it with the ball.
+To enable it, simple touch the action button.
+And remember that you can only keep one at a time in your inventory, so don't forget to use it!
+We think you're now ready to play this game, so we hope you'll have fun with it!
