@@ -44,4 +44,8 @@ shape = SubResource( 3 )
 
 [node name="Polarity_inverter" type="Timer" parent="."]
 wait_time = 10.0
+
+[node name="Magnetic_Timer" type="Timer" parent="."]
+wait_time = 3.0
 [connection signal="timeout" from="Polarity_inverter" to="." method="_on_Polarity_inverter_timeout"]
+[connection signal="timeout" from="Magnetic_Timer" to="." method="_on_Magnetic_Timer_timeout"]
