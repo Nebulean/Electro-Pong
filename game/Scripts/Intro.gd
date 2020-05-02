@@ -4,12 +4,21 @@ var text
 var ball
 var ball_scn
 var textIndex = 0
+var image
+var ring
+var ring_scn
+var player1
+var player2
+var player_scn
+var apple
+var apple_scn
 
 # Called when the node enters the scene tree for the first time.
-func _ready():
+func _ready() -> void:
 	# We load the text file that will guide the tutorial
 	text = load_text("res://Assets/Text/intro.txt")
-	
+
+
 	# We instanciate a ball
 	ball_scn = preload("res://Scenes/Ball.tscn")
 	ball = ball_scn.instance()
@@ -17,6 +26,18 @@ func _ready():
 	var vel = Vector2(0,0)
 	ball_modifier(pos, vel)
 	ball.set_visible(false)
+
+	# We create an empty image
+	image = Sprite.new()
+
+	# We preload some other scenes
+	ring_scn = preload("res://Scenes/Ring.tscn")
+	player_scn = preload("res://Scenes/Player.tscn")
+	apple_scn = preload("res://Scenes/Apple.tscn")
+	
+	# We hide some things
+	$Ground.visible = false
+
 
 # warning-ignore:unused_argument
 func _physics_process(delta):
@@ -30,7 +51,7 @@ func _physics_process(delta):
 	if ball.position.y > get_viewport().size.y:
 		ball.linear_velocity.y *= -1
 
-func _input(ev):
+func _input(ev) -> void:
 	# We check if any key is pressed
 	if ev is InputEventKey and ev.pressed:
 		# If we are at the end of the file, we go to next scene
@@ -38,11 +59,11 @@ func _input(ev):
 			get_tree().change_scene("res://Scenes/Gameplay.tscn")
 		else:
 			next_content(textIndex)
-			
+
 		textIndex += 1
 
 # Will handle what append when next line
-func next_content(index):
+func next_content(index: int) -> void:
 	# We interprete the text
 	var res = line_interpreter(text[index])
 	var line = res[0]
@@ -57,7 +78,7 @@ func next_content(index):
 	$Label.set_visible(true)
 
 # This function will load a text file, and add each line to an element of an array.
-func load_text(filename):
+func load_text(filename: String) -> String:
 	# We create all our variables
 	var txt = Array() # will contain all the texts
 	var f = File.new() # will contain the file data
@@ -79,7 +100,7 @@ func load_text(filename):
 # This function will read the input string, and interpret it.
 # All is considered text, except when !(THIS) is at the beginning of the string,
 # which will be interpreted as a command.
-func line_interpreter(line):
+func line_interpreter(line: String):
 	# We first check if we have any thing
 	if not line.empty():
 		if line[0] == "!" and line[1] == "(":
@@ -97,22 +118,36 @@ func line_interpreter(line):
 			return [new_line, command]
 	return [line, "EMPTY"]
 
-func ball_modifier(position, velocity):
+func ball_modifier(position: Vector2, velocity: Vector2) -> void:
 	# We remove the previous ball
 	ball.queue_free()
 	ball = ball_scn.instance()
-	
+
 	# We modify our properties
 	ball.manual_state = true
 	ball.set_position(position)
 	ball.set_linear_velocity(velocity)
 	ball.set_visible(true)
-	
+
 	# We add ball as scene child
 	add_child(ball)
-	
 
-func command_interpreter(command):	
+
+func load_image(path: String, pos: Vector2, scale: Vector2) -> void:
+	# We free the previous image
+	image.queue_free()
+	# We load the new one and we apply it
+	var texture = load(path)
+	image = Sprite.new()
+	image.set_texture(texture)
+	image.set_position(pos)
+	image.set_scale(scale)
+	add_child(image)
+
+
+
+
+func command_interpreter(command: String) -> void:
 	if command == "EMPTY":
 		print_debug("No commands here")
 	elif command == "BALL_APPEAR_CENTER_STOP":
@@ -121,17 +156,51 @@ func command_interpreter(command):
 		ball_modifier(pos, vec)
 	elif command == "BALL_DISAPPEAR":
 		ball.set_visible(false)
-	elif command == "PLAYER_APPEAR_BOTTOM":
-		pass
+	# elif command == "PLAYER_APPEAR_BOTTOM":
+	# 	pass
 	elif command == "BALL_APPEAR_LEFT_MOVE":
 		var pos = Vector2(get_viewport().size.x/6, get_viewport().size.y/2)
 		var vec = Vector2(200,0)
 		ball_modifier(pos, vec)
-	elif command == "PLAYER_DISAPPEAR":
-		pass
+	# elif command == "PLAYER_DISAPPEAR":
+	# 	pass
 	elif command == "MAGNETIC":
 		pass
 	elif command == "ELECTRIC":
+		pass
+	elif command == "PLAYER_1_KEYBOARD_APPEAR":
+		var pos = Vector2(get_viewport().size.x/2, get_viewport().size.y/2)
+		var scale = Vector2(0.4, 0.4)
+		load_image("res://Assets/Sprites/player_1_key.png", pos, scale)
+	elif command == "PLAYER_2_KEYBOARD_APPEAR":
+		var pos = Vector2(get_viewport().size.x/2, get_viewport().size.y/2)
+		var scale = Vector2(0.4, 0.4)
+		load_image("res://Assets/Sprites/player_2_key.png", pos, scale)
+	elif command == "IMAGE_CLEAR":
+		load_image("", Vector2(0,0), Vector2(0,0))
+	elif command == "RING_APPEAR":
+		# We spawn the ring
+		ring = ring_scn.instance()
+		var pos = Vector2(get_viewport().size.x/2, get_viewport().size.y/2)
+		ring.set_position(pos)
+		add_child(ring)
+	elif command == "RING_DISSAPPEAR":
+		ring.queue_free()
+	elif command == "APPLE_APPEAR":
+		# instanciate the apple
+		apple = apple_scn.instance()
+		var pos = Vector2(get_viewport().size.x/2, get_viewport().size.y/4)
+		apple.set_position(pos)
+		# We show the ground
+		$Ground.visible = true
+		# We add the apple to children
+		add_child(apple)
+	elif command == "APPLE_DISAPPEAR":
+		apple.queue_free()
+		$Ground.queue_free()
+	elif command == "POWERUPS_APPEAR":
+		pass
+	elif command == "POWERUPS_DISAPPEAR":
 		pass
 	else:
 		print_debug("Unknown command")

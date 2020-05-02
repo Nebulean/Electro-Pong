@@ -3,8 +3,8 @@ You know nothing about electrodynamics ? Don't worry, we'll now explain how it w
 !(BALL_APPEAR_CENTER_STOP) This is the ball. It is a negatively charged particles. Yes, like electrons.
 As of any charged particles, it is affected by what we call "electromagnetic fields".
 !(BALL_DISAPPEAR) Fields are mathematical objects that apply forces at some elements in a particular direction for a position.
-For instance, the gravitational field applies forces on us (not only), and makes us stay on earth.
-In our case, we are interessed in electromagnetic fields.
+!(APPLE_APPEAR) For instance, the gravitational field applies forces on us (not only), and makes us stay on earth.
+!(APPLE_DISAPPEAR) In our case, we are interessed in electromagnetic fields.
 These are two separate fields: electric field and magnetic field.
 To keep it simple, this game will only consider fields that are uniform, which means that their effect does not change with position.
 In this case, electric fields are the most simple ones.
@@ -20,12 +20,14 @@ One more thing, we have also added a powerup able to inverse the polarity of the
 The effect of this inversion of polarity is that all the effects are inversed!
 A repulsive electric field becomes attractive, and the particle affected by the magnetic field will rotate in the other direction.
 You now understand the scientific part of the game, we now probably need to explain a few things about the game itself.
-The game is simple: two players are located on the border of a ring, and they will play the ball with the particle.
+!(RING_APPEAR) The game is simple: two players are located on the border of a ring, and they will play the ball with the particle.
 The goal is simple, shoot the ball into the opponent area to get a point.
 The first player with 11 points will win.
-The players move with two directional keys.
-Some times, a powerup will appear inside the ring: they are four of them.
-The repulsive and attractive electric fields, the magnetic field and the inversion of polarity.
+!(RING_DISSAPPEAR) The players move with two directional keys.
+!(PLAYER_1_KEYBOARD_APPEAR) For player 1, A-D for swiss keyboards and Q-D for french keyboards
+!(PLAYER_2_KEYBOARD_APPEAR) For player 2, left-right for all keyboards.
+!(IMAGE_CLEAR) Some times, a powerup will appear inside the ring: they are three of them.
+!(POWERUPS_APPEAR) The electric fields, the magnetic field and the inversion of polarity.
 Don't worry! All of them work exactly like it was explained before.
 To obtain a powerup, you need to touch it with the ball.
 To enable it, simple touch the action button.
