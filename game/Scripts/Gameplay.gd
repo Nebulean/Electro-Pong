@@ -5,6 +5,8 @@ onready var p1 := $Player1
 onready var p2 := $Player2
 onready var ball := $Ball
 onready var hud := $HUD
+onready var area1 := $AreaElectric1
+onready var area2 := $AreaElectric2
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -12,6 +14,9 @@ func _ready() -> void:
 	var screen_size := get_tree().root.size
 	ring.position = screen_size/2
 	var radius := ($Ring/CollisionShape2D.shape as CircleShape2D).radius
+	
+	area1.position = screen_size/2
+	area2.position = screen_size/2
 	
 	# Set players
 	p1.set_player(1, ring.position, radius)
@@ -36,6 +41,11 @@ func _physics_process(_delta: float) -> void:
 		ring.angle = first_solution
 	else:
 		ring.angle = second_solution
+	#Area for electric field rotation with player
+	area1.angle = p1.angle
+	area2.angle = p2.angle
+	ball.angle_p1 = p1.angle
+	ball.angle_p2 = p2.angle
 
 func _on_Ring_body_exited(_body: Node) -> void:
 	var exit_angle: float = (ball.position - ring.position).angle() - ring.angle
@@ -54,3 +64,36 @@ func _on_player_won(player) -> void:
 	print_debug("Player _ won.")
 	var status := get_tree().change_scene("res://Scenes/MainMenu.tscn")
 	assert(status == OK)
+
+func execute_elec_att(num):
+	assert(num in [1, 2])
+	if num == 1:
+		ball.elec_att_active_p1 = 1
+		$ElecAttTimer1.start()
+	else:
+		ball.elec_att_active_p2 = 1
+		$ElecAttTimer2.start()
+
+
+func _on_AreaElectric1_body_entered(body):
+	ball.ball_area1 = 1
+
+func _on_AreaElectric1_body_exited(body):
+	ball.ball_area1 = 0
+
+func _on_AreaElectric2_body_entered(body):
+	ball.ball_area2 = 1
+
+func _on_AreaElectric2_body_exited(body):
+	ball.ball_area2 = 0
+
+
+func _on_ElecAttTimer1_timeout():
+	$ElecAttTimer1.stop()
+	print_debug("Attractive Electric field stopped for Player 1")
+	ball.elec_att_active_p1 = 0
+
+func _on_ElecAttTimer2_timeout():
+	$ElecAttTimer2.stop()
+	print_debug("Attractive Electric field stopped for Player 2")
+	ball.elec_att_active_p2 = 0

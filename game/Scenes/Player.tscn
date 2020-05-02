@@ -11,9 +11,9 @@ animations = [ {
 "name": "player1_power",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 2 ) ],
+"frames": [ ExtResource( 1 ) ],
 "loop": true,
-"name": "player2_power",
+"name": "player1",
 "speed": 5.0
 }, {
 "frames": [ ExtResource( 2 ) ],
@@ -21,9 +21,9 @@ animations = [ {
 "name": "player2",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 1 ) ],
+"frames": [ ExtResource( 2 ) ],
 "loop": true,
-"name": "player1",
+"name": "player2_power",
 "speed": 5.0
 } ]
 
