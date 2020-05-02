@@ -4,9 +4,14 @@
 .import/
 export.cfg
 export_presets.cfg
+game/.import/*
+
 
 # Mono-specific ignores
 .mono/
 
 ###  MacOS ###
 .DS_Store
+
+### Some other stuff ###
+.vscode/

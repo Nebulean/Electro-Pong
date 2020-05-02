@@ -2,9 +2,9 @@ extends KinematicBody2D
 
 class_name Player
 
-var angle
-var is_right = false
-var is_left = false
+export var angle: float
+var is_clockwise = false
+var is_trigo = false
 export var angle_step = 1
 export var is_input_sensitive = true
 var player
@@ -27,35 +27,35 @@ func set_player(num: int, center: Vector2, radius: float):
 
 	ring_center = center
 	ring_radius = radius
-	set_position_via_angle()
+	position = position_from_angle(angle)
 
-func set_position_via_angle() -> void:
-	position = ring_center + ring_radius*Vector2(cos(angle), sin(angle))
+func position_from_angle(alpha: float) -> Vector2:
+	return ring_center + ring_radius * Vector2(cos(alpha), sin(alpha))
 
 func _input(event):
 	if is_input_sensitive:
-		if event.is_action_pressed("ui_right") && player == 1:
-			is_right = true
-		if event.is_action_pressed("ui_right2") && player == 2:
-			is_right = true
-		if event.is_action_pressed("ui_left") && player == 1:
-			is_left = true
-		if event.is_action_pressed("ui_left2") && player == 2:
-			is_left = true
-		if event.is_action_released("ui_right") && player == 1:
-			is_right = false
-		if event.is_action_released("ui_right2") && player == 2:
-			is_right = false
-		if event.is_action_released("ui_left") && player == 1:
-			is_left = false
-		if event.is_action_released("ui_left2") && player == 2:
-			is_left = false
+		if event.is_action_pressed("p1_clockwise") && player == 1:
+			is_clockwise = true
+		if event.is_action_pressed("p2_clockwise") && player == 2:
+			is_clockwise = true
+		if event.is_action_pressed("p1_trigo") && player == 1:
+			is_trigo = true
+		if event.is_action_pressed("p2_trigo") && player == 2:
+			is_trigo = true
+		if event.is_action_released("p1_clockwise") && player == 1:
+			is_clockwise = false
+		if event.is_action_released("p2_clockwise") && player == 2:
+			is_clockwise = false
+		if event.is_action_released("p1_trigo") && player == 1:
+			is_trigo = false
+		if event.is_action_released("p2_trigo") && player == 2:
+			is_trigo = false
 
 func _physics_process(delta):
-	var lastPos = Vector2(0, 250).rotated(angle)
 	var lastAngle = angle
-	if is_right:
-		angle = angle + angle_step * delta
-	if is_left:
-		angle = angle - angle_step * delta
-	set_position_via_angle()
+	if is_clockwise:
+		angle = wrapf(angle + angle_step * delta, 0, 2*PI)
+	if is_trigo:
+		angle = wrapf(angle - angle_step * delta, 0, 2*PI)
+	position = position_from_angle(angle)
+	rotation = angle + PI/2
