@@ -4,6 +4,7 @@ onready var ring := $Ring
 onready var p1 := $Player1
 onready var p2 := $Player2
 onready var ball := $Ball
+onready var hud := $HUD
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -22,12 +23,7 @@ func _ready() -> void:
 func angular_distance(alpha: float, beta: float) -> float:
 	assert(0 <= alpha && alpha <= 2*PI)
 	assert(0 <= beta && beta <= 2*PI)
-	if alpha > beta:
-		var temp := alpha
-		alpha = beta
-		beta = temp
-
-	var diff := beta - alpha
+	var diff := abs(beta - alpha)
 	return min(diff, 2*PI - diff)
 
 func _physics_process(_delta: float) -> void:
@@ -40,3 +36,14 @@ func _physics_process(_delta: float) -> void:
 		ring.angle = first_solution
 	else:
 		ring.angle = second_solution
+
+func _on_Ring_body_exited(_body: Node) -> void:
+	var exit_angle: float = (ball.position - ring.position).angle() - ring.angle
+	exit_angle = wrapf(exit_angle, 0, 2*PI)
+	if 0 <= exit_angle && exit_angle < PI:
+		p2.score += 1
+		hud.set_score_p2(p2.score)
+	else:
+		p1.score += 1
+		hud.set_score_p1(p1.score)
+	ball.reset()

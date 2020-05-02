@@ -26,3 +26,4 @@ position = Vector2( 0, 250 )
 linear_damp = 0.0
 
 [node name="HUD" parent="." instance=ExtResource( 5 )]
+[connection signal="body_exited" from="Ring" to="." method="_on_Ring_body_exited"]

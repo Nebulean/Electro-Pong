@@ -10,6 +10,7 @@ export var is_input_sensitive = true
 var player
 var ring_center: Vector2
 var ring_radius: float
+var score := 0
 
 # Declare member variables here. Examples:
 # var a = 2
