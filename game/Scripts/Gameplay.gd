@@ -13,6 +13,7 @@ func _ready() -> void:
 	# Set ring
 	var screen_size := get_tree().root.size
 	ring.position = screen_size/2
+	$PowerupGenerator.position = screen_size/2
 	var radius := ($Ring/CollisionShape2D.shape as CircleShape2D).radius
 	
 	area1.position = screen_size/2
