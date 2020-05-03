@@ -69,10 +69,12 @@ func _on_player_won(player) -> void:
 func execute_elec_att(num):
 	assert(num in [1, 2])
 	if num == 1:
+		print_debug("Electric field active for Player1")
 		ball.elec_att_active_p1 = 1
 		$ElecAttTimer1.start()
 	else:
-		ball.elec_att_active_p2 = 1
+		ball.elec_att_active_p2 = 2
+		print_debug("Electric field active for Player2")
 		$ElecAttTimer2.start()
 
 
@@ -98,3 +100,13 @@ func _on_ElecAttTimer2_timeout():
 	$ElecAttTimer2.stop()
 	print_debug("Attractive Electric field stopped for Player 2")
 	ball.elec_att_active_p2 = 0
+
+
+func _on_PowerupGenerator_taken_magnetic():
+	ball.execute_magnetic()
+
+
+func _on_PowerupGenerator_taken_elec_att():
+	var p = ball.get_last_hit_player()
+	var num = p.player
+	execute_elec_att(num)
