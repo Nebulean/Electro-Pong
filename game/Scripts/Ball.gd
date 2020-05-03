@@ -17,6 +17,7 @@ var angle_p1
 var angle_p2
 export var B = 0.01
 export var E = 0.01
+var last_hit_player: Player = null
 
 func _ready():
 	can_sleep = false
@@ -63,7 +64,7 @@ func set_sprite():
 	else :
 		$Sprite.animation = "negative"
 
-func _change_polarity():
+func change_polarity():
 	print_debug("Polarity changed")
 	charge *= -1
 	set_sprite()
@@ -78,3 +79,10 @@ func _on_Magnetic_Timer_timeout():
 	$Magnetic_Timer.stop()
 	print_debug("Magnetic field stops")
 	magnetic_active = 0
+
+
+func _on_Ball_body_entered(body):
+	last_hit_player = body
+
+func get_last_hit_player() -> Player:
+	return last_hit_player
