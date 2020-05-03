@@ -39,10 +39,6 @@ angle_step = 2
 linear_damp = 0.0
 
 [node name="HUD" parent="." instance=ExtResource( 5 )]
-margin_left = 4.10107
-margin_top = -2.65009
-margin_right = 4.10107
-margin_bottom = -2.65009
 
 [node name="AreaElectric1" parent="." instance=ExtResource( 7 )]
 
@@ -63,15 +59,17 @@ scale = Vector2( 1.00316, 0.995885 )
 
 [node name="CenterLight" type="Light2D" parent="."]
 texture = ExtResource( 10 )
+texture_scale = 1.25
 color = Color( 0.792157, 0.988235, 1, 1 )
+energy = 0.77
 shadow_enabled = true
 shadow_gradient_length = 2.0
 shadow_filter = 1
 shadow_filter_smooth = 0.5
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
-position = Vector2( 0, -1.36038 )
-color = Color( 0.27451, 0.27451, 0.27451, 1 )
+position = Vector2( 7.79211, -3.30838 )
+color = Color( 0.662745, 0.662745, 0.662745, 1 )
 [connection signal="body_entered" from="AreaElectric1" to="." method="_on_AreaElectric1_body_entered"]
 [connection signal="body_exited" from="AreaElectric1" to="." method="_on_AreaElectric1_body_exited"]
 [connection signal="timeout" from="ElecAttTimer1" to="." method="_on_ElecAttTimer1_timeout"]
