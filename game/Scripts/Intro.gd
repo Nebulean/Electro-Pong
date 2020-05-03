@@ -43,10 +43,10 @@ func _ready() -> void:
 	pu_el_scn = preload("res://Scenes/PowerUpElecAtt.tscn")
 	pu_mag_scn = preload("res://Scenes/PowerUpMagnetic.tscn")
 	# pu_pol_scn = preload(???)
-	
+
 	# We hide some things
 	$Ground.visible = false
-	
+
 	# We connect the resize event
 	get_tree().get_root().connect("size_changed", self, "resize")
 
@@ -134,7 +134,8 @@ func line_interpreter(line: String):
 
 func ball_modifier(position: Vector2, velocity: Vector2) -> void:
 	# We remove the previous ball
-	ball.queue_free()
+	if is_instance_valid(ball):
+		ball.queue_free()
 	ball = ball_scn.instance()
 
 	# We modify our properties
@@ -149,7 +150,8 @@ func ball_modifier(position: Vector2, velocity: Vector2) -> void:
 
 func load_image(path: String, pos: Vector2, scale: Vector2) -> void:
 	# We free the previous image
-	image.queue_free()
+	if is_instance_valid(image):
+		image.queue_free()
 	# We load the new one and we apply it
 	var texture = load(path)
 	image = Sprite.new()
@@ -182,14 +184,16 @@ func command_interpreter(command: String) -> void:
 		pu_mag.set_position(pos)
 		add_child(pu_mag)
 	elif command == "MAGNETIC_DISAPPEAR":
-		pu_mag.queue_free()
+		if is_instance_valid(pu_mag):
+			pu_mag.queue_free()
 	elif command == "ELECTRIC_APPEAR":
 		pu_el = pu_el_scn.instance()
 		var pos = Vector2(get_viewport().size.x/2, get_viewport().size.y/2)
 		pu_el.set_position(pos)
 		add_child(pu_el)
 	elif command == "ELECTRIC_DISAPPEAR":
-		pu_el.queue_free()
+		if is_instance_valid(pu_el):
+			pu_el.queue_free()
 	elif command == "PLAYER_1_KEYBOARD_APPEAR":
 		var pos = Vector2(get_viewport().size.x/2, get_viewport().size.y/2)
 		var scale = Vector2(0.4, 0.4)
@@ -209,7 +213,8 @@ func command_interpreter(command: String) -> void:
 		ring.set_scale(scale)
 		add_child(ring)
 	elif command == "RING_DISSAPPEAR":
-		ring.queue_free()
+		if is_instance_valid(ring):
+			ring.queue_free()
 	elif command == "APPLE_APPEAR":
 		# instanciate the apple
 		apple = apple_scn.instance()
@@ -220,8 +225,10 @@ func command_interpreter(command: String) -> void:
 		# We add the apple to children
 		add_child(apple)
 	elif command == "APPLE_DISAPPEAR":
-		apple.queue_free()
-		$Ground.queue_free()
+		if is_instance_valid(apple):
+			apple.queue_free()
+		if is_instance_valid($Ground):
+			$Ground.queue_free()
 	elif command == "POWERUPS_APPEAR":
 		# We spawn all powerups
 		pu_el = pu_el_scn.instance()
@@ -237,8 +244,10 @@ func command_interpreter(command: String) -> void:
 		add_child(pu_mag)
 		#add_child(pu_pol)
 	elif command == "POWERUPS_DISAPPEAR":
-		pu_el.queue_free()
-		pu_mag.queue_free()
+		if is_instance_valid(pu_el):
+			pu_el.queue_free()
+		if is_instance_valid(pu_mag):
+			pu_mag.queue_free()
 		#pu_pol.queue_free()
 	elif command == "VECTORFIELD_APPEAR":
 		var pos = Vector2(get_viewport().size.x/2, get_viewport().size.y/2)
