@@ -27,11 +27,9 @@ gravity = 0.0
 
 [node name="Player1" parent="." instance=ExtResource( 1 )]
 position = Vector2( 0, -250 )
-angle_step = 2
 
 [node name="Player2" parent="." instance=ExtResource( 1 )]
 position = Vector2( 0, 250 )
-angle_step = 2
 
 [node name="Ball" parent="." instance=ExtResource( 3 )]
 linear_damp = 0.0
@@ -74,6 +72,6 @@ color = Color( 0.662745, 0.662745, 0.662745, 1 )
 [connection signal="body_exited" from="AreaElectric2" to="." method="_on_AreaElectric2_body_exited"]
 [connection signal="timeout" from="ElecAttTimer2" to="." method="_on_ElecAttTimer2_timeout"]
 [connection signal="taken_elec_att" from="PowerupGenerator" to="." method="_on_PowerupGenerator_taken_elec_att"]
-[connection signal="taken_magnetic" from="PowerupGenerator" to="." method="_on_PowerupGenerator_taken_magnetic"]
 [connection signal="taken_magnetic" from="PowerupGenerator" to="Ball" method="execute_magnetic"]
+[connection signal="taken_magnetic" from="PowerupGenerator" to="." method="_on_PowerupGenerator_taken_magnetic"]
 [connection signal="taken_polarity_inverter" from="PowerupGenerator" to="Ball" method="change_polarity"]

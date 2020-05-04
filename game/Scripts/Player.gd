@@ -3,10 +3,10 @@ extends KinematicBody2D
 class_name Player
 
 const MAX_SCORE = 11
-export var angle: float
+var angle: float
 var is_clockwise = false
 var is_trigo = false
-export var angle_step = 1
+export var angle_step: float = 1
 export var is_input_sensitive = true
 var player
 var ring_center: Vector2
@@ -22,7 +22,7 @@ func set_player(num: int, center: Vector2, radius: float):
 		angle = PI/2
 		$Sprite.animation = "player1"
 	else:
-		angle = 3*PI/2
+		angle = -PI/2
 		$Sprite.animation = "player2"
 
 	ring_center = center
@@ -51,13 +51,20 @@ func _input(event):
 		if event.is_action_released("p2_trigo") && player == 2:
 			is_trigo = false
 
-func _physics_process(delta):
-	var lastAngle = angle
+func _physics_process(delta: float) -> void:
+	var relative_pos := position - ring_center
+	var tangent := Vector2(-relative_pos.y, relative_pos.x).normalized()
+	var movement := Vector2.ZERO
+	
 	if is_clockwise:
-		angle = wrapf(angle + angle_step * delta, 0, 2*PI)
+		movement = movement + angle_step * ring_radius * delta * tangent
 	if is_trigo:
-		angle = wrapf(angle - angle_step * delta, 0, 2*PI)
-	position = position_from_angle(angle)
+		movement = movement - angle_step * ring_radius * delta * tangent
+	
+	var _collision := move_and_collide(movement)
+	relative_pos = position - ring_center
+	angle = relative_pos.angle()
+	position = ring_center + relative_pos.normalized() * ring_radius
 	rotation = angle + PI/2
 
 func increment_score():
