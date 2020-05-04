@@ -2,6 +2,7 @@ extends KinematicBody2D
 
 class_name Player
 
+const MAX_SCORE = 11
 export var angle: float
 var is_clockwise = false
 var is_trigo = false
@@ -10,10 +11,9 @@ export var is_input_sensitive = true
 var player
 var ring_center: Vector2
 var ring_radius: float
+var score := 0 setget , get_score
 
-# Declare member variables here. Examples:
-# var a = 2
-# var b = "text"
+signal player_won(player)
 
 func set_player(num: int, center: Vector2, radius: float):
 	assert(num in [1, 2])
@@ -59,3 +59,11 @@ func _physics_process(delta):
 		angle = wrapf(angle - angle_step * delta, 0, 2*PI)
 	position = position_from_angle(angle)
 	rotation = angle + PI/2
+
+func increment_score():
+	score += 1
+	if score >= MAX_SCORE:
+		emit_signal("player_won", player)
+
+func get_score():
+	return score

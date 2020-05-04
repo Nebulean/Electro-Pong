@@ -29,6 +29,8 @@ radius = 35.2071
 mass = 0.01
 physics_material_override = SubResource( 1 )
 gravity_scale = 0.0
+contacts_reported = 1
+contact_monitor = true
 script = ExtResource( 3 )
 __meta__ = {
 "_edit_group_": true,
@@ -43,6 +45,9 @@ animation = "negative"
 [node name="Collision" type="CollisionShape2D" parent="."]
 shape = SubResource( 3 )
 
+[node name="Pause_between_rounds" type="Timer" parent="."]
+one_shot = true
+
 [node name="Magnetic_Timer" type="Timer" parent="."]
 wait_time = 3.0
 
@@ -52,4 +57,6 @@ energy = 0.29
 shadow_enabled = true
 shadow_filter = 3
 shadow_filter_smooth = 1.0
+[connection signal="body_entered" from="." to="." method="_on_Ball_body_entered"]
+[connection signal="timeout" from="Pause_between_rounds" to="." method="_on_Pause_between_rounds_timeout"]
 [connection signal="timeout" from="Magnetic_Timer" to="." method="_on_Magnetic_Timer_timeout"]
