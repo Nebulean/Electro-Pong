@@ -1,6 +1,6 @@
 Welcome to Electro-pong, a simple reproduction of the game Pong, with a touch of electrodynamics.
 You know nothing about electrodynamics ? Don't worry, we'll now explain how it work.
-!(BALL_APPEAR_CENTER_STOP) This is the ball. It is a negatively charged particles. Yes, like electrons.
+!(BALL_APPEAR_CENTER_STOP) This is the ball. It is a positively charged particles. Yes, like protons.
 As of any charged particles, it is affected by what we call "electromagnetic fields".
 !(BALL_DISAPPEAR,VECTORFIELD_APPEAR) Fields are mathematical objects that apply forces at some elements in a particular direction for a position.
 !(IMAGE_CLEAR,APPLE_APPEAR) For instance, the gravitational field applies forces on us (not only), and makes us stay on earth.
