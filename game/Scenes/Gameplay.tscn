@@ -18,7 +18,7 @@ __meta__ = {
 }
 
 [node name="Background" type="Sprite" parent="."]
-position = Vector2( 520.568, 292.819 )
+position = Vector2( 526.12, 296.52 )
 scale = Vector2( 20.566, 12.6845 )
 texture = ExtResource( 11 )
 
@@ -51,6 +51,7 @@ wait_time = 3.0
 scale = Vector2( 1, 0.995885 )
 
 [node name="CenterLight" type="Light2D" parent="."]
+position = Vector2( 1.71472, 0 )
 texture = ExtResource( 10 )
 texture_scale = 1.25
 color = Color( 0.792157, 0.988235, 1, 1 )
@@ -68,6 +69,7 @@ color = Color( 0.662745, 0.662745, 0.662745, 1 )
 position = Vector2( 512, 300 )
 current = true
 script = ExtResource( 6 )
+ring_exit_trauma = 0.4
 [connection signal="body_exited" from="Ring" to="." method="_on_Ring_body_exited"]
 [connection signal="body_exited" from="Ring" to="ShakeCamera2D" method="_on_Ring_body_exited"]
 [connection signal="player_won" from="Player1" to="." method="_on_player_won"]

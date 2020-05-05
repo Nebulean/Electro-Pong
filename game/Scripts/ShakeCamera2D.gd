@@ -11,7 +11,8 @@ var trauma_power = 2  # Trauma exponent. Use [2, 3].
 onready var noise = OpenSimplexNoise.new()
 var noise_y = 0
 
-export var ball_pad_collision_trauma = 0.3
+onready var ball = get_node("../Ball")
+
 export var ring_exit_trauma = 0.6
 
 func _ready():
@@ -38,13 +39,22 @@ func shake():
 #	rotation = max_roll * amount * rand_range(-1, 1)
 #	offset.x = max_offset.x * amount * rand_range(-1, 1)
 #	offset.y = max_offset.y * amount * rand_range(-1, 1)
-	
+
 func add_trauma(amount):
 	trauma = min(trauma + amount, 1.0)
 
-func _on_Ball_body_entered(body):
-	add_trauma(ball_pad_collision_trauma)
 
+
+func _on_Ball_body_entered(body):
+	trauma = _velocity_to_trauma(ball.linear_velocity.length())
+	add_trauma(trauma)
 
 func _on_Ring_body_exited(body):
 	add_trauma(ring_exit_trauma)
+
+func _velocity_to_trauma(v, max_trauma = 0.4, divider = 1000):
+	var res = v / divider
+	
+	# limit trauma
+	res = res if res < max_trauma else max_trauma
+	return res
