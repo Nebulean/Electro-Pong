@@ -14,6 +14,7 @@ func _ready() -> void:
 	var screen_size := get_tree().root.size
 	ring.position = screen_size/2
 	$PowerupGenerator.position = screen_size/2
+	$CenterLight.position = screen_size/2
 	var radius := ($Ring/CollisionShape2D.shape as CircleShape2D).radius
 	
 	area1.position = screen_size/2
@@ -25,10 +26,10 @@ func _ready() -> void:
 	#p1.add_collision_exception_with(p2)
 	#p2.add_collision_exception_with(p1)
 
-# The angles must be between 0 and 2*PI
+# The angles must use the same bounds
 func angular_distance(alpha: float, beta: float) -> float:
-	assert(0 <= alpha && alpha <= 2*PI)
-	assert(0 <= beta && beta <= 2*PI)
+	assert(-PI <= alpha && alpha <= PI)
+	assert(-PI <= beta && beta <= PI)
 	var diff := abs(beta - alpha)
 	return min(diff, 2*PI - diff)
 
@@ -36,7 +37,7 @@ func _physics_process(_delta: float) -> void:
 	# Ring rotation
 	var first_solution: float = (p1.angle + p2.angle)/2
 	var dist_to_first_solution := angular_distance(first_solution, ring.angle)
-	var second_solution := wrapf(first_solution + PI, 0, 2*PI)
+	var second_solution := wrapf(first_solution + PI, -PI, PI)
 	var dist_to_second_solution := angular_distance(second_solution, ring.angle)
 	if dist_to_first_solution < dist_to_second_solution:
 		ring.angle = first_solution
@@ -57,6 +58,7 @@ func _on_Ring_body_exited(_body: Node) -> void:
 	else:
 		p1.increment_score()
 		hud.set_score_p1(p1.score)
+	$Ball.playPointSound()
 	ball.reset()
 
 
@@ -67,6 +69,7 @@ func _on_player_won(player) -> void:
 	assert(status == OK)
 
 func execute_elec_att(num):
+	$Ball.playPowerupSound()
 	assert(num in [1, 2])
 	if num == 1:
 		print_debug("Electric field active for Player1")
