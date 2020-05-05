@@ -58,6 +58,7 @@ func _on_Ring_body_exited(_body: Node) -> void:
 	else:
 		p1.increment_score()
 		hud.set_score_p1(p1.score)
+	$Ball.playPointSound()
 	ball.reset()
 
 
@@ -68,6 +69,7 @@ func _on_player_won(player) -> void:
 	assert(status == OK)
 
 func execute_elec_att(num):
+	$Ball.playPowerupSound()
 	assert(num in [1, 2])
 	if num == 1:
 		print_debug("Electric field active for Player1")

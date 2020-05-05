@@ -76,6 +76,7 @@ func change_polarity():
 	print_debug("Polarity changed")
 	charge *= -1
 	set_sprite()
+	playPowerupSound()
 
 func _on_Pause_between_rounds_timeout() -> void:
 	_velocity_reset_needed = true
@@ -84,6 +85,7 @@ func execute_magnetic():
 	magnetic_active = 1
 	print_debug("Magnetic field active")
 	$Magnetic_Timer.start()
+	playPowerupSound()
 
 func _on_Magnetic_Timer_timeout():
 	$Magnetic_Timer.stop()
@@ -96,3 +98,15 @@ func _on_Ball_body_entered(body):
 
 func get_last_hit_player() -> Player:
 	return last_hit_player
+
+
+func _on_Area2D_body_entered(body):
+	if body.is_in_group("players"):
+		$SoundBoing.play()
+
+
+func playPowerupSound():
+	$SoundPowerup.play()
+
+func playPointSound():
+	$SoundPoint.play()
