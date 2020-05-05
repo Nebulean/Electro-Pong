@@ -182,9 +182,11 @@ func command_interpreter(command: String) -> void:
 		pu_mag = pu_mag_scn.instance()
 		var pos = Vector2(get_viewport().size.x/2, get_viewport().size.y/2)
 		pu_mag.set_position(pos)
+		pu_mag.connect("taken_magnetic", ball, "execute_magnetic")
 		add_child(pu_mag)
 	elif command == "MAGNETIC_DISAPPEAR":
 		if is_instance_valid(pu_mag):
+			pu_mag.disconnect("taken_magnetic", ball, "execute_magnetic")
 			pu_mag.queue_free()
 	elif command == "ELECTRIC_APPEAR":
 		pu_el = pu_el_scn.instance()
