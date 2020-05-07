@@ -77,7 +77,7 @@ func execute_elec_att(num):
 		$ElecAttTimer1.start()
 		area1.set_sprite(true)
 	else:
-		ball.elec_att_active_p2 = 2
+		ball.elec_att_active_p2 = 1
 		print_debug("Electric field active for Player2")
 		$ElecAttTimer2.start()
 		area2.set_sprite(true)
