@@ -49,6 +49,10 @@ func _ready() -> void:
 
 	# We connect the resize event
 	get_tree().get_root().connect("size_changed", self, "resize")
+	
+	# We start the tutorial 
+	next_content(textIndex)
+	textIndex += 1
 
 func resize() -> void:
 	var pos = Vector2(get_viewport().size.x/2, get_viewport().size.y - 41)
@@ -73,7 +77,6 @@ func _input(ev) -> void:
 			get_tree().change_scene("res://Scenes/Gameplay.tscn")
 		else:
 			next_content(textIndex)
-
 		textIndex += 1
 
 # Will handle what append when next line
