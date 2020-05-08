@@ -1,4 +1,4 @@
-Welcome to Electro-pong, a simple reproduction of the game Pong, with a touch of electrodynamics.
+Welcome to Electro-pong, a simple reproduction of the game Pong, with a touch of electrodynamics. (Press any key to continue)
 You know nothing about electrodynamics ? Don't worry, we'll now explain how it work.
 !(BALL_APPEAR_CENTER_STOP) This is the ball. It is a positively charged particles. Yes, like protons.
 As of any charged particles, it is affected by what we call "electromagnetic fields".
@@ -15,10 +15,11 @@ This field might be a little bit trickier to understand, as the acceleration in 
 In this game, the magnetic field will points toward you. Yes, you, the players.
 !(BALL_APPEAR_LEFT_MOVE,MAGNETIC_APPEAR) In this particular configuration, the ball will be affected the following way.
 !(BALL_DISAPPEAR,MAGNETIC_DISAPPEAR) Weird, right ? Yes, it is, but don't worry, physicist do know exactly how it behaves.
+So, what you've seen is that magnetic fields pointing in your direction will make the trajectory of the particule circular, where the direction depending on the charge of the particle.
 And.... that's it ! You now know everything about electrodynamics (except for the minor content of some 1000-ish pages books).
 One more thing, we have also added a powerup able to inverse the polarity of the particles (which means that if the particles is negatively charged, it becomes positively charge.)
 The effect of this inversion of polarity is that all the effects are inversed!
-A repulsive electric field becomes attractive, and the particle affected by the magnetic field will rotate in the other direction.
+An electric field that used to be repulsive will now become attractive, and the magnetic field will make the particle rotate in the other direction.
 You now understand the scientific part of the game, we now probably need to explain a few things about the game itself.
 !(RING_APPEAR) The game is simple: two players are located on the border of a ring, and they will play the ball with the particle.
 The goal is simple, shoot the ball into the opponent area to get a point.
@@ -29,7 +30,5 @@ The players move with two directional keys.
 !(IMAGE_CLEAR) Some times, a powerup will appear inside the ring: they are three of them.
 !(POWERUPS_APPEAR) The electric fields, the magnetic field and the inversion of polarity.
 Don't worry! All of them work exactly like it was explained before.
-To obtain a powerup, you need to touch it with the ball.
-To enable it, simple touch the action button.
-And remember that you can only keep one at a time in your inventory, so don't forget to use it!
+To use a powerup, you simply need to touch it with the ball.
 We think you're now ready to play this game, so we hope you'll have fun with it!

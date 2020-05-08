@@ -255,8 +255,10 @@ func command_interpreter(command: String) -> void:
 			pu_mag.queue_free()
 		#pu_pol.queue_free()
 	elif command == "VECTORFIELD_APPEAR":
-		var pos = Vector2(get_viewport().size.x/2, get_viewport().size.y/2)
-		var scale = Vector2(0.4, 0.4)
-		load_image("res://Assets/Sprites/vector_field.png", pos, scale)
+		# useless and ugly
+		pass
+		#var pos = Vector2(get_viewport().size.x/2, get_viewport().size.y/2)
+		#var scale = Vector2(0.4, 0.4)
+		#load_image("res://Assets/Sprites/vector_field.png", pos, scale)
 	else:
 		print_debug("Unknown command")
