@@ -75,10 +75,12 @@ func execute_elec_att(num):
 		print_debug("Electric field active for Player1")
 		ball.elec_att_active_p1 = 1
 		$ElecAttTimer1.start()
+		area1.set_sprite(true)
 	else:
-		ball.elec_att_active_p2 = 2
+		ball.elec_att_active_p2 = 1
 		print_debug("Electric field active for Player2")
 		$ElecAttTimer2.start()
+		area2.set_sprite(true)
 
 
 func _on_AreaElectric1_body_entered(body):
@@ -96,11 +98,13 @@ func _on_AreaElectric2_body_exited(body):
 
 func _on_ElecAttTimer1_timeout():
 	$ElecAttTimer1.stop()
+	area1.set_sprite(false)
 	print_debug("Attractive Electric field stopped for Player 1")
 	ball.elec_att_active_p1 = 0
 
 func _on_ElecAttTimer2_timeout():
 	$ElecAttTimer2.stop()
+	area2.set_sprite(false)
 	print_debug("Attractive Electric field stopped for Player 2")
 	ball.elec_att_active_p2 = 0
 

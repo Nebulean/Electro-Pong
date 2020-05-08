@@ -28,7 +28,7 @@ func _ready():
 
 func _place_powerup():
 	# select random position within spawn radius
-	var spawn_position = Vector2(rng.randf_range(-1.0, 1.0), rng.randf_range(-1.0, 1.0)) * rng.randf_range(0, spawn_radius)
+	var spawn_position = Vector2(rng.randf_range(-1.0, 1.0), rng.randf_range(-1.0, 1.0)).normalized() * rng.randf_range(0, spawn_radius)
 	
 	# select a random powerup from our list
 	var powerup_number = rng.randi() % powerups.size()

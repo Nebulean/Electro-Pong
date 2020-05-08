@@ -10,3 +10,9 @@ func _ready():
 
 func _physics_process(_delta: float) -> void:
 	set_rotation(angle)
+
+func set_sprite(value : bool):
+	if value:
+		$AreaSprite.show()
+	else:
+		$AreaSprite.hide()
