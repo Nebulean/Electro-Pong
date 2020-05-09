@@ -19,11 +19,12 @@ export var B = 0.01
 export var E = 3
 var last_hit_player: Player = null
 
-var manual_state = false
+var intro = false
+var intro_force = false
 
 func _ready():
 	set_sprite()
-	if !manual_state:
+	if !intro:
 		can_sleep = false
 		reset()
 
@@ -66,6 +67,8 @@ func _integrate_forces(state: Physics2DDirectBodyState) -> void:
 		set_applied_force(-charge*E*Vector2(cos(angle_p2), sin(angle_p2)) + charge*B*Vector2(linear_velocity.y, -linear_velocity.x))
 	elif magnetic_active == 1 and elec_att_active_p1 == 1 and ball_area1 == 1 and elec_att_active_p2 == 1 and ball_area2 == 1:
 		set_applied_force(-charge*E*Vector2(cos(angle_p1), sin(angle_p1)) + charge*B*Vector2(linear_velocity.y, -linear_velocity.x) - charge*E*Vector2(cos(angle_p2), sin(angle_p2)))
+	elif intro_force:
+		set_applied_force(Vector2(-1,0))
 	else:
 		set_applied_force(Vector2(0, 0))
 
@@ -114,3 +117,6 @@ func playPowerupSound():
 
 func playPointSound():
 	$SoundPoint.play()
+
+func intro_elec_exec():
+	intro_force = true

@@ -142,10 +142,11 @@ func ball_modifier(position: Vector2, velocity: Vector2) -> void:
 	ball = ball_scn.instance()
 
 	# We modify our properties
-	ball.manual_state = true
+	ball.intro = true
 	ball.set_position(position)
 	ball.set_linear_velocity(velocity)
 	ball.set_visible(true)
+	ball.intro = true
 
 	# We add ball as scene child
 	add_child(ball)
@@ -163,6 +164,9 @@ func load_image(path: String, pos: Vector2, scale: Vector2) -> void:
 	image.set_scale(scale)
 	add_child(image)
 
+func execute_elec():
+	ball.playPowerupSound()
+	ball.intro_elec_exec()
 
 
 
@@ -192,13 +196,24 @@ func command_interpreter(command: String) -> void:
 			pu_mag.disconnect("taken_magnetic", ball, "execute_magnetic")
 			pu_mag.queue_free()
 	elif command == "ELECTRIC_APPEAR":
+		# We spawn the electric powerup
 		pu_el = pu_el_scn.instance()
-		var pos = Vector2(get_viewport().size.x/2, get_viewport().size.y/2)
+		var pos = Vector2(get_viewport().size.x/3, get_viewport().size.y/2)
 		pu_el.set_position(pos)
+		pu_el.connect("taken_elec_att", self, "execute_elec")
+		# We spawn the player
+		player1 = player_scn.instance()
+		var posP = Vector2(2*get_viewport().size.x/3, get_viewport().size.y/2)
+		player1.set_position(posP)
+		player1.set_rotation(PI/2)
+		player1.manual_pos = true
 		add_child(pu_el)
+		add_child(player1)
 	elif command == "ELECTRIC_DISAPPEAR":
 		if is_instance_valid(pu_el):
 			pu_el.queue_free()
+		if is_instance_valid(player1):
+			player1.queue_free()
 	elif command == "PLAYER_1_KEYBOARD_APPEAR":
 		var pos = Vector2(get_viewport().size.x/2, get_viewport().size.y/2)
 		var scale = Vector2(0.4, 0.4)
