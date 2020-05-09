@@ -42,7 +42,7 @@ func _ready() -> void:
 	apple_scn = preload("res://Scenes/Apple.tscn")
 	pu_el_scn = preload("res://Scenes/PowerUpElecAtt.tscn")
 	pu_mag_scn = preload("res://Scenes/PowerUpMagnetic.tscn")
-	# pu_pol_scn = preload(???)
+	pu_pol_scn = preload("res://Scenes/PowerUpPolarityInverter.tscn")
 
 	# We hide some things
 	$Ground.visible = false
@@ -253,22 +253,23 @@ func command_interpreter(command: String) -> void:
 		# We spawn all powerups
 		pu_el = pu_el_scn.instance()
 		pu_mag = pu_mag_scn.instance()
-		#pu_pol = pu_pol_scn.instance()
+		pu_pol = pu_pol_scn.instance()
 		var pos_el = Vector2(3*get_viewport().size.x/8, get_viewport().size.y/2)
 		var pos_mag = Vector2(get_viewport().size.x/2, get_viewport().size.y/2)
-		#var pos_pol = Vector2(5*get_viewport().size.x/8, get_viewport().size.y/2)
+		var pos_pol = Vector2(5*get_viewport().size.x/8, get_viewport().size.y/2)
 		pu_el.set_position(pos_el)
 		pu_mag.set_position(pos_mag)
-		#pu_pol.set_position(pos_pol)
+		pu_pol.set_position(pos_pol)
 		add_child(pu_el)
 		add_child(pu_mag)
-		#add_child(pu_pol)
+		add_child(pu_pol)
 	elif command == "POWERUPS_DISAPPEAR":
 		if is_instance_valid(pu_el):
 			pu_el.queue_free()
 		if is_instance_valid(pu_mag):
 			pu_mag.queue_free()
-		#pu_pol.queue_free()
+		if is_instance_valid(pu_pol):
+			pu_pol.queue_free()
 	elif command == "VECTORFIELD_APPEAR":
 		# useless and ugly
 		pass
