@@ -88,6 +88,7 @@ ring_exit_trauma = 0.4
 wait_time = 3.0
 one_shot = true
 [connection signal="body_exited" from="Ring" to="." method="_on_Ring_body_exited"]
+[connection signal="body_exited" from="Ring" to="PowerupGenerator" method="_on_Ring_body_exited"]
 [connection signal="body_exited" from="Ring" to="ShakeCamera2D" method="_on_Ring_body_exited"]
 [connection signal="player_won" from="Player1" to="." method="_on_player_won"]
 [connection signal="player_won" from="Player2" to="." method="_on_player_won"]
