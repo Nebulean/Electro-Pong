@@ -115,5 +115,6 @@ func _on_PowerupGenerator_taken_magnetic():
 
 func _on_PowerupGenerator_taken_elec_att():
 	var p = ball.get_last_hit_player()
-	var num = p.player
-	execute_elec_att(num)
+	if (p != null):
+		var num = p.player
+		execute_elec_att(num)
