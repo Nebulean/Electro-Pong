@@ -62,6 +62,20 @@ func _on_Ring_body_exited(_body: Node) -> void:
 	$Ball.playPointSound()
 	if (p1.score < 11 && p2.score < 11):
 		ball.reset()
+	if ball.magnetic_active == 1:
+		$Ball/Magnetic_Timer.stop()
+		print_debug("Magnetic field stops")
+		ball.magnetic_active = 0
+	if ball.elec_att_active_p1 == 1:
+		$ElecAttTimer1.stop()
+		area1.set_sprite(false)
+		print_debug("Attractive Electric field stopped for Player 1")
+		ball.elec_att_active_p1 = 0
+	if ball.elec_att_active_p2 == 1:
+		$ElecAttTimer2.stop()
+		area2.set_sprite(false)
+		print_debug("Attractive Electric field stopped for Player 2")
+		ball.elec_att_active_p2 = 0
 
 
 func _on_player_won(player) -> void:
