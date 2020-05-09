@@ -25,6 +25,7 @@ func _ready() -> void:
 	p2.set_player(2, ring.position, radius)
 	#p1.add_collision_exception_with(p2)
 	#p2.add_collision_exception_with(p1)
+	hud._on_game_starts()
 
 # The angles must use the same bounds
 func angular_distance(alpha: float, beta: float) -> float:
@@ -59,12 +60,17 @@ func _on_Ring_body_exited(_body: Node) -> void:
 		p1.increment_score()
 		hud.set_score_p1(p1.score)
 	$Ball.playPointSound()
-	ball.reset()
+	if (p1.score < 11 && p2.score < 11):
+		ball.reset()
 
 
 func _on_player_won(player) -> void:
 	assert(player in [1, 2])
-	print_debug("Player _ won.")
+	print_debug("Player %d won." % player)
+	hud._on_player_won(player)
+	$GameFinished.start()
+	
+func _on_GameFinished_timeout():
 	var status := get_tree().change_scene("res://Scenes/MainMenu.tscn")
 	assert(status == OK)
 

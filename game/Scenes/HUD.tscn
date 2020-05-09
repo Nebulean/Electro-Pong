@@ -1,17 +1,24 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Fonts/Roboto-Medium.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://Scripts/ScoreDisplay.gd" type="Script" id=2]
 [ext_resource path="res://Scripts/HUD.gd" type="Script" id=3]
+[ext_resource path="res://Fonts/Roboto-Regular.ttf" type="DynamicFontData" id=4]
 
 [sub_resource type="DynamicFont" id=1]
 size = 60
 outline_color = Color( 0, 0, 0, 1 )
 font_data = ExtResource( 1 )
 
+[sub_resource type="DynamicFont" id=2]
+size = 60
+outline_size = 1
+font_data = ExtResource( 4 )
+
 [node name="HUD" type="Control"]
+anchor_top = 0.00178589
 anchor_right = 1.0
-anchor_bottom = 1.0
+anchor_bottom = 1.00179
 script = ExtResource( 3 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -48,6 +55,22 @@ custom_colors/font_color = Color( 0.8, 0.552, 0.552, 1 )
 text = "0"
 align = 2
 script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VictoryText" type="Label" parent="."]
+anchor_left = 0.483
+anchor_top = 0.336786
+anchor_right = 0.483
+anchor_bottom = 0.336786
+margin_left = -419.592
+margin_top = 8.92847
+margin_right = 440.408
+margin_bottom = 295.928
+custom_fonts/font = SubResource( 2 )
+align = 1
+valign = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
