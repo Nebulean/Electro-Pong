@@ -26,7 +26,7 @@ animations = [ {
 } ]
 
 [sub_resource type="CircleShape2D" id=3]
-radius = 35.2071
+radius = 32.2897
 
 [node name="Ball" type="RigidBody2D"]
 mass = 0.01
@@ -41,9 +41,8 @@ __meta__ = {
 }
 
 [node name="Sprite" type="AnimatedSprite" parent="."]
-scale = Vector2( 0.1, 0.1 )
 frames = SubResource( 2 )
-animation = "negative"
+animation = "positive"
 
 [node name="Collision" type="CollisionShape2D" parent="."]
 shape = SubResource( 3 )

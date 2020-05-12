@@ -6,16 +6,6 @@
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
-"frames": [ ExtResource( 2 ) ],
-"loop": true,
-"name": "player2",
-"speed": 5.0
-}, {
-"frames": [ ExtResource( 1 ) ],
-"loop": true,
-"name": "player1",
-"speed": 5.0
-}, {
 "frames": [ ExtResource( 1 ) ],
 "loop": true,
 "name": "player1_power",
@@ -24,6 +14,16 @@ animations = [ {
 "frames": [ ExtResource( 2 ) ],
 "loop": true,
 "name": "player2_power",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 1 ) ],
+"loop": true,
+"name": "player1",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 2 ) ],
+"loop": true,
+"name": "player2",
 "speed": 5.0
 } ]
 
@@ -40,12 +40,12 @@ script = ExtResource( 3 )
 angle_step = 2.0
 
 [node name="Sprite" type="AnimatedSprite" parent="."]
-scale = Vector2( 0.125, 0.125 )
+scale = Vector2( 0.638, 0.605 )
 frames = SubResource( 1 )
 animation = "player1"
 
 [node name="LightOccluder2D" type="LightOccluder2D" parent="Sprite"]
-scale = Vector2( 17.35, 5 )
+scale = Vector2( 3.378, 1 )
 occluder = SubResource( 2 )
 
 [node name="Collision" type="CollisionShape2D" parent="."]
