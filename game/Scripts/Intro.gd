@@ -58,7 +58,7 @@ func resize() -> void:
 	var pos = Vector2(get_viewport().size.x/2, get_viewport().size.y - 41)
 	$Ground.set_position(pos)
 
-func _physics_process(delta):
+func _physics_process(delta: float) -> void:
 	# we check if the ball is off limite
 	if ball.position.x < 0:
 		ball.linear_velocity.x *= -1
@@ -69,7 +69,7 @@ func _physics_process(delta):
 	if ball.position.y > get_viewport().size.y:
 		ball.linear_velocity.y *= -1
 
-func _input(ev) -> void:
+func _input(ev: InputEvent) -> void:
 	# We check if any key is pressed
 	if ev is InputEventKey and ev.pressed:
 		# If we are at the end of the file, we go to next scene
@@ -117,7 +117,7 @@ func load_text(filename: String) -> String:
 # This function will read the input string, and interpret it.
 # All is considered text, except when !(THIS) is at the beginning of the string,
 # which will be interpreted as a command.
-func line_interpreter(line: String):
+func line_interpreter(line: String) -> Array:
 	# We first check if we have any thing
 	if not line.empty():
 		if line[0] == "!" and line[1] == "(":
@@ -164,7 +164,7 @@ func load_image(path: String, pos: Vector2, scale: Vector2) -> void:
 	image.set_scale(scale)
 	add_child(image)
 
-func execute_elec():
+func execute_elec() -> void:
 	ball.playPowerupSound()
 	ball.intro_elec_exec()
 
