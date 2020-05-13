@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/powerup_electrical_attraction.png-8f9d332a79cd1b693413fca18d460d92.stex"
+path="res://.import/powerup_electrical.png-55c8d80e50565c8ef642d9c70da656dd.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Sprites/powerup_electrical_attraction.png"
-dest_files=[ "res://.import/powerup_electrical_attraction.png-8f9d332a79cd1b693413fca18d460d92.stex" ]
+source_file="res://Assets/Sprites/powerup_electrical.png"
+dest_files=[ "res://.import/powerup_electrical.png-55c8d80e50565c8ef642d9c70da656dd.stex" ]
 
 [params]
 

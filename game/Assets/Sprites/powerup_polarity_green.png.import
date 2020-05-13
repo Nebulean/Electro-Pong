@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/powerup_electrical_repulsion.png-94eed1130d99f5ef5dc746701fddb3d4.stex"
+path="res://.import/powerup_polarity_green.png-e676ee14b62c140c1f21f38b6775d66a.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Sprites/powerup_electrical_repulsion.png"
-dest_files=[ "res://.import/powerup_electrical_repulsion.png-94eed1130d99f5ef5dc746701fddb3d4.stex" ]
+source_file="res://Assets/Sprites/powerup_polarity_green.png"
+dest_files=[ "res://.import/powerup_polarity_green.png-e676ee14b62c140c1f21f38b6775d66a.stex" ]
 
 [params]
 
