@@ -15,18 +15,18 @@ for i=1:N
     for j=1:M
         [d,p] = dist_phase(i,j,N,M);
         
-        if d < dmin/5
-            imgR(i,j) = floor(map(d, 0, dmin/5, 180, 130) + normrnd(0,2));
-            imgG(i,j) = floor(map(d, 0, dmin/5, 180, 130) + normrnd(0,2));
-            imgB(i,j) = floor(map(d, 0, dmin/5, 180, 130) + normrnd(0,2));
-        elseif d >= dmin/5 && d < 3*dmin/5
-            imgR(i,j) = floor(map(d, dmin/5, 3*dmin/5, 130, 50+80) + normrnd(0,2));
-            imgG(i,j) = floor(map(d, dmin/5, 3*dmin/5, 130, 0+80) + normrnd(0,2));
-            imgB(i,j) = floor(map(d, dmin/5, 3*dmin/5, 130, 100+80) + normrnd(0,2));
-        elseif d >= 3*dmin/5
-            imgR(i,j) = floor(map(d, 3*dmin/5, dmax, 50+80, 100) + normrnd(0,2));
-            imgG(i,j) = floor(map(d, 3*dmin/5, dmax, 0+80, 100) + normrnd(0,2));
-            imgB(i,j) = floor(map(d, 3*dmin/5, dmax, 100+80, 100) + normrnd(0,2));
+        if d < 2*dmin/5
+            imgR(i,j) = floor(map(d, 0, 2*dmin/5, 180, 140) + normrnd(0,2));
+            imgG(i,j) = floor(map(d, 0, 2*dmin/5, 180, 140) + normrnd(0,2));
+            imgB(i,j) = floor(map(d, 0, 2*dmin/5, 180, 140) + normrnd(0,2));
+        elseif d >= 2*dmin/5 && d < 4*dmin/5
+            imgR(i,j) = floor(map(d, 2*dmin/5, 4*dmin/5, 140, 120) + normrnd(0,2)); % 50+80
+            imgG(i,j) = floor(map(d, 2*dmin/5, 4*dmin/5, 140, 120) + normrnd(0,2)); % 0+80
+            imgB(i,j) = floor(map(d, 2*dmin/5, 4*dmin/5, 140, 120) + normrnd(0,2)); % 100+80
+        elseif d >= 4*dmin/5
+            imgR(i,j) = floor(map(d, 4*dmin/5, dmax, 120, 110) + normrnd(0,2));
+            imgG(i,j) = floor(map(d, 4*dmin/5, dmax, 120, 110) + normrnd(0,2));
+            imgB(i,j) = floor(map(d, 4*dmin/5, dmax, 120, 110) + normrnd(0,2));
         end
     end
 end
@@ -36,6 +36,7 @@ img(:,:,1) = imgR;
 img(:,:,2) = imgG;
 img(:,:,3) = imgB;
 
+figure
 imshow(uint8(img))
 imwrite(uint8(img),"background.png","png")
 

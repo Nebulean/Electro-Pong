@@ -13,7 +13,7 @@ animations = [ {
 }, {
 "frames": [ ExtResource( 2 ) ],
 "loop": true,
-"name": "player2_power",
+"name": "player2",
 "speed": 5.0
 }, {
 "frames": [ ExtResource( 1 ) ],
@@ -23,7 +23,7 @@ animations = [ {
 }, {
 "frames": [ ExtResource( 2 ) ],
 "loop": true,
-"name": "player2",
+"name": "player2_power",
 "speed": 5.0
 } ]
 
@@ -40,7 +40,7 @@ script = ExtResource( 3 )
 angle_step = 2.0
 
 [node name="Sprite" type="AnimatedSprite" parent="."]
-scale = Vector2( 0.638, 0.605 )
+scale = Vector2( 0.627, 0.627 )
 frames = SubResource( 1 )
 animation = "player1"
 
