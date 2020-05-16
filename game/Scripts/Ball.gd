@@ -65,6 +65,10 @@ func _integrate_forces(state: Physics2DDirectBodyState) -> void:
 		set_applied_force(-charge*E*Vector2(cos(angle_p1), sin(angle_p1)) + charge*B*Vector2(linear_velocity.y, -linear_velocity.x) - charge*E*Vector2(cos(angle_p2), sin(angle_p2)))
 	else:
 		set_applied_force(Vector2(0, 0))
+	
+	#set a minimum velocity when the ball is moving to avoid problems when the ball is reseted
+	if sqrt(linear_velocity.dot(linear_velocity)) < min_speed and sqrt(linear_velocity.dot(linear_velocity)) > 1:
+		state.set_linear_velocity(linear_velocity.normalized() * min_speed)
 
 func set_sprite():
 	if (charge >= 0):
