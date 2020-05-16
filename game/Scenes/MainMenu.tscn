@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=36 format=2]
 
 [ext_resource path="res://Scripts/MainMenu.gd" type="Script" id=1]
 [ext_resource path="res://Fonts/Roboto-Regular.ttf" type="DynamicFontData" id=2]
@@ -9,6 +9,28 @@
 [ext_resource path="res://Assets/Sprites/play_button_hover.png" type="Texture" id=7]
 [ext_resource path="res://Assets/Sprites/LOGOV2.png" type="Texture" id=8]
 [ext_resource path="res://Assets/Sprites/background.png" type="Texture" id=9]
+[ext_resource path="res://Assets/Sprites/logo_hover/LOGO_hover3.png" type="Texture" id=10]
+[ext_resource path="res://Assets/Sprites/logo_hover/LOGO_hover1.png" type="Texture" id=11]
+[ext_resource path="res://Assets/Sprites/logo_hover/LOGO_hover22.png" type="Texture" id=12]
+[ext_resource path="res://Assets/Sprites/logo_hover/LOGO_hover21.png" type="Texture" id=13]
+[ext_resource path="res://Assets/Sprites/logo_hover/LOGO_hover2.png" type="Texture" id=14]
+[ext_resource path="res://Assets/Sprites/logo_hover/LOGO_hover11.png" type="Texture" id=15]
+[ext_resource path="res://Assets/Sprites/logo_hover/LOGO_hover16.png" type="Texture" id=16]
+[ext_resource path="res://Assets/Sprites/logo_hover/LOGO_hover15.png" type="Texture" id=17]
+[ext_resource path="res://Assets/Sprites/logo_hover/LOGO_hover5.png" type="Texture" id=18]
+[ext_resource path="res://Assets/Sprites/logo_hover/LOGO_hover10.png" type="Texture" id=19]
+[ext_resource path="res://Assets/Sprites/logo_hover/LOGO_hover8.png" type="Texture" id=20]
+[ext_resource path="res://Assets/Sprites/logo_hover/LOGO_hover19.png" type="Texture" id=21]
+[ext_resource path="res://Assets/Sprites/logo_hover/LOGO_hover13.png" type="Texture" id=22]
+[ext_resource path="res://Assets/Sprites/logo_hover/LOGO_hover4.png" type="Texture" id=23]
+[ext_resource path="res://Assets/Sprites/logo_hover/LOGO_hover7.png" type="Texture" id=24]
+[ext_resource path="res://Assets/Sprites/logo_hover/LOGO_hover9.png" type="Texture" id=25]
+[ext_resource path="res://Assets/Sprites/logo_hover/LOGO_hover12.png" type="Texture" id=26]
+[ext_resource path="res://Assets/Sprites/logo_hover/LOGO_hover18.png" type="Texture" id=27]
+[ext_resource path="res://Assets/Sprites/logo_hover/LOGO_hover17.png" type="Texture" id=28]
+[ext_resource path="res://Assets/Sprites/logo_hover/LOGO_hover6.png" type="Texture" id=29]
+[ext_resource path="res://Assets/Sprites/logo_hover/LOGO_hover20.png" type="Texture" id=30]
+[ext_resource path="res://Assets/Sprites/logo_hover/LOGO_hover14.png" type="Texture" id=31]
 
 [sub_resource type="DynamicFont" id=1]
 size = 60
@@ -436,6 +458,19 @@ WindowDialog/icons/close = null
 WindowDialog/icons/close_highlight = null
 WindowDialog/styles/panel = null
 
+[sub_resource type="SpriteFrames" id=4]
+animations = [ {
+"frames": [ ExtResource( 8 ) ],
+"loop": true,
+"name": "idle",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 11 ), ExtResource( 14 ), ExtResource( 10 ), ExtResource( 23 ), ExtResource( 18 ), ExtResource( 29 ), ExtResource( 24 ), ExtResource( 20 ), ExtResource( 25 ), ExtResource( 19 ), ExtResource( 15 ), ExtResource( 26 ), ExtResource( 22 ), ExtResource( 31 ), ExtResource( 17 ), ExtResource( 16 ), ExtResource( 28 ), ExtResource( 27 ), ExtResource( 21 ), ExtResource( 30 ), ExtResource( 13 ), ExtResource( 12 ) ],
+"loop": true,
+"name": "hover",
+"speed": 40.0
+} ]
+
 [node name="Control" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -452,6 +487,7 @@ scale = Vector2( 1.66115, 1.24671 )
 texture = ExtResource( 9 )
 
 [node name="Title" type="Label" parent="."]
+visible = false
 anchor_left = 0.5
 anchor_right = 0.5
 margin_left = -202.0
@@ -514,10 +550,13 @@ __meta__ = {
 "_edit_use_anchors_": true
 }
 
-[node name="Logo" type="Sprite" parent="VBoxContainer2"]
-position = Vector2( -1.30139, 11 )
+[node name="Logo" type="AnimatedSprite" parent="VBoxContainer2"]
 scale = Vector2( 6, 6 )
-texture = ExtResource( 8 )
+frames = SubResource( 4 )
+animation = "idle"
+playing = true
 centered = false
 [connection signal="pressed" from="VBoxContainer/PlayButton" to="." method="_on_Play_Button_pressed"]
 [connection signal="pressed" from="VBoxContainer/TutoButton" to="." method="_on_Tuto_Button_pressed"]
+[connection signal="mouse_entered" from="VBoxContainer2" to="." method="_on_VBoxContainer2_mouse_entered"]
+[connection signal="animation_finished" from="VBoxContainer2/Logo" to="." method="_on_Logo_animation_finished"]
