@@ -41,6 +41,7 @@ __meta__ = {
 }
 
 [node name="Sprite" type="AnimatedSprite" parent="."]
+scale = Vector2( 2, 2 )
 frames = SubResource( 2 )
 animation = "positive"
 

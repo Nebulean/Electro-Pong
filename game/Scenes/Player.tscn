@@ -6,14 +6,9 @@
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
-"frames": [ ExtResource( 1 ) ],
-"loop": true,
-"name": "player1",
-"speed": 5.0
-}, {
 "frames": [ ExtResource( 2 ) ],
 "loop": true,
-"name": "player2_power",
+"name": "player2",
 "speed": 5.0
 }, {
 "frames": [ ExtResource( 1 ) ],
@@ -23,16 +18,21 @@ animations = [ {
 }, {
 "frames": [ ExtResource( 2 ) ],
 "loop": true,
-"name": "player2",
+"name": "player2_power",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 1 ) ],
+"loop": true,
+"name": "player1",
 "speed": 5.0
 } ]
 
 [sub_resource type="OccluderPolygon2D" id=2]
-polygon = PoolVector2Array( -20, -20, 20, -20, 20, 20, -20, 20 )
+polygon = PoolVector2Array( -15.0805, -20.6117, 14.7392, -19.6881, 18.3552, -13.223, 20.356, -2.66768, 16.5536, 20.2901, -16.1403, 20.4221, -20.0615, -0.292732, -18.8427, -13.6188 )
 
 [sub_resource type="CapsuleShape2D" id=3]
-radius = 13.0575
-height = 62.0335
+radius = 20.0095
+height = 59.9124
 
 [node name="Player" type="KinematicBody2D" groups=[
 "players",
@@ -45,12 +45,12 @@ __meta__ = {
 angle_step = 2.0
 
 [node name="Sprite" type="AnimatedSprite" parent="."]
-scale = Vector2( 0.627, 0.627 )
+scale = Vector2( 2, 2 )
 frames = SubResource( 1 )
 animation = "player1"
 
 [node name="LightOccluder2D" type="LightOccluder2D" parent="Sprite"]
-scale = Vector2( 3.378, 1 )
+scale = Vector2( 1.245, 0.5 )
 occluder = SubResource( 2 )
 
 [node name="Collision" type="CollisionShape2D" parent="."]
