@@ -82,7 +82,7 @@ func _integrate_forces(state: Physics2DDirectBodyState) -> void:
 		set_applied_force(Vector2(0, 0))
 
 	#set a minimum velocity when the ball is moving to avoid problems when the ball is reseted
-	if sqrt(linear_velocity.dot(linear_velocity)) < min_speed and sqrt(linear_velocity.dot(linear_velocity)) > 1:
+	if sqrt(linear_velocity.dot(linear_velocity)) < min_speed and sqrt(linear_velocity.dot(linear_velocity)) > 1 and not intro_force:
 		state.set_linear_velocity(linear_velocity.normalized() * min_speed)
 
 func set_sprite():
