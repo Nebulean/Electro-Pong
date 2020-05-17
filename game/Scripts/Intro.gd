@@ -181,6 +181,7 @@ func command_interpreter(command: String) -> void:
 	elif command == "BALL_DISAPPEAR":
 		ball.set_visible(false)
 		ball.sleeping = true
+		ball.linear_velocity = Vector2.ZERO
 		ball.position = Vector2.ZERO
 
 	elif command == "BALL_APPEAR_LEFT_MOVE":
