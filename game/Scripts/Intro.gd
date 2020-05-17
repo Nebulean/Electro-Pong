@@ -49,8 +49,8 @@ func _ready() -> void:
 
 	# We connect the resize event
 	get_tree().get_root().connect("size_changed", self, "resize")
-	
-	# We start the tutorial 
+
+	# We start the tutorial
 	next_content(textIndex)
 	textIndex += 1
 
@@ -178,7 +178,9 @@ func command_interpreter(command: String) -> void:
 		var pos = Vector2(get_viewport().size.x/2, get_viewport().size.y/2)
 		var vec = Vector2(0,0)
 		ball_modifier(pos, vec)
+		# ball.startTrail()
 	elif command == "BALL_DISAPPEAR":
+		# ball.stopTrail()
 		ball.set_visible(false)
 		ball.sleeping = true
 		ball.linear_velocity = Vector2.ZERO
@@ -188,7 +190,7 @@ func command_interpreter(command: String) -> void:
 		var pos = Vector2(get_viewport().size.x/6, get_viewport().size.y/2)
 		var vec = Vector2(200,0)
 		ball_modifier(pos, vec)
-
+		# ball.startTrail()
 	elif command == "MAGNETIC_APPEAR":
 		pu_mag = pu_mag_scn.instance()
 		var pos = Vector2(get_viewport().size.x/2, get_viewport().size.y/2)

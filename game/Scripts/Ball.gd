@@ -27,6 +27,13 @@ func _ready():
 	if !intro:
 		can_sleep = false
 		reset()
+		$Trail.start()
+
+func startTrail():
+	$Trail.start()
+
+func stopTrail():
+	$Trail.stop()
 
 func reset():
 	_position_reset_needed = true
@@ -49,6 +56,8 @@ func _integrate_forces(state: Physics2DDirectBodyState) -> void:
 		_position_reset_needed = false
 		charge = 1
 		set_sprite()
+		$Trail.set_gradient(charge)
+		$Trail.reset_trail()
 	if _velocity_reset_needed:
 		state.set_linear_velocity(_new_random_velocity())
 		_velocity_reset_needed = false
@@ -72,6 +81,10 @@ func _integrate_forces(state: Physics2DDirectBodyState) -> void:
 	else:
 		set_applied_force(Vector2(0, 0))
 
+	#set a minimum velocity when the ball is moving to avoid problems when the ball is reseted
+	if sqrt(linear_velocity.dot(linear_velocity)) < min_speed and sqrt(linear_velocity.dot(linear_velocity)) > 1:
+		state.set_linear_velocity(linear_velocity.normalized() * min_speed)
+
 func set_sprite():
 	if (charge >= 0):
 		$Sprite.animation = "positive"
@@ -82,10 +95,12 @@ func change_polarity():
 	print_debug("Polarity changed")
 	charge *= -1
 	set_sprite()
+	$Trail.set_gradient(charge)
 	playPowerupSound()
 
 func _on_Pause_between_rounds_timeout() -> void:
 	_velocity_reset_needed = true
+	$Trail.start()
 
 func execute_magnetic():
 	magnetic_active = 1
