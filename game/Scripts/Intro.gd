@@ -222,11 +222,11 @@ func command_interpreter(command: String) -> void:
 			player1.queue_free()
 	elif command == "PLAYER_1_KEYBOARD_APPEAR":
 		var pos = Vector2(get_viewport().size.x/2, get_viewport().size.y/2)
-		var scale = Vector2(0.4, 0.4)
+		var scale = Vector2(4, 4)
 		load_image("res://Assets/Sprites/player_1_key.png", pos, scale)
 	elif command == "PLAYER_2_KEYBOARD_APPEAR":
 		var pos = Vector2(get_viewport().size.x/2, get_viewport().size.y/2)
-		var scale = Vector2(0.4, 0.4)
+		var scale = Vector2(4, 4)
 		load_image("res://Assets/Sprites/player_2_key.png", pos, scale)
 	elif command == "IMAGE_CLEAR":
 		load_image("", Vector2(0,0), Vector2(0,0))
