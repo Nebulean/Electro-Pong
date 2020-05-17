@@ -104,16 +104,20 @@ func execute_elec_att(num):
 
 
 func _on_AreaElectric1_body_entered(body):
-	ball.ball_area1 = 1
+	if body.is_in_group("ball"):
+		ball.ball_area1 = 1
 
 func _on_AreaElectric1_body_exited(body):
-	ball.ball_area1 = 0
+	if body.is_in_group("ball"):
+		ball.ball_area1 = 0
 
 func _on_AreaElectric2_body_entered(body):
-	ball.ball_area2 = 1
+	if body.is_in_group("ball"):
+		ball.ball_area2 = 1
 
 func _on_AreaElectric2_body_exited(body):
-	ball.ball_area2 = 0
+	if body.is_in_group("ball"):
+		ball.ball_area2 = 0
 
 
 func _on_ElecAttTimer1_timeout():
