@@ -26,6 +26,7 @@ var intro_force = false
 
 func _ready():
 	set_sprite()
+	mode = MODE_CHARACTER
 	if !intro:
 		can_sleep = false
 		contact_monitor = true
