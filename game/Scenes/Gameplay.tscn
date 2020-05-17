@@ -34,7 +34,6 @@ position = Vector2( 0, -250 )
 position = Vector2( 0, 250 )
 
 [node name="Ball" parent="." instance=ExtResource( 3 )]
-linear_damp = 0.0
 
 [node name="HUD" parent="." instance=ExtResource( 5 )]
 

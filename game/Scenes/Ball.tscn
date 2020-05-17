@@ -55,13 +55,15 @@ animations = [ {
 radius = 35.2071
 
 [node name="Ball" type="RigidBody2D" groups=[
-"ball",
+"balls",
 ]]
 mass = 0.01
 physics_material_override = SubResource( 1 )
 gravity_scale = 0.0
 contacts_reported = 1
 contact_monitor = true
+linear_damp = 0.0
+angular_damp = 0.0
 script = ExtResource( 3 )
 __meta__ = {
 "_edit_group_": true,
