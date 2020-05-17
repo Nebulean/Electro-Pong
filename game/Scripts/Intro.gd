@@ -146,6 +146,7 @@ func ball_modifier(position: Vector2, velocity: Vector2) -> void:
 	ball.set_position(position)
 	ball.set_linear_velocity(velocity)
 	ball.set_visible(true)
+	ball.sleeping = false
 	ball.intro = true
 
 	# We add ball as scene child
@@ -179,6 +180,8 @@ func command_interpreter(command: String) -> void:
 		ball_modifier(pos, vec)
 	elif command == "BALL_DISAPPEAR":
 		ball.set_visible(false)
+		ball.sleeping = true
+		ball.position = Vector2.ZERO
 
 	elif command == "BALL_APPEAR_LEFT_MOVE":
 		var pos = Vector2(get_viewport().size.x/6, get_viewport().size.y/2)
