@@ -12,6 +12,7 @@ var player
 var ring_center: Vector2
 var ring_radius: float
 var score := 0 setget , get_score
+var manual_pos = false
 
 signal player_won(player)
 
@@ -27,7 +28,8 @@ func set_player(num: int, center: Vector2, radius: float):
 
 	ring_center = center
 	ring_radius = radius
-	position = position_from_angle(angle)
+	if not manual_pos:
+		position = position_from_angle(angle)
 
 func position_from_angle(alpha: float) -> Vector2:
 	return ring_center + ring_radius * Vector2(cos(alpha), sin(alpha))
@@ -64,8 +66,9 @@ func _physics_process(delta: float) -> void:
 	var _collision := move_and_collide(movement)
 	relative_pos = position - ring_center
 	angle = relative_pos.angle()
-	position = ring_center + relative_pos.normalized() * ring_radius
-	rotation = angle + PI/2
+	if not manual_pos:
+		position = ring_center + relative_pos.normalized() * ring_radius
+		rotation = angle + PI/2
 
 func increment_score():
 	score += 1

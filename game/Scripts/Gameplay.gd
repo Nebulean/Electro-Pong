@@ -106,19 +106,19 @@ func execute_elec_att(num):
 
 
 func _on_AreaElectric1_body_entered(body):
-	if body.is_in_group("ball"):
+	if body.is_in_group("balls"):
 		ball.ball_area1 = 1
 
 func _on_AreaElectric1_body_exited(body):
-	if body.is_in_group("ball"):
+	if body.is_in_group("balls"):
 		ball.ball_area1 = 0
 
 func _on_AreaElectric2_body_entered(body):
-	if body.is_in_group("ball"):
+	if body.is_in_group("balls"):
 		ball.ball_area2 = 1
 
 func _on_AreaElectric2_body_exited(body):
-	if body.is_in_group("ball"):
+	if body.is_in_group("balls"):
 		ball.ball_area2 = 0
 
 
