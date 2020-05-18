@@ -3,7 +3,7 @@
 [ext_resource path="res://Assets/Sprites/ground.png" type="Texture" id=1]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 893.415, 79.5793 )
+extents = Vector2( 96.0154, 16.258 )
 
 [node name="Ground" type="StaticBody2D"]
 

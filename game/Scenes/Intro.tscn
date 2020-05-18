@@ -2,11 +2,11 @@
 
 [ext_resource path="res://Scripts/Intro.gd" type="Script" id=1]
 [ext_resource path="res://Scenes/Ground.tscn" type="PackedScene" id=2]
-[ext_resource path="res://Fonts/Roboto-Bold.ttf" type="DynamicFontData" id=3]
+[ext_resource path="res://Fonts/ThaleahFat.ttf" type="DynamicFontData" id=3]
 [ext_resource path="res://Assets/Sprites/background.png" type="Texture" id=4]
 
 [sub_resource type="DynamicFont" id=1]
-size = 22
+size = 34
 font_data = ExtResource( 3 )
 
 [node name="Intro" type="Node"]
@@ -38,5 +38,5 @@ __meta__ = {
 }
 
 [node name="Ground" parent="." instance=ExtResource( 2 )]
-position = Vector2( 542.658, 571.528 )
-scale = Vector2( 1, 0.5 )
+position = Vector2( 542.658, 565.528 )
+scale = Vector2( 6, 6 )

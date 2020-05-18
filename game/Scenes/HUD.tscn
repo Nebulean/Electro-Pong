@@ -1,19 +1,8 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=4 format=2]
 
-[ext_resource path="res://Fonts/Roboto-Medium.ttf" type="DynamicFontData" id=1]
+[ext_resource path="res://Fonts/ThaleahFat.tres" type="DynamicFont" id=1]
 [ext_resource path="res://Scripts/ScoreDisplay.gd" type="Script" id=2]
 [ext_resource path="res://Scripts/HUD.gd" type="Script" id=3]
-[ext_resource path="res://Fonts/Roboto-Regular.ttf" type="DynamicFontData" id=4]
-
-[sub_resource type="DynamicFont" id=1]
-size = 60
-outline_color = Color( 0, 0, 0, 1 )
-font_data = ExtResource( 1 )
-
-[sub_resource type="DynamicFont" id=2]
-size = 60
-outline_size = 1
-font_data = ExtResource( 4 )
 
 [node name="HUD" type="Control"]
 anchor_top = 0.00178589
@@ -35,10 +24,10 @@ __meta__ = {
 }
 
 [node name="ScoreP1" type="Label" parent="MarginContainer"]
-margin_top = 14.0
+margin_top = 12.0
 margin_right = 924.0
-margin_bottom = 85.0
-custom_fonts/font = SubResource( 1 )
+margin_bottom = 86.0
+custom_fonts/font = ExtResource( 1 )
 custom_colors/font_color = Color( 0.5751, 0.60642, 0.81, 1 )
 text = "0"
 script = ExtResource( 2 )
@@ -47,10 +36,10 @@ __meta__ = {
 }
 
 [node name="ScoreP2" type="Label" parent="MarginContainer"]
-margin_top = 14.0
+margin_top = 12.0
 margin_right = 924.0
-margin_bottom = 85.0
-custom_fonts/font = SubResource( 1 )
+margin_bottom = 86.0
+custom_fonts/font = ExtResource( 1 )
 custom_colors/font_color = Color( 0.8, 0.552, 0.552, 1 )
 text = "0"
 align = 2
@@ -68,7 +57,7 @@ margin_left = -419.592
 margin_top = 8.92847
 margin_right = 440.408
 margin_bottom = 295.928
-custom_fonts/font = SubResource( 2 )
+custom_fonts/font = ExtResource( 1 )
 align = 1
 valign = 1
 __meta__ = {
