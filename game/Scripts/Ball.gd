@@ -34,11 +34,6 @@ func _ready():
 		reset()
 		$Trail.start()
 
-func startTrail():
-	$Trail.start()
-
-func stopTrail():
-	$Trail.stop()
 
 func reset():
 	_position_reset_needed = true
