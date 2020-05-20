@@ -98,7 +98,7 @@ one_shot = true
 [connection signal="body_exited" from="AreaElectric2" to="." method="_on_AreaElectric2_body_exited"]
 [connection signal="timeout" from="ElecAttTimer2" to="." method="_on_ElecAttTimer2_timeout"]
 [connection signal="taken_elec_att" from="PowerupGenerator" to="." method="_on_PowerupGenerator_taken_elec_att"]
-[connection signal="taken_magnetic" from="PowerupGenerator" to="." method="_on_PowerupGenerator_taken_magnetic"]
 [connection signal="taken_magnetic" from="PowerupGenerator" to="Ball" method="execute_magnetic"]
+[connection signal="taken_magnetic" from="PowerupGenerator" to="." method="_on_PowerupGenerator_taken_magnetic"]
 [connection signal="taken_polarity_inverter" from="PowerupGenerator" to="Ball" method="change_polarity"]
 [connection signal="timeout" from="GameFinished" to="." method="_on_GameFinished_timeout"]
