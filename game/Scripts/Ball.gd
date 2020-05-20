@@ -36,6 +36,8 @@ func _ready():
 
 
 func reset():
+	$Trail.reset_trail()
+	set_linear_velocity(Vector2.ZERO)
 	if charge > 0:
 		$Sprite.play("positive_explode")
 	else :
@@ -91,6 +93,7 @@ func _integrate_forces(state: Physics2DDirectBodyState) -> void:
 			linear_velocity = linear_velocity.normalized() * min_speed
 		_velocity_normalization_needed = false
 
+
 func set_sprite():
 	if (charge >= 0):
 		$Sprite.animation = "positive"
@@ -107,6 +110,7 @@ func change_polarity():
 func _on_Pause_between_rounds_timeout() -> void:
 	_velocity_reset_needed = true
 	sleeping = false
+	show()
 	$Trail.start()
 
 func execute_magnetic():
