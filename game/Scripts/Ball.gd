@@ -124,6 +124,7 @@ func _on_Magnetic_Timer_timeout():
 
 func _on_Ball_body_entered(body):
 	if body.is_in_group("players"):
+		body.emit_particules(self)
 		last_hit_player = body
 		_velocity_normalization_needed = true
 		_pad_normal = (center_of_screen - body.position).normalized()
@@ -134,6 +135,7 @@ func get_last_hit_player() -> Player:
 
 func _on_Area2D_body_entered(body):
 	if body.is_in_group("players"):
+		body.emit_particules(self)
 		$SoundBoing.play()
 
 

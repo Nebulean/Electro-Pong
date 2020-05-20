@@ -77,3 +77,8 @@ func increment_score():
 
 func get_score():
 	return score
+
+func emit_particules(ball):
+	#$CollisionParticules.position = position + (ball.position - position).normalized()
+	$CollisionParticules.set_direction((ring_center - position_from_angle(angle)).normalized().rotated(PI/2))
+	$CollisionParticules.set_emitting(true)

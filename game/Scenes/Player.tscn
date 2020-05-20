@@ -6,17 +6,12 @@
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
-"frames": [ ExtResource( 1 ) ],
-"loop": true,
-"name": "player1_power",
-"speed": 5.0
-}, {
 "frames": [ ExtResource( 2 ) ],
 "loop": true,
 "name": "player2_power",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 1 ) ],
+"frames": [ ExtResource( 2 ) ],
 "loop": true,
 "name": "player1",
 "speed": 5.0
@@ -24,6 +19,11 @@ animations = [ {
 "frames": [ ExtResource( 2 ) ],
 "loop": true,
 "name": "player2",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 1 ) ],
+"loop": true,
+"name": "player1_power",
 "speed": 5.0
 } ]
 
@@ -50,3 +50,13 @@ occluder = SubResource( 2 )
 
 [node name="Collision" type="CollisionShape2D" parent="."]
 shape = SubResource( 3 )
+
+[node name="CollisionParticules" type="CPUParticles2D" parent="."]
+emitting = false
+amount = 200
+one_shot = true
+explosiveness = 1.0
+spread = 90.0
+gravity = Vector2( 0, 0 )
+initial_velocity = 200.0
+initial_velocity_random = 1.0
