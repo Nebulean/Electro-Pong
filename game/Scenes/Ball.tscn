@@ -47,7 +47,7 @@ __meta__ = {
 
 [node name="Trail" parent="." instance=ExtResource( 9 )]
 points = PoolVector2Array( 134.586, -27.3098 )
-width = 70.0
+width = 60.0
 target_path = NodePath("..")
 
 [node name="Sprite" type="AnimatedSprite" parent="."]
