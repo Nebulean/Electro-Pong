@@ -31,13 +31,18 @@ func _ready():
 		can_sleep = false
 		contact_monitor = true
 		contacts_reported = 1
-		reset()
+		_on_Sprite_animation_finished()
 		$Trail.start()
 
 
 func reset():
-	_position_reset_needed = true
-	$Pause_between_rounds.start()
+	$Trail.reset_trail()
+	set_linear_velocity(Vector2.ZERO)
+	if charge > 0:
+		$Sprite.play("positive_explode")
+	else :
+		$Sprite.play("negative_explode")
+	
 
 func _new_random_velocity() -> Vector2:
 	var new_velocity := Vector2(1, 0)
@@ -88,6 +93,7 @@ func _integrate_forces(state: Physics2DDirectBodyState) -> void:
 			linear_velocity = linear_velocity.normalized() * min_speed
 		_velocity_normalization_needed = false
 
+
 func set_sprite():
 	if (charge >= 0):
 		$Sprite.animation = "positive"
@@ -103,6 +109,8 @@ func change_polarity():
 
 func _on_Pause_between_rounds_timeout() -> void:
 	_velocity_reset_needed = true
+	sleeping = false
+	show()
 	$Trail.start()
 
 func execute_magnetic():
@@ -131,7 +139,6 @@ func _on_Area2D_body_entered(body):
 	if body.is_in_group("players"):
 		$SoundBoing.play()
 
-
 func playPowerupSound():
 	$SoundPowerup.play()
 
@@ -140,3 +147,9 @@ func playPointSound():
 
 func intro_elec_exec():
 	intro_force = true
+
+func _on_Sprite_animation_finished():
+	$Sprite.stop()
+	print_debug("coucous")
+	_position_reset_needed = true
+	$Pause_between_rounds.start()

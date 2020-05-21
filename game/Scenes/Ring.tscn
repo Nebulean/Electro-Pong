@@ -4,7 +4,7 @@
 [ext_resource path="res://Scripts/Ring.gd" type="Script" id=2]
 
 [sub_resource type="CircleShape2D" id=1]
-radius = 238.349
+radius = 247.475
 
 [node name="Ring" type="Area2D"]
 script = ExtResource( 2 )
