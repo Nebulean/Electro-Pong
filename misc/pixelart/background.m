@@ -1,8 +1,8 @@
 % This will create a background numerically.
 % An RGB image is a NxMx3 uint8 matrix. (no alpha)
 
-N = 480;
-M = 620;
+N = 720/2;
+M = 1280/2;
 
 imgR = zeros(N,M);
 imgG = zeros(N,M);

@@ -548,8 +548,8 @@ __meta__ = {
 }
 
 [node name="Background" type="Sprite" parent="."]
-position = Vector2( 514.666, 297.348 )
-scale = Vector2( 1.66115, 1.24671 )
+position = Vector2( 640, 360 )
+scale = Vector2( 2, 2 )
 texture = ExtResource( 9 )
 
 [node name="Title" type="Label" parent="."]

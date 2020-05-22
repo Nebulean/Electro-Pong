@@ -18,6 +18,10 @@ var pu_mag
 var pu_mag_scn
 var pu_pol
 var pu_pol_scn
+onready var max_coordinates := Vector2(
+	ProjectSettings.get_setting("display/window/size/width") as int,
+	ProjectSettings.get_setting("display/window/size/height") as int
+)
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -28,7 +32,7 @@ func _ready() -> void:
 	# We instanciate a ball
 	ball_scn = preload("res://Scenes/Ball.tscn")
 	ball = ball_scn.instance()
-	var pos = Vector2(get_viewport().size.x/2, get_viewport().size.y/2)
+	var pos = Vector2(max_coordinates.x/2, max_coordinates.y/2)
 	var vel = Vector2(0,0)
 	ball_modifier(pos, vel)
 	ball.set_visible(false)
@@ -48,26 +52,19 @@ func _ready() -> void:
 	# We hide some things
 	$Ground.visible = false
 
-	# We connect the resize event
-	get_tree().get_root().connect("size_changed", self, "resize")
-
 	# We start the tutorial
 	next_content(textIndex)
 	textIndex += 1
-
-func resize() -> void:
-	var pos = Vector2(get_viewport().size.x/2, get_viewport().size.y - 41)
-	$Ground.set_position(pos)
 
 func _physics_process(delta: float) -> void:
 	# we check if the ball is off limite
 	if ball.position.x < 0:
 		ball.linear_velocity.x *= -1
-	if ball.position.x > get_viewport().size.x:
+	if ball.position.x > max_coordinates.x:
 		ball.linear_velocity.x *= -1
 	if ball.position.y < 0:
 		ball.linear_velocity.y *= -1
-	if ball.position.y > get_viewport().size.y:
+	if ball.position.y > max_coordinates.y:
 		ball.linear_velocity.y *= -1
 
 func _input(ev: InputEvent) -> void:
@@ -172,13 +169,11 @@ func execute_elec() -> void:
 	ball.playPowerupSound()
 	ball.intro_elec_exec()
 
-
-
 func command_interpreter(command: String) -> void:
 	if command == "EMPTY":
 		print_debug("No commands here")
 	elif command == "BALL_APPEAR_CENTER_STOP":
-		var pos = Vector2(get_viewport().size.x/2, get_viewport().size.y/2)
+		var pos = Vector2(max_coordinates.x/2, max_coordinates.y/2)
 		var vec = Vector2(0,0)
 		ball_modifier(pos, vec)
 		# ball.startTrail()
@@ -190,13 +185,13 @@ func command_interpreter(command: String) -> void:
 		ball.position = Vector2.ZERO
 
 	elif command == "BALL_APPEAR_LEFT_MOVE":
-		var pos = Vector2(get_viewport().size.x/6, get_viewport().size.y/2)
+		var pos = Vector2(max_coordinates.x/6, max_coordinates.y/2)
 		var vec = Vector2(200,0)
 		ball_modifier(pos, vec)
 		# ball.startTrail()
 	elif command == "MAGNETIC_APPEAR":
 		pu_mag = pu_mag_scn.instance()
-		var pos = Vector2(get_viewport().size.x/2, get_viewport().size.y/2)
+		var pos = Vector2(max_coordinates.x/2, max_coordinates.y/2)
 		pu_mag.set_position(pos)
 		pu_mag.connect("taken_magnetic", ball, "execute_magnetic")
 		add_child(pu_mag)
@@ -207,12 +202,12 @@ func command_interpreter(command: String) -> void:
 	elif command == "ELECTRIC_APPEAR":
 		# We spawn the electric powerup
 		pu_el = pu_el_scn.instance()
-		var pos = Vector2(get_viewport().size.x/3, get_viewport().size.y/2)
+		var pos = Vector2(max_coordinates.x/3, max_coordinates.y/2)
 		pu_el.set_position(pos)
 		pu_el.connect("taken_elec_att", self, "execute_elec")
 		# We spawn the player
 		player1 = player_scn.instance()
-		var posP = Vector2(2*get_viewport().size.x/3, get_viewport().size.y/2)
+		var posP = Vector2(2*max_coordinates.x/3, max_coordinates.y/2)
 		player1.set_position(posP)
 		player1.set_rotation(PI/2)
 		player1.manual_pos = true
@@ -224,11 +219,11 @@ func command_interpreter(command: String) -> void:
 		if is_instance_valid(player1):
 			player1.queue_free()
 	elif command == "PLAYER_1_KEYBOARD_APPEAR":
-		var pos = Vector2(get_viewport().size.x/2, get_viewport().size.y/2)
+		var pos = Vector2(max_coordinates.x/2, max_coordinates.y/2)
 		var scale = Vector2(4, 4)
 		load_image("res://Assets/Sprites/player_1_key.png", pos, scale)
 	elif command == "PLAYER_2_KEYBOARD_APPEAR":
-		var pos = Vector2(get_viewport().size.x/2, get_viewport().size.y/2)
+		var pos = Vector2(max_coordinates.x/2, max_coordinates.y/2)
 		var scale = Vector2(4, 4)
 		load_image("res://Assets/Sprites/player_2_key.png", pos, scale)
 	elif command == "IMAGE_CLEAR":
@@ -236,7 +231,7 @@ func command_interpreter(command: String) -> void:
 	elif command == "RING_APPEAR":
 		# We spawn the ring
 		ring = ring_scn.instance()
-		var pos = Vector2(get_viewport().size.x/2, get_viewport().size.y/2)
+		var pos = Vector2(max_coordinates.x/2, max_coordinates.y/2)
 		var scale = Vector2(0.7, 0.7)
 		ring.set_position(pos)
 		ring.set_scale(scale)
@@ -247,7 +242,7 @@ func command_interpreter(command: String) -> void:
 	elif command == "APPLE_APPEAR":
 		# instanciate the apple
 		apple = apple_scn.instance()
-		var pos = Vector2(get_viewport().size.x/2, get_viewport().size.y/4)
+		var pos = Vector2(max_coordinates.x/2, max_coordinates.y/4)
 		apple.set_position(pos)
 		# We show the ground
 		$Ground.visible = true
@@ -263,9 +258,9 @@ func command_interpreter(command: String) -> void:
 		pu_el = pu_el_scn.instance()
 		pu_mag = pu_mag_scn.instance()
 		pu_pol = pu_pol_scn.instance()
-		var pos_el = Vector2(3*get_viewport().size.x/8, get_viewport().size.y/2)
-		var pos_mag = Vector2(get_viewport().size.x/2, get_viewport().size.y/2)
-		var pos_pol = Vector2(5*get_viewport().size.x/8, get_viewport().size.y/2)
+		var pos_el = Vector2(3*max_coordinates.x/8, max_coordinates.y/2)
+		var pos_mag = Vector2(max_coordinates.x/2, max_coordinates.y/2)
+		var pos_pol = Vector2(5*max_coordinates.x/8, max_coordinates.y/2)
 		pu_el.set_position(pos_el)
 		pu_mag.set_position(pos_mag)
 		pu_pol.set_position(pos_pol)
@@ -282,7 +277,7 @@ func command_interpreter(command: String) -> void:
 	elif command == "VECTORFIELD_APPEAR":
 		# useless and ugly
 		pass
-		#var pos = Vector2(get_viewport().size.x/2, get_viewport().size.y/2)
+		#var pos = Vector2(max_coordinates.x/2, max_coordinates.y/2)
 		#var scale = Vector2(0.4, 0.4)
 		#load_image("res://Assets/Sprites/vector_field.png", pos, scale)
 	else:

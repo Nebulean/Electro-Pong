@@ -11,14 +11,7 @@ onready var area2 := $AreaElectric2
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	# Set ring
-	var screen_size := get_tree().root.size
-	ring.position = screen_size/2
-	$PowerupGenerator.position = screen_size/2
-	$CenterLight.position = screen_size/2
 	var radius := ($Ring/CollisionShape2D.shape as CircleShape2D).radius
-	
-	area1.position = screen_size/2
-	area2.position = screen_size/2
 	
 	# Set players
 	p1.set_player(1, ring.position, radius)

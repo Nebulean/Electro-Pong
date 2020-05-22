@@ -17,8 +17,8 @@ __meta__ = {
 }
 
 [node name="Background" type="Sprite" parent="."]
-position = Vector2( 515.401, 300.593 )
-scale = Vector2( 1.67581, 1.27872 )
+position = Vector2( 640, 360 )
+scale = Vector2( 2, 2 )
 texture = ExtResource( 4 )
 
 [node name="Label" type="Label" parent="."]
@@ -38,5 +38,5 @@ __meta__ = {
 }
 
 [node name="Ground" parent="." instance=ExtResource( 2 )]
-position = Vector2( 542.658, 565.528 )
-scale = Vector2( 6, 6 )
+position = Vector2( 640, 650 )
+scale = Vector2( 7, 6 )
