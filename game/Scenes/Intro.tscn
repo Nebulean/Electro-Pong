@@ -32,5 +32,8 @@ __meta__ = {
 }
 
 [node name="Ground" parent="." instance=ExtResource( 2 )]
-position = Vector2( 542.658, 571.528 )
+position = Vector2( 544, 680 )
 scale = Vector2( 1, 0.5 )
+
+[node name="Camera2D" type="Camera2D" parent="."]
+anchor_mode = 0
