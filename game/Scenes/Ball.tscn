@@ -44,6 +44,7 @@ __meta__ = {
 "_edit_group_": true,
 "_edit_lock_": true
 }
+E = 1
 
 [node name="Trail" parent="." instance=ExtResource( 9 )]
 points = PoolVector2Array( 134.586, -27.3098 )
