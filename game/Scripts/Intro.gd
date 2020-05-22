@@ -32,6 +32,7 @@ func _ready() -> void:
 	var vel = Vector2(0,0)
 	ball_modifier(pos, vel)
 	ball.set_visible(false)
+	ball.get_node("Trail").start()
 
 	# We create an empty image
 	image = Sprite.new()
@@ -148,9 +149,11 @@ func ball_modifier(position: Vector2, velocity: Vector2) -> void:
 	ball.set_visible(true)
 	ball.sleeping = false
 	ball.intro = true
+	ball.get_node("Trail").reset_trail()
 
 	# We add ball as scene child
 	add_child(ball)
+	ball.get_node("Trail").start()
 
 
 func load_image(path: String, pos: Vector2, scale: Vector2) -> void:

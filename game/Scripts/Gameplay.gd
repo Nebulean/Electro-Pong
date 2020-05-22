@@ -47,8 +47,8 @@ func _physics_process(_delta: float) -> void:
 	else:
 		ring.angle = second_solution
 	#Area for electric field rotation with player
-	area1.angle = p1.angle
-	area2.angle = p2.angle
+	area1.angle = p1.angle - PI/2
+	area2.angle = p2.angle - PI/2
 	ball.angle_p1 = p1.angle
 	ball.angle_p2 = p2.angle
 
