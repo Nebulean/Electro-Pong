@@ -24,6 +24,7 @@ scale = Vector2( 20.566, 12.6845 )
 texture = ExtResource( 11 )
 
 [node name="Ring" parent="." instance=ExtResource( 2 )]
+position = Vector2( 640, 360 )
 gravity_vec = Vector2( 0, 0 )
 gravity = 0.0
 
@@ -38,6 +39,7 @@ position = Vector2( 0, 250 )
 [node name="HUD" parent="." instance=ExtResource( 5 )]
 
 [node name="AreaElectric1" parent="." instance=ExtResource( 7 )]
+position = Vector2( 640, 360 )
 
 [node name="AreaSprite" type="Sprite" parent="AreaElectric1"]
 visible = false
@@ -48,6 +50,7 @@ texture = ExtResource( 8 )
 wait_time = 3.0
 
 [node name="AreaElectric2" parent="." instance=ExtResource( 7 )]
+position = Vector2( 640, 360 )
 
 [node name="AreaSprite" type="Sprite" parent="AreaElectric2"]
 visible = false
@@ -59,10 +62,11 @@ texture = ExtResource( 8 )
 wait_time = 3.0
 
 [node name="PowerupGenerator" parent="." instance=ExtResource( 9 )]
+position = Vector2( 640, 360 )
 scale = Vector2( 1, 0.995885 )
 
 [node name="CenterLight" type="Light2D" parent="."]
-position = Vector2( 1.71472, 0 )
+position = Vector2( 640, 360 )
 texture = ExtResource( 10 )
 texture_scale = 1.25
 color = Color( 0.792157, 0.988235, 1, 1 )
@@ -77,7 +81,7 @@ position = Vector2( 7.79211, -3.30838 )
 color = Color( 0.662745, 0.662745, 0.662745, 1 )
 
 [node name="ShakeCamera2D" type="Camera2D" parent="."]
-position = Vector2( 512, 300 )
+anchor_mode = 0
 current = true
 script = ExtResource( 6 )
 ring_exit_trauma = 0.4
@@ -85,9 +89,9 @@ ring_exit_trauma = 0.4
 [node name="GameFinished" type="Timer" parent="."]
 wait_time = 3.0
 one_shot = true
-[connection signal="body_exited" from="Ring" to="." method="_on_Ring_body_exited"]
 [connection signal="body_exited" from="Ring" to="ShakeCamera2D" method="_on_Ring_body_exited"]
 [connection signal="body_exited" from="Ring" to="PowerupGenerator" method="_on_Ring_body_exited"]
+[connection signal="body_exited" from="Ring" to="." method="_on_Ring_body_exited"]
 [connection signal="player_won" from="Player1" to="." method="_on_player_won"]
 [connection signal="player_won" from="Player2" to="." method="_on_player_won"]
 [connection signal="body_entered" from="Ball" to="ShakeCamera2D" method="_on_Ball_body_entered"]
@@ -98,7 +102,7 @@ one_shot = true
 [connection signal="body_exited" from="AreaElectric2" to="." method="_on_AreaElectric2_body_exited"]
 [connection signal="timeout" from="ElecAttTimer2" to="." method="_on_ElecAttTimer2_timeout"]
 [connection signal="taken_elec_att" from="PowerupGenerator" to="." method="_on_PowerupGenerator_taken_elec_att"]
-[connection signal="taken_magnetic" from="PowerupGenerator" to="." method="_on_PowerupGenerator_taken_magnetic"]
 [connection signal="taken_magnetic" from="PowerupGenerator" to="Ball" method="execute_magnetic"]
+[connection signal="taken_magnetic" from="PowerupGenerator" to="." method="_on_PowerupGenerator_taken_magnetic"]
 [connection signal="taken_polarity_inverter" from="PowerupGenerator" to="Ball" method="change_polarity"]
 [connection signal="timeout" from="GameFinished" to="." method="_on_GameFinished_timeout"]
