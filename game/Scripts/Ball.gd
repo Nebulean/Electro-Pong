@@ -20,7 +20,7 @@ var angle_p2
 export var B = 0.01
 export var E = 3
 var last_hit_player: Player = null
-
+var exploding = false
 var intro = false
 var intro_force = false
 
@@ -40,15 +40,18 @@ func reset():
 	set_linear_velocity(Vector2.ZERO)
 	if charge > 0:
 		$Sprite.play("positive_explode")
-	else :
+	else:
 		$Sprite.play("negative_explode")
-	
+	exploding = true
+	get_tree().call_group("players", "stop_moving")
+
 
 func _new_random_velocity() -> Vector2:
 	var new_velocity := Vector2(1, 0)
 	var direction := rand_range(-PI, PI)
 	new_velocity = new_velocity.rotated(direction) * rand_range(min_speed, max_speed)
 	return new_velocity
+
 
 func _integrate_forces(state: Physics2DDirectBodyState) -> void:
 	# Ball reseting
@@ -63,6 +66,8 @@ func _integrate_forces(state: Physics2DDirectBodyState) -> void:
 		set_sprite()
 		$Trail.set_gradient(charge)
 		$Trail.reset_trail()
+		exploding = false
+		get_tree().call_group("players", "start_moving")
 	if _velocity_reset_needed:
 		state.set_linear_velocity(_new_random_velocity())
 		_velocity_reset_needed = false
@@ -92,7 +97,6 @@ func _integrate_forces(state: Physics2DDirectBodyState) -> void:
 		elif linear_velocity.length() < min_speed:
 			linear_velocity = linear_velocity.normalized() * min_speed
 		_velocity_normalization_needed = false
-
 
 func set_sprite():
 	if (charge >= 0):
@@ -136,7 +140,7 @@ func get_last_hit_player() -> Player:
 
 
 func _on_Area2D_body_entered(body):
-	if body.is_in_group("players"):
+	if body.is_in_group("players") and not exploding:
 		$SoundBoing.play()
 
 func playPowerupSound():

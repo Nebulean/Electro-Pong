@@ -30,20 +30,21 @@ func angular_distance(alpha: float, beta: float) -> float:
 	return min(diff, 2*PI - diff)
 
 func _physics_process(_delta: float) -> void:
-	# Ring rotation
-	var first_solution: float = (p1.angle + p2.angle)/2
-	var dist_to_first_solution := angular_distance(first_solution, ring.angle)
-	var second_solution := wrapf(first_solution + PI, -PI, PI)
-	var dist_to_second_solution := angular_distance(second_solution, ring.angle)
-	if dist_to_first_solution < dist_to_second_solution:
-		ring.angle = first_solution
-	else:
-		ring.angle = second_solution
-	#Area for electric field rotation with player
-	area1.angle = p1.angle - PI/2
-	area2.angle = p2.angle - PI/2
-	ball.angle_p1 = p1.angle
-	ball.angle_p2 = p2.angle
+	if not ball.exploding:
+		# Ring rotation
+		var first_solution: float = (p1.angle + p2.angle)/2
+		var dist_to_first_solution := angular_distance(first_solution, ring.angle)
+		var second_solution := wrapf(first_solution + PI, -PI, PI)
+		var dist_to_second_solution := angular_distance(second_solution, ring.angle)
+		if dist_to_first_solution < dist_to_second_solution:
+			ring.angle = first_solution
+		else:
+			ring.angle = second_solution
+		#Area for electric field rotation with player
+		area1.angle = p1.angle - PI/2
+		area2.angle = p2.angle - PI/2
+		ball.angle_p1 = p1.angle
+		ball.angle_p2 = p2.angle
 
 func _on_Ring_body_exited(_body: Node) -> void:
 	var exit_angle: float = (ball.position - ring.position).angle() - ring.angle

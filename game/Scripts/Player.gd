@@ -57,12 +57,12 @@ func _physics_process(delta: float) -> void:
 	var relative_pos := position - ring_center
 	var tangent := Vector2(-relative_pos.y, relative_pos.x).normalized()
 	var movement := Vector2.ZERO
-	
-	if is_clockwise:
-		movement = movement + angle_step * ring_radius * delta * tangent
-	if is_trigo:
-		movement = movement - angle_step * ring_radius * delta * tangent
-	
+	if is_input_sensitive:
+		if is_clockwise:
+			movement = movement + angle_step * ring_radius * delta * tangent
+		if is_trigo:
+			movement = movement - angle_step * ring_radius * delta * tangent
+
 	var _collision := move_and_collide(movement)
 	relative_pos = position - ring_center
 	angle = relative_pos.angle()
@@ -77,3 +77,9 @@ func increment_score():
 
 func get_score():
 	return score
+
+func stop_moving():
+	is_input_sensitive = false
+
+func start_moving():
+	is_input_sensitive = true
