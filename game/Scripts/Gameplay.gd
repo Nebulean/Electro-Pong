@@ -19,8 +19,6 @@ func _ready() -> void:
 	#p1.add_collision_exception_with(p2)
 	#p2.add_collision_exception_with(p1)
 	hud._on_game_starts()
-	
-	$Background.set_position(Vector2(get_viewport().size.x/2, get_viewport().size.y/2))
 
 # The angles must use the same bounds
 func angular_distance(alpha: float, beta: float) -> float:
