@@ -46,7 +46,7 @@ atlas = ExtResource( 1 )
 region = Rect2( 64, 64, 32, 32 )
 
 [sub_resource type="AtlasTexture" id=10]
-atlas = ExtResource( 1 )
+atlas = ExtResource( 2 )
 region = Rect2( 0, 0, 32, 32 )
 
 [sub_resource type="AtlasTexture" id=11]
@@ -82,7 +82,7 @@ atlas = ExtResource( 2 )
 region = Rect2( 64, 64, 32, 32 )
 
 [sub_resource type="AtlasTexture" id=19]
-atlas = ExtResource( 2 )
+atlas = ExtResource( 1 )
 region = Rect2( 0, 0, 32, 32 )
 
 [sub_resource type="SpriteFrames" id=20]
@@ -94,7 +94,7 @@ animations = [ {
 }, {
 "frames": [ SubResource( 10 ) ],
 "loop": true,
-"name": "negative",
+"name": "positive",
 "speed": 5.0
 }, {
 "frames": [ SubResource( 11 ), SubResource( 12 ), SubResource( 13 ), SubResource( 14 ), SubResource( 15 ), SubResource( 16 ), SubResource( 17 ), SubResource( 18 ) ],
@@ -104,7 +104,7 @@ animations = [ {
 }, {
 "frames": [ SubResource( 19 ) ],
 "loop": true,
-"name": "positive",
+"name": "negative",
 "speed": 5.0
 } ]
 
@@ -126,7 +126,6 @@ __meta__ = {
 "_edit_group_": true,
 "_edit_lock_": true
 }
-E = 1
 
 [node name="Trail" parent="." instance=ExtResource( 9 )]
 points = PoolVector2Array( 134.586, -27.3098 )
