@@ -47,6 +47,7 @@ _global_script_class_icons={
 config/name="Electro-Pong"
 run/main_scene="res://Scenes/MainMenu.tscn"
 config/icon="res://Assets/Sprites/LOGO.png"
+config/windows_native_icon="res://icon.ico"
 
 [display]
 
