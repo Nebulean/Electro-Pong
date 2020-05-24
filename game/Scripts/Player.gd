@@ -13,6 +13,8 @@ var ring_center: Vector2
 var ring_radius: float
 var score := 0 setget , get_score
 var manual_pos = false
+var is_stopped: bool = false
+
 
 signal player_won(player)
 
@@ -56,11 +58,12 @@ func _input(event):
 		is_clockwise = false
 		is_trigo = false
 
+
 func _physics_process(delta: float) -> void:
 	var relative_pos := position - ring_center
 	var tangent := Vector2(-relative_pos.y, relative_pos.x).normalized()
 	var movement := Vector2.ZERO
-	if is_input_sensitive:
+	if is_input_sensitive and !is_stopped:
 		if is_clockwise:
 			movement = movement + angle_step * ring_radius * delta * tangent
 		if is_trigo:
@@ -82,7 +85,9 @@ func get_score():
 	return score
 
 func stop_moving():
-	is_input_sensitive = false
+	is_stopped = true
+
 
 func start_moving():
-	is_input_sensitive = true
+	is_stopped = false
+
