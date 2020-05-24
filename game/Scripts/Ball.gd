@@ -43,8 +43,8 @@ func reset():
 	else:
 		$Sprite.play("negative_explode")
 	exploding = true
-	get_tree().call_group("players", "stop_moving")
-
+	if get_tree():
+		get_tree().call_group("players", "stop_moving")
 
 func _new_random_velocity() -> Vector2:
 	var new_velocity := Vector2(1, 0)
