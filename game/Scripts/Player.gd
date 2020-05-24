@@ -52,6 +52,9 @@ func _input(event):
 			is_trigo = false
 		if event.is_action_released("p2_trigo") && player == 2:
 			is_trigo = false
+	else:
+		is_clockwise = false
+		is_trigo = false
 
 func _physics_process(delta: float) -> void:
 	var relative_pos := position - ring_center
