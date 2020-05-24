@@ -28,25 +28,31 @@ animations = [ {
 } ]
 
 [sub_resource type="OccluderPolygon2D" id=2]
-polygon = PoolVector2Array( -20, -20, 20, -20, 20, 20, -20, 20 )
+polygon = PoolVector2Array( -15.0805, -20.6117, 14.7392, -19.6881, 18.3552, -13.223, 20.356, -2.66768, 16.5536, 20.2901, -16.1403, 20.4221, -20.0615, -0.292732, -18.8427, -13.6188 )
 
-[sub_resource type="RectangleShape2D" id=3]
-extents = Vector2( 43.2517, 12.656 )
+[sub_resource type="CapsuleShape2D" id=3]
+radius = 20.0095
+height = 59.9124
 
 [node name="Player" type="KinematicBody2D" groups=[
 "players",
 ]]
 script = ExtResource( 3 )
+__meta__ = {
+"_edit_group_": true,
+"_edit_lock_": true
+}
 angle_step = 2.0
 
 [node name="Sprite" type="AnimatedSprite" parent="."]
-scale = Vector2( 0.125, 0.125 )
+scale = Vector2( 2, 2 )
 frames = SubResource( 1 )
 animation = "player1"
 
 [node name="LightOccluder2D" type="LightOccluder2D" parent="Sprite"]
-scale = Vector2( 17.35, 5 )
+scale = Vector2( 1.245, 0.5 )
 occluder = SubResource( 2 )
 
 [node name="Collision" type="CollisionShape2D" parent="."]
+rotation = 1.5708
 shape = SubResource( 3 )

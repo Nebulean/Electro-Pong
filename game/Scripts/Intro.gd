@@ -36,6 +36,7 @@ func _ready() -> void:
 	var vel = Vector2(0,0)
 	ball_modifier(pos, vel)
 	ball.set_visible(false)
+	ball.get_node("Trail").start()
 
 	# We create an empty image
 	image = Sprite.new()
@@ -145,9 +146,11 @@ func ball_modifier(position: Vector2, velocity: Vector2) -> void:
 	ball.set_visible(true)
 	ball.sleeping = false
 	ball.intro = true
+	ball.get_node("Trail").reset_trail()
 
 	# We add ball as scene child
 	add_child(ball)
+	ball.get_node("Trail").start()
 
 
 func load_image(path: String, pos: Vector2, scale: Vector2) -> void:
@@ -217,11 +220,11 @@ func command_interpreter(command: String) -> void:
 			player1.queue_free()
 	elif command == "PLAYER_1_KEYBOARD_APPEAR":
 		var pos = Vector2(max_coordinates.x/2, max_coordinates.y/2)
-		var scale = Vector2(0.4, 0.4)
+		var scale = Vector2(4, 4)
 		load_image("res://Assets/Sprites/player_1_key.png", pos, scale)
 	elif command == "PLAYER_2_KEYBOARD_APPEAR":
 		var pos = Vector2(max_coordinates.x/2, max_coordinates.y/2)
-		var scale = Vector2(0.4, 0.4)
+		var scale = Vector2(4, 4)
 		load_image("res://Assets/Sprites/player_2_key.png", pos, scale)
 	elif command == "IMAGE_CLEAR":
 		load_image("", Vector2(0,0), Vector2(0,0))

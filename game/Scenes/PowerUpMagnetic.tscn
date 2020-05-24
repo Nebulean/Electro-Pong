@@ -4,7 +4,7 @@
 [ext_resource path="res://Scripts/PowerUpMagnetic.gd" type="Script" id=2]
 
 [sub_resource type="CircleShape2D" id=1]
-radius = 17.7744
+radius = 20.5186
 
 [node name="PowerUpMagnetic" type="Area2D" groups=[
 "powerups",
@@ -15,6 +15,5 @@ script = ExtResource( 2 )
 shape = SubResource( 1 )
 
 [node name="Sprite" type="Sprite" parent="."]
-scale = Vector2( 0.05, 0.05 )
 texture = ExtResource( 1 )
 [connection signal="body_entered" from="." to="." method="_on_PowerUpMagnetic_body_entered"]

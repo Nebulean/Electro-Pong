@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/logo.png-e850d5ade6adcc07d541993d9f3bf26a.stex"
+path="res://.import/powerup_electrical.png-55c8d80e50565c8ef642d9c70da656dd.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Sprites/logo.png"
-dest_files=[ "res://.import/logo.png-e850d5ade6adcc07d541993d9f3bf26a.stex" ]
+source_file="res://Assets/Sprites/powerup_electrical.png"
+dest_files=[ "res://.import/powerup_electrical.png-55c8d80e50565c8ef642d9c70da656dd.stex" ]
 
 [params]
 
@@ -20,7 +20,7 @@ compress/hdr_mode=0
 compress/bptc_ldr=0
 compress/normal_map=0
 flags/repeat=0
-flags/filter=true
+flags/filter=false
 flags/mipmaps=false
 flags/anisotropic=false
 flags/srgb=2
@@ -30,5 +30,5 @@ process/HDR_as_SRGB=false
 process/invert_color=false
 stream=false
 size_limit=0
-detect_3d=true
+detect_3d=false
 svg/scale=1.0

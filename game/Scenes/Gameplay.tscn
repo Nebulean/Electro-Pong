@@ -7,10 +7,10 @@
 [ext_resource path="res://Scenes/HUD.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Scripts/ShakeCamera2D.gd" type="Script" id=6]
 [ext_resource path="res://Scenes/AreaElectric.tscn" type="PackedScene" id=7]
-[ext_resource path="res://Assets/Sprites/Powerup_electrical_effect_area.png" type="Texture" id=8]
 [ext_resource path="res://Scenes/PowerupGenerator.tscn" type="PackedScene" id=9]
 [ext_resource path="res://Assets/Sprites/light.png" type="Texture" id=10]
 [ext_resource path="res://Assets/Sprites/background.png" type="Texture" id=11]
+[ext_resource path="res://Assets/Sprites/electric_field_area_arrow.png" type="Texture" id=12]
 
 [node name="Gameplay" type="Node"]
 script = ExtResource( 4 )
@@ -19,14 +19,39 @@ __meta__ = {
 }
 
 [node name="Background" type="Sprite" parent="."]
-position = Vector2( 527.173, 295.467 )
-scale = Vector2( 20.566, 12.6845 )
+position = Vector2( 640, 360 )
+scale = Vector2( 2, 2 )
 texture = ExtResource( 11 )
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="Ring" parent="." instance=ExtResource( 2 )]
 position = Vector2( 640, 360 )
 gravity_vec = Vector2( 0, 0 )
 gravity = 0.0
+
+[node name="AreaElectric1" parent="." instance=ExtResource( 7 )]
+position = Vector2( 640, 360 )
+
+[node name="AreaSprite" type="Sprite" parent="AreaElectric1"]
+visible = false
+scale = Vector2( 3, 3 )
+texture = ExtResource( 12 )
+
+[node name="ElecAttTimer1" type="Timer" parent="."]
+wait_time = 3.0
+
+[node name="AreaElectric2" parent="." instance=ExtResource( 7 )]
+position = Vector2( 640, 360 )
+
+[node name="AreaSprite" type="Sprite" parent="AreaElectric2"]
+visible = false
+scale = Vector2( 3, 3 )
+texture = ExtResource( 12 )
+
+[node name="ElecAttTimer2" type="Timer" parent="."]
+wait_time = 3.0
 
 [node name="Player1" parent="." instance=ExtResource( 1 )]
 position = Vector2( 0, -250 )
@@ -37,29 +62,6 @@ position = Vector2( 0, 250 )
 [node name="Ball" parent="." instance=ExtResource( 3 )]
 
 [node name="HUD" parent="." instance=ExtResource( 5 )]
-
-[node name="AreaElectric1" parent="." instance=ExtResource( 7 )]
-position = Vector2( 640, 360 )
-
-[node name="AreaSprite" type="Sprite" parent="AreaElectric1"]
-visible = false
-scale = Vector2( 0.6, 0.8 )
-texture = ExtResource( 8 )
-
-[node name="ElecAttTimer1" type="Timer" parent="."]
-wait_time = 3.0
-
-[node name="AreaElectric2" parent="." instance=ExtResource( 7 )]
-position = Vector2( 640, 360 )
-
-[node name="AreaSprite" type="Sprite" parent="AreaElectric2"]
-visible = false
-rotation = 3.14159
-scale = Vector2( 0.6, 0.8 )
-texture = ExtResource( 8 )
-
-[node name="ElecAttTimer2" type="Timer" parent="."]
-wait_time = 3.0
 
 [node name="PowerupGenerator" parent="." instance=ExtResource( 9 )]
 position = Vector2( 640, 360 )
@@ -75,6 +77,9 @@ shadow_enabled = true
 shadow_gradient_length = 2.0
 shadow_filter = 1
 shadow_filter_smooth = 0.5
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
 position = Vector2( 7.79211, -3.30838 )
@@ -89,20 +94,20 @@ ring_exit_trauma = 0.4
 [node name="GameFinished" type="Timer" parent="."]
 wait_time = 3.0
 one_shot = true
+[connection signal="body_exited" from="Ring" to="." method="_on_Ring_body_exited"]
 [connection signal="body_exited" from="Ring" to="ShakeCamera2D" method="_on_Ring_body_exited"]
 [connection signal="body_exited" from="Ring" to="PowerupGenerator" method="_on_Ring_body_exited"]
-[connection signal="body_exited" from="Ring" to="." method="_on_Ring_body_exited"]
-[connection signal="player_won" from="Player1" to="." method="_on_player_won"]
-[connection signal="player_won" from="Player2" to="." method="_on_player_won"]
-[connection signal="body_entered" from="Ball" to="ShakeCamera2D" method="_on_Ball_body_entered"]
 [connection signal="body_entered" from="AreaElectric1" to="." method="_on_AreaElectric1_body_entered"]
 [connection signal="body_exited" from="AreaElectric1" to="." method="_on_AreaElectric1_body_exited"]
 [connection signal="timeout" from="ElecAttTimer1" to="." method="_on_ElecAttTimer1_timeout"]
 [connection signal="body_entered" from="AreaElectric2" to="." method="_on_AreaElectric2_body_entered"]
 [connection signal="body_exited" from="AreaElectric2" to="." method="_on_AreaElectric2_body_exited"]
 [connection signal="timeout" from="ElecAttTimer2" to="." method="_on_ElecAttTimer2_timeout"]
+[connection signal="player_won" from="Player1" to="." method="_on_player_won"]
+[connection signal="player_won" from="Player2" to="." method="_on_player_won"]
+[connection signal="body_entered" from="Ball" to="ShakeCamera2D" method="_on_Ball_body_entered"]
 [connection signal="taken_elec_att" from="PowerupGenerator" to="." method="_on_PowerupGenerator_taken_elec_att"]
-[connection signal="taken_magnetic" from="PowerupGenerator" to="Ball" method="execute_magnetic"]
 [connection signal="taken_magnetic" from="PowerupGenerator" to="." method="_on_PowerupGenerator_taken_magnetic"]
+[connection signal="taken_magnetic" from="PowerupGenerator" to="Ball" method="execute_magnetic"]
 [connection signal="taken_polarity_inverter" from="PowerupGenerator" to="Ball" method="change_polarity"]
 [connection signal="timeout" from="GameFinished" to="." method="_on_GameFinished_timeout"]

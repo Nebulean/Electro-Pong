@@ -18,9 +18,9 @@ var ball_area2 = 0
 var angle_p1
 var angle_p2
 export var B = 0.01
-export var E = 3
+export var E = 2
 var last_hit_player: Player = null
-
+var exploding = false
 var intro = false
 var intro_force = false
 
@@ -31,24 +31,27 @@ func _ready():
 		can_sleep = false
 		contact_monitor = true
 		contacts_reported = 1
-		reset()
+		_on_Sprite_animation_finished()
 		$Trail.start()
 
-func startTrail():
-	$Trail.start()
-
-func stopTrail():
-	$Trail.stop()
 
 func reset():
-	_position_reset_needed = true
-	$Pause_between_rounds.start()
+	$Trail.reset_trail()
+	set_linear_velocity(Vector2.ZERO)
+	if charge > 0:
+		$Sprite.play("positive_explode")
+	else:
+		$Sprite.play("negative_explode")
+	exploding = true
+	if get_tree():
+		get_tree().call_group("players", "stop_moving")
 
 func _new_random_velocity() -> Vector2:
 	var new_velocity := Vector2(1, 0)
 	var direction := rand_range(-PI, PI)
 	new_velocity = new_velocity.rotated(direction) * rand_range(min_speed, max_speed)
 	return new_velocity
+
 
 func _integrate_forces(state: Physics2DDirectBodyState) -> void:
 	# Ball reseting
@@ -63,6 +66,8 @@ func _integrate_forces(state: Physics2DDirectBodyState) -> void:
 		set_sprite()
 		$Trail.set_gradient(charge)
 		$Trail.reset_trail()
+		exploding = false
+		get_tree().call_group("players", "start_moving")
 	if _velocity_reset_needed:
 		state.set_linear_velocity(_new_random_velocity())
 		_velocity_reset_needed = false
@@ -108,6 +113,8 @@ func change_polarity():
 
 func _on_Pause_between_rounds_timeout() -> void:
 	_velocity_reset_needed = true
+	sleeping = false
+	show()
 	$Trail.start()
 
 func execute_magnetic():
@@ -133,9 +140,8 @@ func get_last_hit_player() -> Player:
 
 
 func _on_Area2D_body_entered(body):
-	if body.is_in_group("players"):
+	if body.is_in_group("players") and not exploding:
 		$SoundBoing.play()
-
 
 func playPowerupSound():
 	$SoundPowerup.play()
@@ -145,3 +151,9 @@ func playPointSound():
 
 func intro_elec_exec():
 	intro_force = true
+
+func _on_Sprite_animation_finished():
+	$Sprite.stop()
+	print_debug("coucous")
+	_position_reset_needed = true
+	$Pause_between_rounds.start()

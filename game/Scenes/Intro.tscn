@@ -1,11 +1,12 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Scripts/Intro.gd" type="Script" id=1]
 [ext_resource path="res://Scenes/Ground.tscn" type="PackedScene" id=2]
-[ext_resource path="res://Fonts/Roboto-Bold.ttf" type="DynamicFontData" id=3]
+[ext_resource path="res://Fonts/ThaleahFat.ttf" type="DynamicFontData" id=3]
+[ext_resource path="res://Assets/Sprites/background.png" type="Texture" id=4]
 
 [sub_resource type="DynamicFont" id=1]
-size = 22
+size = 34
 font_data = ExtResource( 3 )
 
 [node name="Intro" type="Node"]
@@ -14,6 +15,11 @@ __meta__ = {
 "_edit_horizontal_guides_": [  ],
 "_edit_vertical_guides_": [  ]
 }
+
+[node name="Background" type="Sprite" parent="."]
+position = Vector2( 640, 360 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 4 )
 
 [node name="Label" type="Label" parent="."]
 anchor_left = 0.5
@@ -32,8 +38,5 @@ __meta__ = {
 }
 
 [node name="Ground" parent="." instance=ExtResource( 2 )]
-position = Vector2( 544, 680 )
-scale = Vector2( 1, 0.5 )
-
-[node name="Camera2D" type="Camera2D" parent="."]
-anchor_mode = 0
+position = Vector2( 640, 650 )
+scale = Vector2( 7, 6 )
