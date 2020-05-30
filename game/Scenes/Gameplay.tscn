@@ -7,10 +7,10 @@
 [ext_resource path="res://Scenes/HUD.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Scripts/ShakeCamera2D.gd" type="Script" id=6]
 [ext_resource path="res://Scenes/AreaElectric.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Assets/Godot tres/electric_field.tres" type="SpriteFrames" id=8]
 [ext_resource path="res://Scenes/PowerupGenerator.tscn" type="PackedScene" id=9]
 [ext_resource path="res://Assets/Sprites/light.png" type="Texture" id=10]
 [ext_resource path="res://Assets/Sprites/background.png" type="Texture" id=11]
-[ext_resource path="res://Assets/Sprites/electric_field_area_arrow.png" type="Texture" id=12]
 
 [node name="Gameplay" type="Node"]
 script = ExtResource( 4 )
@@ -31,24 +31,30 @@ position = Vector2( 640, 360 )
 gravity_vec = Vector2( 0, 0 )
 gravity = 0.0
 
-[node name="AreaElectric1" parent="." instance=ExtResource( 7 )]
+[node name="AreaElectric1" parent="." groups=[
+"areaElectric",
+] instance=ExtResource( 7 )]
 position = Vector2( 640, 360 )
 
-[node name="AreaSprite" type="Sprite" parent="AreaElectric1"]
+[node name="Sprite" type="AnimatedSprite" parent="AreaElectric1"]
 visible = false
 scale = Vector2( 3, 3 )
-texture = ExtResource( 12 )
+frames = ExtResource( 8 )
+animation = "forward"
 
 [node name="ElecAttTimer1" type="Timer" parent="."]
 wait_time = 3.0
 
-[node name="AreaElectric2" parent="." instance=ExtResource( 7 )]
+[node name="AreaElectric2" parent="." groups=[
+"areaElectric",
+] instance=ExtResource( 7 )]
 position = Vector2( 640, 360 )
 
-[node name="AreaSprite" type="Sprite" parent="AreaElectric2"]
+[node name="Sprite" type="AnimatedSprite" parent="AreaElectric2"]
 visible = false
 scale = Vector2( 3, 3 )
-texture = ExtResource( 12 )
+frames = ExtResource( 8 )
+animation = "forward"
 
 [node name="ElecAttTimer2" type="Timer" parent="."]
 wait_time = 3.0
@@ -95,8 +101,8 @@ ring_exit_trauma = 0.4
 wait_time = 3.0
 one_shot = true
 [connection signal="body_exited" from="Ring" to="." method="_on_Ring_body_exited"]
-[connection signal="body_exited" from="Ring" to="ShakeCamera2D" method="_on_Ring_body_exited"]
 [connection signal="body_exited" from="Ring" to="PowerupGenerator" method="_on_Ring_body_exited"]
+[connection signal="body_exited" from="Ring" to="ShakeCamera2D" method="_on_Ring_body_exited"]
 [connection signal="body_entered" from="AreaElectric1" to="." method="_on_AreaElectric1_body_entered"]
 [connection signal="body_exited" from="AreaElectric1" to="." method="_on_AreaElectric1_body_exited"]
 [connection signal="timeout" from="ElecAttTimer1" to="." method="_on_ElecAttTimer1_timeout"]

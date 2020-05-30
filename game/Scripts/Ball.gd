@@ -24,6 +24,7 @@ var exploding = false
 var intro = false
 var intro_force = false
 
+
 func _ready():
 	set_sprite()
 	mode = MODE_CHARACTER
@@ -110,6 +111,7 @@ func change_polarity():
 	set_sprite()
 	$Trail.set_gradient(charge)
 	playPowerupSound()
+	get_tree().call_group("areaElectric", "update_sprite", charge)
 
 func _on_Pause_between_rounds_timeout() -> void:
 	_velocity_reset_needed = true
@@ -154,6 +156,13 @@ func intro_elec_exec():
 
 func _on_Sprite_animation_finished():
 	$Sprite.stop()
+	hide()
+	$Reset_timer.start()
 	print_debug("coucous")
 	_position_reset_needed = true
 	$Pause_between_rounds.start()
+
+
+func _on_Reset_timer_timeout():
+	show()
+	$Reset_timer.stop()
