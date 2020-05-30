@@ -89,13 +89,20 @@ func execute_elec_att(num):
 		print_debug("Electric field active for Player1")
 		ball.elec_att_active_p1 = 1
 		$ElecAttTimer1.start()
+		if $Ball.charge > 0:
+			$AreaElectric1/Sprite.set_animation("forward")
+		else:
+			$AreaElectric1/Sprite.set_animation("downward")
 		area1.set_sprite(true)
 	else:
 		ball.elec_att_active_p2 = 1
 		print_debug("Electric field active for Player2")
 		$ElecAttTimer2.start()
+		if $Ball.charge > 0:
+			$AreaElectric2/Sprite.set_animation("forward")
+		else:
+			$AreaElectric2/Sprite.set_animation("downward")
 		area2.set_sprite(true)
-
 
 func _on_AreaElectric1_body_entered(body):
 	if body.is_in_group("balls"):

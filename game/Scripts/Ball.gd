@@ -111,6 +111,7 @@ func change_polarity():
 	set_sprite()
 	$Trail.set_gradient(charge)
 	playPowerupSound()
+	get_tree().call_group("areaElectric", "update_sprite", charge)
 
 func _on_Pause_between_rounds_timeout() -> void:
 	_velocity_reset_needed = true
