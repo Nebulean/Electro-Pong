@@ -13,6 +13,6 @@ func _physics_process(_delta: float) -> void:
 
 func set_sprite(value : bool) -> void:
 	if value:
-		$AreaSprite.show()
+		$Sprite.show()
 	else:
-		$AreaSprite.hide()
+		$Sprite.hide()
