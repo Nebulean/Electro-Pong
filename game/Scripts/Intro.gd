@@ -274,11 +274,7 @@ func command_interpreter(command: String) -> void:
 			pu_mag.queue_free()
 		if is_instance_valid(pu_pol):
 			pu_pol.queue_free()
-	elif command == "VECTORFIELD_APPEAR":
-		# useless and ugly
-		pass
-		#var pos = Vector2(max_coordinates.x/2, max_coordinates.y/2)
-		#var scale = Vector2(0.4, 0.4)
-		#load_image("res://Assets/Sprites/vector_field.png", pos, scale)
+	elif command == "END":
+		get_tree().change_scene("res://Scenes/Gameplay.tscn")
 	else:
 		print_debug("Unknown command")
