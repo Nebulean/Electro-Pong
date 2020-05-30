@@ -1,0 +1,125 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://Fonts/ThaleahFat.tres" type="DynamicFont" id=1]
+[ext_resource path="res://Fonts/ThaleahFat.ttf" type="DynamicFontData" id=2]
+[ext_resource path="res://Assets/Sprites/return_button_hover.png" type="Texture" id=3]
+[ext_resource path="res://Assets/Sprites/return_button_idle.png" type="Texture" id=4]
+[ext_resource path="res://Scripts/Credits.gd" type="Script" id=5]
+[ext_resource path="res://Assets/Sprites/background.png" type="Texture" id=6]
+
+[sub_resource type="DynamicFont" id=1]
+size = 44
+font_data = ExtResource( 2 )
+
+[node name="Credits" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_pivot_offset = Vector2( -398.711, 27.2724 )
+script = ExtResource( 5 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Background" type="Sprite" parent="."]
+position = Vector2( 640, 360 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 6 )
+
+[node name="Credits" type="Label" parent="."]
+anchor_right = 1.0
+margin_top = 40.0
+margin_bottom = 74.0
+custom_fonts/font = ExtResource( 1 )
+text = "Credits"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Container" type="VBoxContainer" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -320.0
+margin_top = -193.0
+margin_right = 320.0
+margin_bottom = 193.0
+
+[node name="Alexandre" type="Label" parent="Container"]
+margin_right = 640.0
+margin_bottom = 74.0
+custom_fonts/font = ExtResource( 1 )
+text = "Alexandre Pinazza"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Damien" type="Label" parent="Container"]
+margin_top = 78.0
+margin_right = 640.0
+margin_bottom = 152.0
+custom_fonts/font = ExtResource( 1 )
+text = "Damien Korber"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Florian" type="Label" parent="Container"]
+margin_top = 156.0
+margin_right = 640.0
+margin_bottom = 230.0
+custom_fonts/font = ExtResource( 1 )
+text = "Florian Rider"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Hamza" type="Label" parent="Container"]
+margin_top = 234.0
+margin_right = 640.0
+margin_bottom = 308.0
+custom_fonts/font = ExtResource( 1 )
+text = "Hamza Meel"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Yanis" type="Label" parent="Container"]
+margin_top = 312.0
+margin_right = 640.0
+margin_bottom = 386.0
+custom_fonts/font = ExtResource( 1 )
+text = "Yanis Bendali"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="font" type="Label" parent="."]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -584.5
+margin_top = -73.0
+margin_right = 584.5
+margin_bottom = -32.0
+custom_fonts/font = SubResource( 1 )
+text = "Font by TinyWorlds: tinyworlds.itch.io/free-pixel-font-thaleah"
+
+[node name="Return" type="TextureButton" parent="."]
+anchor_left = 0.05
+anchor_top = 0.05
+anchor_right = 0.05
+anchor_bottom = 0.05
+margin_right = 80.0
+margin_bottom = 80.0
+texture_normal = ExtResource( 4 )
+texture_hover = ExtResource( 3 )
+expand = true
+[connection signal="pressed" from="Return" to="." method="_on_Return_pressed"]
