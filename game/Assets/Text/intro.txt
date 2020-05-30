@@ -31,4 +31,5 @@ The players move with two directional keys.
 !(POWERUPS_APPEAR) The electric fields, the magnetic field and the inversion of polarity.
 Don't worry! All of them work exactly like it was explained before.
 To use a powerup, you simply need to touch it with the ball.
-We think you're now ready to play this game, so we hope you'll have fun with it!
+!(POWERUPS_DISAPPEAR) We think you're now ready to play this game, so we hope you'll have fun with it!
+!(END)
