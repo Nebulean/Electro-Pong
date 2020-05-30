@@ -11,6 +11,12 @@ func _ready() -> void:
 func _physics_process(_delta: float) -> void:
 	set_rotation(angle)
 
+func update_sprite(charge):
+	if charge > 0:
+		get_node("Sprite").set_animation("forward")
+	else:
+		get_node("Sprite").set_animation("downward")
+
 func set_sprite(value : bool) -> void:
 	if value:
 		$Sprite.show()
