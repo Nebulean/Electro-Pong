@@ -17,7 +17,7 @@ In this game, the magnetic field will points toward you. Yes, you, the players.
 !(BALL_DISAPPEAR,MAGNETIC_DISAPPEAR) Weird, right ? Yes, it is, but don't worry, physicist do know exactly how it behaves.
 So, what you've seen is that magnetic fields pointing in your direction will make the trajectory of the particule circular, where the direction depending on the charge of the particle.
 And.... that's it ! You now know everything about electrodynamics (except for the minor content of some 1000-ish pages books).
-One more thing, we have also added a powerup able to inverse the polarity of the particles (which means that if the particles is negatively charged, it becomes positively charge.)
+One more thing, we have also added a powerup to be able to inverse the polarity of the particles (which means that if the particles is negatively charged, it becomes positively charge.)
 The effect of this inversion of polarity is that all the effects are inversed!
 An electric field that used to be repulsive will now become attractive, and the magnetic field will make the particle rotate in the other direction.
 You now understand the scientific part of the game, we now probably need to explain a few things about the game itself.
