@@ -17,3 +17,7 @@ func _on_VBoxContainer2_mouse_entered():
 
 func _on_Logo_animation_finished():
 	$VBoxContainer2/Logo.set_animation("idle")
+
+
+func _on_Credits_pressed():
+	get_tree().change_scene("res://Scenes/Credits.tscn")
