@@ -66,6 +66,7 @@ position = Vector2( 0, -250 )
 position = Vector2( 0, 250 )
 
 [node name="Ball" parent="." instance=ExtResource( 3 )]
+E = 2.5
 
 [node name="HUD" parent="." instance=ExtResource( 5 )]
 

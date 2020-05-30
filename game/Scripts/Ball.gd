@@ -18,7 +18,7 @@ var ball_area2 = 0
 var angle_p1
 var angle_p2
 export var B = 0.01
-export var E = 2
+export var E = 2.1
 var last_hit_player: Player = null
 var exploding = false
 var intro = false
