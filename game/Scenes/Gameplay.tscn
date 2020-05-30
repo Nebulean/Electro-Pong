@@ -95,8 +95,8 @@ ring_exit_trauma = 0.4
 wait_time = 3.0
 one_shot = true
 [connection signal="body_exited" from="Ring" to="." method="_on_Ring_body_exited"]
-[connection signal="body_exited" from="Ring" to="PowerupGenerator" method="_on_Ring_body_exited"]
 [connection signal="body_exited" from="Ring" to="ShakeCamera2D" method="_on_Ring_body_exited"]
+[connection signal="body_exited" from="Ring" to="PowerupGenerator" method="_on_Ring_body_exited"]
 [connection signal="body_entered" from="AreaElectric1" to="." method="_on_AreaElectric1_body_entered"]
 [connection signal="body_exited" from="AreaElectric1" to="." method="_on_AreaElectric1_body_exited"]
 [connection signal="timeout" from="ElecAttTimer1" to="." method="_on_ElecAttTimer1_timeout"]

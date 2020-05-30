@@ -26,6 +26,12 @@ var rng = RandomNumberGenerator.new()
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	rng.randomize()
+	reset_timer()
+
+func reset_timer():
+	var new_time = 5 + rng.randf_range(-1.5,1.5)
+	print_debug("New timer: " + str(new_time))
+	$SpawnTimer.set_wait_time(new_time)
 
 func _place_powerup():
 	# select random position within spawn radius
@@ -56,7 +62,8 @@ func _delete_powerups():
 # redirects signals to gameplay
 func _on_SpawnTimer_timeout():
 	_place_powerup()
-	
+	reset_timer()
+
 func hander_elec_att():
 	emit_signal("taken_elec_att")
 	
