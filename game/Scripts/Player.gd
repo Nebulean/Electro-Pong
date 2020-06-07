@@ -14,7 +14,7 @@ var ring_radius: float
 var score := 0 setget , get_score
 var manual_pos = false
 var is_stopped: bool = false
-
+export var speed_multiplied = 1.2
 
 signal player_won(player)
 
@@ -65,9 +65,9 @@ func _physics_process(delta: float) -> void:
 	var movement := Vector2.ZERO
 	if is_input_sensitive and !is_stopped:
 		if is_clockwise:
-			movement = movement + angle_step * ring_radius * delta * tangent
+			movement = movement + angle_step * ring_radius * delta * tangent * speed_multiplied
 		if is_trigo:
-			movement = movement - angle_step * ring_radius * delta * tangent
+			movement = movement - angle_step * ring_radius * delta * tangent * speed_multiplied
 
 	var _collision := move_and_collide(movement)
 	relative_pos = position - ring_center
