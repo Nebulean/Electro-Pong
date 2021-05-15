@@ -45,11 +45,11 @@ func add_trauma(amount):
 
 
 
-func _on_Ball_body_entered(body):
+func _on_Ball_body_entered(_body):
 	trauma = _velocity_to_trauma(ball.linear_velocity.length())
 	add_trauma(trauma)
 
-func _on_Ring_body_exited(body):
+func _on_Ring_body_exited(_body):
 	add_trauma(ring_exit_trauma)
 
 func _velocity_to_trauma(v, max_trauma = 0.4, divider = 1000):

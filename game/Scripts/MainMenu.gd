@@ -2,9 +2,11 @@ extends Control
 
 func _ready():
 	$VBoxContainer2/Logo.set_animation("idle")
+	MultiVariables.is_multi = false
 
 func _on_Play_Button_pressed():
-	get_tree().change_scene("res://Scenes/Gameplay.tscn")
+	var status := get_tree().change_scene("res://Scenes/Gameplay.tscn")
+	assert(status == OK)
 
 func _on_Tuto_Button_pressed():
 	var status := get_tree().change_scene("res://Scenes/Intro.tscn")
@@ -20,4 +22,10 @@ func _on_Logo_animation_finished():
 
 
 func _on_Credits_pressed():
-	get_tree().change_scene("res://Scenes/Credits.tscn")
+	var status := get_tree().change_scene("res://Scenes/Credits.tscn")
+	assert(status == OK)
+
+
+func _on_MultiButton_pressed():
+	var status := get_tree().change_scene("res://Scenes/Lobby.tscn")
+	assert(status == OK)

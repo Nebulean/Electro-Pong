@@ -12,7 +12,7 @@ export (Gradient) var negative_gradient
 func _ready():
 	target = get_node(target_path)
 
-func _process(delta):
+func _process(_delta):
 	if not trail_active:
 		return
 	

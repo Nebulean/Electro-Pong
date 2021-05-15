@@ -1,16 +1,15 @@
-[gd_scene load_steps=35 format=2]
+[gd_scene load_steps=34 format=2]
 
-[ext_resource path="res://Scripts/MainMenu.gd" type="Script" id=1]
-[ext_resource path="res://Assets/Sprites/credits_idle.png" type="Texture" id=2]
-[ext_resource path="res://Assets/Sprites/credits_hover.png" type="Texture" id=3]
-[ext_resource path="res://Assets/Sprites/play_button.png" type="Texture" id=4]
-[ext_resource path="res://Assets/Sprites/tutorial_button.png" type="Texture" id=5]
-[ext_resource path="res://Assets/Sprites/tutorial_button_hover.png" type="Texture" id=6]
-[ext_resource path="res://Assets/Sprites/play_button_hover.png" type="Texture" id=7]
+[ext_resource path="res://Scripts/Lobby.gd" type="Script" id=1]
+[ext_resource path="res://Assets/Sprites/client_button_hover.png" type="Texture" id=2]
+[ext_resource path="res://Assets/Sprites/client_button.png" type="Texture" id=3]
+[ext_resource path="res://Assets/Sprites/server_button.png" type="Texture" id=4]
+[ext_resource path="res://Assets/Sprites/server_button_hover.png" type="Texture" id=5]
+[ext_resource path="res://Assets/Sprites/return_button_idle.png" type="Texture" id=6]
+[ext_resource path="res://Assets/Sprites/return_button_hover.png" type="Texture" id=7]
 [ext_resource path="res://Assets/Sprites/logo-animation.png" type="Texture" id=8]
 [ext_resource path="res://Assets/Sprites/background.png" type="Texture" id=9]
-[ext_resource path="res://Assets/Sprites/multi_button.png" type="Texture" id=10]
-[ext_resource path="res://Assets/Sprites/multi_button_hover.png" type="Texture" id=11]
+[ext_resource path="res://Fonts/ThaleahFat.tres" type="DynamicFont" id=10]
 
 [sub_resource type="AtlasTexture" id=1]
 atlas = ExtResource( 8 )
@@ -143,31 +142,22 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="PlayButton" type="TextureButton" parent="VBoxContainer"]
-margin_top = 23.0
+[node name="ServerButton" type="TextureButton" parent="VBoxContainer"]
+margin_top = 84.0
 margin_right = 514.0
-margin_bottom = 123.0
+margin_bottom = 184.0
 rect_min_size = Vector2( 512, 100 )
 texture_normal = ExtResource( 4 )
-texture_hover = ExtResource( 7 )
+texture_hover = ExtResource( 5 )
 expand = true
 
-[node name="MultiButton" type="TextureButton" parent="VBoxContainer"]
-margin_top = 145.0
+[node name="ClientButton" type="TextureButton" parent="VBoxContainer"]
+margin_top = 206.0
 margin_right = 514.0
-margin_bottom = 245.0
+margin_bottom = 306.0
 rect_min_size = Vector2( 512, 100 )
-texture_normal = ExtResource( 10 )
-texture_hover = ExtResource( 11 )
-expand = true
-
-[node name="TutoButton" type="TextureButton" parent="VBoxContainer"]
-margin_top = 267.0
-margin_right = 514.0
-margin_bottom = 367.0
-rect_min_size = Vector2( 512, 100 )
-texture_normal = ExtResource( 5 )
-texture_hover = ExtResource( 6 )
+texture_normal = ExtResource( 3 )
+texture_hover = ExtResource( 2 )
 expand = true
 
 [node name="VBoxContainer2" type="VBoxContainer" parent="."]
@@ -190,23 +180,58 @@ animation = "idle"
 playing = true
 centered = false
 
-[node name="Credits" type="TextureButton" parent="."]
-anchor_left = 0.95
-anchor_top = 0.95
-anchor_right = 0.95
-anchor_bottom = 0.95
-margin_left = -80.0
-margin_top = -80.0
-texture_normal = ExtResource( 2 )
-texture_hover = ExtResource( 3 )
+[node name="IPInput" type="LineEdit" parent="."]
+visible = false
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -500.0
+margin_top = -300.0
+margin_right = 500.0
+margin_bottom = -250.0
+align = 1
+clear_button_enabled = true
+placeholder_text = "IP address"
+placeholder_alpha = 0.15
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Return" type="TextureButton" parent="."]
+anchor_left = 0.05
+anchor_top = 0.05
+anchor_right = 0.05
+anchor_bottom = 0.05
+margin_right = 80.0
+margin_bottom = 80.0
+texture_normal = ExtResource( 6 )
+texture_hover = ExtResource( 7 )
 expand = true
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[connection signal="pressed" from="VBoxContainer/PlayButton" to="." method="_on_Play_Button_pressed"]
-[connection signal="pressed" from="VBoxContainer/MultiButton" to="." method="_on_MultiButton_pressed"]
-[connection signal="pressed" from="VBoxContainer/TutoButton" to="." method="_on_Tuto_Button_pressed"]
+[node name="WaitingFor" type="Label" parent="."]
+visible = false
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+margin_top = 70.0
+custom_fonts/font = ExtResource( 10 )
+text = "Waiting for connection"
+align = 1
+autowrap = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="WaitForMenu" type="Timer" parent="."]
+
+[connection signal="pressed" from="VBoxContainer/ServerButton" to="." method="start_server"]
+[connection signal="pressed" from="VBoxContainer/ClientButton" to="." method="_on_ClientButton_pressed"]
 [connection signal="mouse_entered" from="VBoxContainer2" to="." method="_on_VBoxContainer2_mouse_entered"]
 [connection signal="animation_finished" from="VBoxContainer2/Logo" to="." method="_on_Logo_animation_finished"]
-[connection signal="pressed" from="Credits" to="." method="_on_Credits_pressed"]
+[connection signal="text_entered" from="IPInput" to="." method="start_client"]
+[connection signal="pressed" from="Return" to="." method="_on_Return_pressed"]
+[connection signal="timeout" from="WaitForMenu" to="." method="_on_Return_pressed"]

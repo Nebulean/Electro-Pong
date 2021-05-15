@@ -8,8 +8,8 @@ export var max_speed: float= 200
 export var charge: float = 1
 var _position_reset_needed := false
 var _velocity_reset_needed := false
-var _pad_normal: Vector2
-var _velocity_normalization_needed := false
+remotesync var _pad_normal: Vector2
+remotesync var _velocity_normalization_needed := false
 var magnetic_active = 0
 var elec_att_active_p1 = 0
 var elec_att_active_p2 = 0
@@ -24,10 +24,26 @@ var exploding = false
 var intro = false
 var intro_force = false
 
+# Multi-player variable
+var ball_velocity = Vector2.ZERO
+var sync_needed = false
+# Number of remaining frame where sync function have to been called:
+var frame_sync = 0
+# Number of frame where sync function is called:
+var FRAME_SYNC_MAX = 40
+# Id of the frame send:
+var id_frame_sync = 0
+# Last id receive from the other player:
+var last_remote_id_frame = -1
+# Id of the synchronization. Change when a player hit the ball.
+var id_sync = 0
+var sync_last_hit_needed = false
+
 
 func _ready():
 	set_sprite()
 	mode = MODE_CHARACTER
+	_update_velocity()
 	if !intro:
 		can_sleep = false
 		contact_monitor = true
@@ -47,11 +63,24 @@ func reset():
 	if get_tree():
 		get_tree().call_group("players", "stop_moving")
 
+
 func _new_random_velocity() -> Vector2:
 	var new_velocity := Vector2(1, 0)
 	var direction := rand_range(-PI, PI)
 	new_velocity = new_velocity.rotated(direction) * rand_range(min_speed, max_speed)
 	return new_velocity
+
+
+func _update_velocity() -> void:
+	if not MultiVariables.is_multi:
+		ball_velocity = _new_random_velocity()
+	elif is_network_master():
+		ball_velocity = _new_random_velocity()
+		rpc("sv", ball_velocity)
+
+
+puppet func sv(velocity): # Set velocity
+	ball_velocity = velocity
 
 
 func _integrate_forces(state: Physics2DDirectBodyState) -> void:
@@ -70,7 +99,7 @@ func _integrate_forces(state: Physics2DDirectBodyState) -> void:
 		exploding = false
 		get_tree().call_group("players", "start_moving")
 	if _velocity_reset_needed:
-		state.set_linear_velocity(_new_random_velocity())
+		state.set_linear_velocity(ball_velocity)
 		_velocity_reset_needed = false
 		sleeping = false
 
@@ -98,6 +127,16 @@ func _integrate_forces(state: Physics2DDirectBodyState) -> void:
 		elif linear_velocity.length() < min_speed:
 			linear_velocity = linear_velocity.normalized() * min_speed
 		_velocity_normalization_needed = false
+	
+	# Ball sync in multi
+	if MultiVariables.is_multi:
+		if frame_sync < FRAME_SYNC_MAX and sync_needed:
+			frame_sync += 1
+#			print_debug("Send sync")
+			rpc_unreliable("sb", id_sync, frame_sync, position, linear_velocity)
+		if sync_last_hit_needed:
+			print_debug("Send sync last_hit ", id_sync)
+			rpc_unreliable("slh", id_sync, MultiVariables.player_num)
 
 func set_sprite():
 	if (charge >= 0):
@@ -133,9 +172,60 @@ func _on_Magnetic_Timer_timeout():
 
 func _on_Ball_body_entered(body):
 	if body.is_in_group("players"):
-		last_hit_player = body
-		_velocity_normalization_needed = true
-		_pad_normal = (center_of_screen - body.position).normalized()
+		if not MultiVariables.is_multi || body.is_network_master():
+			last_hit_player = body
+			_velocity_normalization_needed = true
+			_pad_normal = (center_of_screen - body.position).normalized()
+		if body.is_network_master():
+			frame_sync = 0
+			sync_needed = true
+			sync_last_hit_needed = true
+			id_sync += 1
+			print_debug("Sync id: ", id_sync)
+			rpc_unreliable("slh", id_sync, MultiVariables.player_num)
+
+
+remote func sb(remote_id_sync, remote_id_frame, _position, _velocity): # Sync ball
+	if remote_id_sync > id_sync:
+		last_remote_id_frame = -1
+		id_sync = remote_id_sync
+		print_debug("Change id_frame")
+	if remote_id_sync == id_sync and last_remote_id_frame < remote_id_frame:
+		position = _position
+		linear_velocity = _velocity
+		last_remote_id_frame = remote_id_frame
+	elif remote_id_sync == id_sync:
+		print_debug("Receive outdated ball sync (late)")
+	else:
+		print_debug("Receive outdated ball sync (not the right id_sync)")
+
+
+remote func slh(new_id_sync, _player_num): # Set last_hit_player
+	if new_id_sync > id_sync:
+		print_debug("Receive sync ", new_id_sync, " currently ", id_sync, " -> update")
+		id_sync = new_id_sync
+		last_hit_player = MultiVariables.players[_player_num-1]
+		frame_sync = 0
+		last_remote_id_frame = -1
+		sync_needed = false
+		print_debug("Change id_frame")
+	else:
+		print_debug("Receive sync ", new_id_sync, " currently ", id_sync, " -> ignore")
+	if new_id_sync <= id_sync:
+		rpc_unreliable("conf_slh", id_sync)
+
+
+remote func conf_slh(new_id_sync):
+	if new_id_sync >= id_sync:
+		print_debug("Stop sync last_hit ", id_sync)
+		sync_last_hit_needed = false
+
+
+#remote func sp(_position, _linear_velocity): # Sync position (and speed)
+#	if last_hit_player != MultiVariables.players[MultiVariables.player_num-1]:
+#		position = _linear_velocity
+#		linear_velocity = _linear_velocity
+
 
 func get_last_hit_player() -> Player:
 	return last_hit_player
@@ -161,6 +251,7 @@ func _on_Sprite_animation_finished():
 	print_debug("coucous")
 	_position_reset_needed = true
 	$Pause_between_rounds.start()
+	_update_velocity()
 
 
 func _on_Reset_timer_timeout():

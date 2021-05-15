@@ -46,15 +46,19 @@ _global_script_class_icons={
 
 config/name="Electro-Pong"
 run/main_scene="res://Scenes/MainMenu.tscn"
-run/disable_stdout=true
 run/disable_stderr=true
 config/icon="res://Assets/Sprites/LOGO.png"
 config/windows_native_icon="res://icon.ico"
+
+[autoload]
+
+MultiVariables="*res://Scripts/MultiVariables.gd"
 
 [display]
 
 window/size/width=1280
 window/size/height=720
+window/size/resizable=false
 window/stretch/mode="viewport"
 window/stretch/aspect="keep"
 

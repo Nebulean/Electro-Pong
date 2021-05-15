@@ -13,3 +13,6 @@ The pixel font by TinyWorlds is used in this project, available [here](https://t
 
 ## Contribution
 You can contribute to the project by making pull requests.
+
+## Online mode
+You can play on one computer using the `Play` button, but you can also play on two different computers. If you are on the same local network, you have nothing to change. If you are trying to connect via an Internet box, the person who selects `Server` will have to configure the port forwarding option in it's box's administration page and link port `3333` on the box to the same port on the computer.

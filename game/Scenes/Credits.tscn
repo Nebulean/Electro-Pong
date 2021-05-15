@@ -42,9 +42,12 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 margin_left = -320.0
-margin_top = -193.0
+margin_top = -210.0
 margin_right = 320.0
 margin_bottom = 193.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="Alexandre" type="Label" parent="Container"]
 margin_right = 640.0
@@ -100,6 +103,17 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="Yanis2" type="Label" parent="Container"]
+margin_top = 390.0
+margin_right = 640.0
+margin_bottom = 464.0
+custom_fonts/font = ExtResource( 1 )
+text = "Marc PIERRE"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="font" type="Label" parent="."]
 anchor_left = 0.5
 anchor_top = 1.0
@@ -122,4 +136,8 @@ margin_bottom = 80.0
 texture_normal = ExtResource( 4 )
 texture_hover = ExtResource( 3 )
 expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [connection signal="pressed" from="Return" to="." method="_on_Return_pressed"]

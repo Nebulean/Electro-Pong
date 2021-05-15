@@ -25,8 +25,19 @@ var rng = RandomNumberGenerator.new()
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	rng.randomize()
+	if not MultiVariables.is_multi:
+		rng.randomize()
+		reset_timer()
+	elif is_network_master():
+		rng.randomize()
+		rpc("ss", rng.get_seed())
+		reset_timer()
+
+
+puppet func ss(_seed): # Set seed
+	rng.set_seed(_seed)
 	reset_timer()
+
 
 func reset_timer():
 	var new_time = 5 + rng.randf_range(-1.5,1.5)
@@ -74,6 +85,6 @@ func hander_polarity_inverter():
 	emit_signal("taken_polarity_inverter")
 
 
-func _on_Ring_body_exited(body):
+func _on_Ring_body_exited(_body):
 	# remove all powerups when round finishes
 	_delete_powerups()

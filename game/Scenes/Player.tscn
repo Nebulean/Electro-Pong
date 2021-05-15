@@ -56,3 +56,8 @@ occluder = SubResource( 2 )
 [node name="Collision" type="CollisionShape2D" parent="."]
 rotation = 1.5708
 shape = SubResource( 3 )
+
+[node name="NetworkTimer" type="Timer" parent="."]
+wait_time = 0.05
+
+[connection signal="timeout" from="NetworkTimer" to="." method="_on_NetworkTimer_timeout"]

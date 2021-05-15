@@ -14,6 +14,14 @@ func _ready() -> void:
 	var radius := ($Ring/CollisionShape2D.shape as CircleShape2D).radius
 	
 	# Set players
+	if MultiVariables.is_multi:
+		print("Multi")
+		MultiVariables.list_id.sort()
+		print(MultiVariables.list_id)
+		p1.set_network_master(MultiVariables.list_id[0])
+		p2.set_network_master(MultiVariables.list_id[1])
+		ball.set_network_master(MultiVariables.list_id[0])
+		MultiVariables.players = [p1, p2]
 	p1.set_player(1, ring.position, radius)
 	p2.set_player(2, ring.position, radius)
 	#p1.add_collision_exception_with(p2)
@@ -45,17 +53,22 @@ func _physics_process(_delta: float) -> void:
 		ball.angle_p2 = p2.angle
 
 func _on_Ring_body_exited(_body: Node) -> void:
-	var exit_angle: float = (ball.position - ring.position).angle() - ring.angle
-	exit_angle = wrapf(exit_angle, 0, 2*PI)
-	if 0 <= exit_angle && exit_angle < PI:
-		p2.increment_score()
-		hud.set_score_p2(p2.score)
-	else:
-		p1.increment_score()
-		hud.set_score_p1(p1.score)
+	if (not MultiVariables.is_multi) || is_network_master():
+		var exit_angle: float = (ball.position - ring.position).angle() - ring.angle
+		exit_angle = wrapf(exit_angle, 0, 2*PI)
+		if 0 <= exit_angle && exit_angle < PI:
+#			print("Send increment score 2")
+			rpc("ins", 2)
+			p2.increment_score()
+			hud.set_score_p2(p2.score)
+		else:
+#			print("Send increment score 1")
+			rpc("ins", 1)
+			p1.increment_score()
+			hud.set_score_p1(p1.score)
+		if (p1.score < 11 && p2.score < 11):
+			ball.reset()
 	$Ball.playPointSound()
-	if (p1.score < 11 && p2.score < 11):
-		ball.reset()
 	if ball.magnetic_active == 1:
 		$Ball/Magnetic_Timer.stop()
 		print_debug("Magnetic field stops")
@@ -72,6 +85,18 @@ func _on_Ring_body_exited(_body: Node) -> void:
 		ball.elec_att_active_p2 = 0
 
 
+puppet func ins(player): # incremet_score
+#	print("Receive increment", player)
+	if player == 1:
+		p1.increment_score()
+		hud.set_score_p1(p1.score)
+	else:
+		p2.increment_score()
+		hud.set_score_p2(p2.score)
+	if (p1.score < 11 && p2.score < 11):
+			ball.reset()
+
+
 func _on_player_won(player) -> void:
 	assert(player in [1, 2])
 	print_debug("Player %d won." % player)
@@ -81,6 +106,8 @@ func _on_player_won(player) -> void:
 func _on_GameFinished_timeout():
 	var status := get_tree().change_scene("res://Scenes/MainMenu.tscn")
 	assert(status == OK)
+	if MultiVariables.is_multi:
+		get_tree().network_peer = null
 
 func execute_elec_att(num):
 	$Ball.playPowerupSound()
